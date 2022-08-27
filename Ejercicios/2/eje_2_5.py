@@ -30,6 +30,11 @@ print(fusion(2))
 #c)
 def digitoEnUnidades(num):
     print(len(str(num)))
-
 digitoEnUnidades(200000)
+
+#d)
+def numMultiplo10(num):
+    return num%10
+
+
 
