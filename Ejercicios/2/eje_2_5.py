@@ -35,6 +35,10 @@ digitoEnUnidades(200000)
 #d)
 def numMultiplo10(num):
     return num%10
+def numeroInferior(num):
+    return num - numMultiplo10(num)
+
+print(numeroInferior(256))
 
 
 
