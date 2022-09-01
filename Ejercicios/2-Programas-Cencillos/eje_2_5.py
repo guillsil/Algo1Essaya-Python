@@ -1,10 +1,10 @@
 """
-a) Escribir una función que dado un número entero devuelva 1 si el mismo
+a) Escribir una función que dado un número entero devuelva 1-Conceptos-Basicos si el mismo
 es impar y 0 si fuera par.
-b) Escribir una función que dado un número entero devuelva 0 si el mismo es impar y 1 si
+b) Escribir una función que dado un número entero devuelva 0 si el mismo es impar y 1-Conceptos-Basicos si
 fuera par.
 c) Escribir una función que dado un número entero devuelva el dígito de las unidades. Por
-ejemplo, para 153 debe devolver 3.
+ejemplo, para 153 debe devolver 3-Funciones.
 d) Escribir una función que dado un número devuelva el primer número múltiplo de 10
 inferior a él. Por ejemplo, para 153 debe devolver 150."""
 #a)

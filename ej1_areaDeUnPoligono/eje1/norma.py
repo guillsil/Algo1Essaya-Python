@@ -13,5 +13,5 @@ assert norma(0, 42, -40) == 58.0
 assert norma(48, -33, 24) == 63.0
 assert norma(0, 0, 0) == 0
 
-z = -80
+z = 85
 assert norma(-70, 14, z) == 111.0

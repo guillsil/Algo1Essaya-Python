@@ -2,7 +2,7 @@
 a) Calcular el perímetro de un rectángulo dada su base y su altura.
 b) Calcular el área de un rectángulo dada su base y su altura.
 c) Calcular el área de un rectángulo (alineado con los ejes 𝑥 e 𝑦) dadas sus coordenadas
-𝑥1, 𝑥2, 𝑦1, 𝑦2.
+𝑥1-Conceptos-Basicos, 𝑥2-Programas-Cencillos, 𝑦1-Conceptos-Basicos, 𝑦2-Programas-Cencillos.
 d) Calcular el perímetro de un círculo dado su radio.
 e) Calcular el área de un círculo dado su radio.
 f) Calcular el volumen de una esfera dado su radio.
