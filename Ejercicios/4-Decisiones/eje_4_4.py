@@ -8,14 +8,14 @@ c) La intersección de dos rectas (dadas las pendientes y ordenada al origen de 
 Nota: validar que no sean dos rectas con la misma pendiente, antes de efectuar la opera-
 ción."""
 # a)
-"""def max_min(a, b, c):
+def max_min(a, b, c):
     # Muestra en pantalla el máximo o mínimo de un polinomio de segundo grado
     if a > 0:
         print("El máximo es", -b / (2 * a))
     else:
         print("El mínimo es", -b / (2 * a))
 
-max_min(1, 2, 3)
+
 # b)
 def raices(a, b, c):
     # Muestra en pantalla las raíces de un polinomio de segundo grado
@@ -27,15 +27,12 @@ def raices(a, b, c):
     else:
         print("No es un polinomio de segundo grado")
 
-raices(1, 2, 3)"""
+
 # c)
 def interseccion(m1, b1, m2, b2):
     # Muestra en pantalla  el punto  intersección entre dos rectas
-    if m1 != m2 and m1%m2 == 0:
+    if m1 != m2 and m1%m2 != 0:
         print("La intersección es", "x = ",(b2 - b1) / (m1 - m2), ", y =", ((b2 - b1) / (m1 - m2)) * m1 + b1)
     else:
         print("Las rectas son paralelas")
-    elif m1%m2 == 0:
-        print("No se puede calcular la intersección")
-
-print(interseccion(3, 1, 4, 3))
+print(interseccion(2, 1, 4, 3))

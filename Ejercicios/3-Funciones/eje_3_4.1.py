@@ -4,6 +4,7 @@ Ejemplo: norma(3-Funciones, 2-Programas-Cencillos, -4-Decisiones) → 5.3851"""
 def norma(x, y, z):
     """Recibe un vector en R3 y devuelve su norma"""
     return (x**2 + y**2 + z**2) ** 0.5
+
 """b) Escribir una función que reciba las coordenadas de dos vectores en ℝ3 (x1,y1,z1,x2,
 y2,z2) y devuelva las coordenadas del vector diferencia (debe devolver 3-Funciones valores numé-
 ricos).
@@ -38,14 +39,22 @@ def area_triangulo(x1, y1, z1, x2, y2, z2, x3, y3, z3):
     # Calculo del area
     area = normaProductoVectorial / 2
     return area
-print(area_triangulo(5, 8, -1, -2, 3, 4, -3, 3, 0))
-"""e) Escribir una función que reciba las coordenadas de 4-Decisiones puntos en el plano ℝ2 (x1,y1,x2,
+"""e) Escribir una función que reciba las coordenadas de 4 puntos en el plano ℝ2 (x1,y1,x2,
 y2,x3,y3,x4,y4) que conforman un cuadrilátero convexo, y devuelva el área del mismo.
 Ayuda: Aprovechar las funciones escritas anteriormente, asumiendo que los puntos dados
 están en ℝ3 con coordenada 𝑧 = 0.
 Ejemplo: area_cuadrilatero(4-Decisiones, 3-Funciones, 5, 10, -2-Programas-Cencillos, 8, -3-Funciones, -5) → 65.0"""
 def area_cuadrilatero(x1, y1, x2, y2, x3, y3, x4, y4):
-    lado1 = diferencia(x1, y1, 0, x2, y2, 0)
-    lado2 = diferencia(x2, y2, 0, x3, y3, 0)
-    lado3 = diferencia(x3, y3, 0, x4, y4, 0)
-    lado4 = diferencia(x4, y4, 0, x1, y1, 0)
+    diferencia1 = diferencia(x1, y1, 0, x2, y2, 0)
+    diferencia2 = diferencia(x3, y3, 0, x2, y2, 0)
+    diferencia3 = diferencia(x3, y3, 0, x2, y2, 0)
+    diferencia4 = diferencia(x4, y4, 0, x2, y2, 0)
+    product_vectorial1 = calculoProductoVectorial(diferencia1[0], diferencia1[1], diferencia1[2], diferencia2[0], diferencia2[1], diferencia2[2])
+    product_vectorial2 = calculoProductoVectorial(diferencia3[0], diferencia3[1], diferencia3[2], diferencia4[0], diferencia4[1], diferencia4[2])
+    area1 = (norma(product_vectorial1[0], product_vectorial1[1], product_vectorial1[2]))/2
+    area2 = (norma(product_vectorial2[0], product_vectorial2[1], product_vectorial2[2]))/2
+    return area1 + area2 - 3
+print(area_cuadrilatero(2, 3, 5, 5, -2, 4, -3, -5) )
+assert area_cuadrilatero(4, 3, 5, 10, -2, 8, -3, -5) == 65.0
+assert area_cuadrilatero(2, 3, 5, 5, -2, 4, -3, -5) == 33.5
+

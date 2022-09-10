@@ -13,5 +13,8 @@ def area_triangulo(x1, y1, z1, x2, y2, z2, x3, y3, z3):
     # Calculo del area
     area = normaProductoVectorial / 2
     return area
-print(area_triangulo(5, 8, -1, -2, 3, 4, -3, 3, 0))
+# Agregar pruebas
+assert area_triangulo(5, 8, -1, -2, 3, 4, -3, 3, 0) == 19.45507645834372
+assert area_triangulo(4, 2, 3, 2, 4, 4, 2, 1, 1) == 4.5
+assert area_triangulo(2, 6, 3, 2, 4, 6, 2, 2, 2) == 7.0
 
