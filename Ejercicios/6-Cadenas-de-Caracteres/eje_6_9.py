@@ -15,3 +15,14 @@ Por favor ingresa un número entre -50 y 50.
 Por favor ingresa un número entre -50 y 50.
 ¿Cuál es tu número favorito? [-50..50]: -16
 -16"""
+def pedir_entero(mensaje, min, max):
+    while True:
+        try:
+            x = int(input(mensaje))
+            if x < min or x > max:
+                print("Por favor ingresa un número entre {} y {}.".format(min, max)) #format() formatea una cadena
+            else:
+                return x
+        except ValueError: #ValueError se produce cuando una función int() no puede convertir un valor a entero
+            print("Por favor ingresa un número entre {} y {}.".format(min, max))
+pedir_entero("¿Cuál es tu número favorito?", -50, 50)
