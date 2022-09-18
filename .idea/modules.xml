@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Algo1Essaya.iml" filepath="$PROJECT_DIR$/.idea/Algo1Essaya.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Tp1-algo1/.idea/Tp1-algo1.iml" filepath="$PROJECT_DIR$/../Tp1-algo1/.idea/Tp1-algo1.iml" />
     </modules>
   </component>
 </project>
