@@ -1,10 +1,9 @@
 import gamelib
 
 ANCHO_VENTANA = 300
-ALTO_VENTANA = 300
-JUGADOR_1 = "x"
-JUGADOR_2 = "o"
-
+ALTO_VENTANA = 390
+JUGADOR_1 = "X"
+JUGADOR_2 = "O"
 def alternar_jugador(turno):
     """Determinar de quién es el turno"""
     """alternar entre los dos jugadores"""
@@ -24,14 +23,16 @@ def juego_crear():
             juego[i, j] = 0
     return juego
 
+
 def alternar_jugador(turno):
     """Determinar de quién es el turno"""
     """alternar entre los dos jugadores"""
     if turno == JUGADOR_1:
-        turno = JUGADOR_2
+        return JUGADOR_2
     else:
-        turno = JUGADOR_1
-def juego_actualizar(juego, x, y):
+        return JUGADOR_1
+
+def juego_actualizar(juego, x, y, turno):
     """Actualizar el estado del juego
     x e y son las coordenadas (en pixels) donde el usuario hizo click.
     Esta función determina si esas coordenadas corresponden a una celda
@@ -44,43 +45,51 @@ def juego_actualizar(juego, x, y):
     """
     x = x // 30
     y = y // 30
-    """juego es un diccionario que tiene como claves las posiciones del tablero y como valor el símbolo del jugador que hizo la jugada en esa posición."""
-    """Tamibién tenemos que determinar de quién es el turno y actualizar el tablero con la jugada del usuario."""
-    turno = JUGADOR_1
-    if juego[x][y] == 0:
-        juego[x][y] = turno
-        turno = alternar_jugador(turno)
+    """juego es un diccionario que tiene como claves las posiciones del tablero y como valor el símbolo del jugador que hizo la jugada en esa posición.
+    Tambien debo cambiar el turno del jugador
+    """
+    juego[x, y] = turno
+
     return juego
 
+def esta_ocupado(juego, x, y):
+    """Determinar si una celda está ocupada"""
+    """En la función esta_ocupado tenemos que determinar si una celda está ocupada.
+    es decir no contiene a uno de los jugadores
+    """
+    return juego[x, y] != 0
 
-def juego_mostrar(juego):
+def juego_mostrar(juego, turno):
     """Actualizar la ventana"""
     """En la función juego_mostrar tenemos que utilizar las funciones de Gamelib para dibujar el tablero y mostrar de 
     quién es el turno. ¡No es necesario dibujar nada muy sofisticado! Debería ser suficiente con utilizar las funciones 
     draw_text y draw_rectangle/draw_line"""
     """Dibujar el tablero"""
+    gamelib.draw_rectangle(0, 0, 300, 390, fill='#080F28')
+    gamelib.draw_rectangle(0, 0, 300, 300, fill='#dda90e')
 
-    gamelib.draw_rectangle(0, 0, 300, 300, fill='yellow')
     for i in range(10):
         for j in range(10):
-            gamelib.draw_line(i * 30, 0, i * 30, 300, fill='blue', width=2)
-            gamelib.draw_line(0, j * 30, 300, j * 30, fill='blue', width=2)
-            """Acceder a las claves del diccionario juego que son las posiciones del tablero"""
+            gamelib.draw_line(i * 30, 0, i * 30, 360, fill='#080F28', width=2)
+            gamelib.draw_line(0, j * 30, 330, j * 30, fill='#080F28', width=2)
+    """Dibujar las fichas"""
+    for i in range(10):
+        for j in range(10):
+            if juego[i, j] == JUGADOR_1:
+                gamelib.draw_text(JUGADOR_1, i * 30 + 15, j * 30 + 15, fill='#080F28',size=15)
+            elif juego[i, j] == JUGADOR_2:
+                gamelib.draw_text(JUGADOR_2, i * 30 + 15, j * 30 + 15, fill='#080F28',size=15)
 
-
-
-
-
-
-
-
-
-
+    """Mostrar de quién es el turno"""
+    gamelib.draw_text("Turno de: " + turno , 150, 330, fill='#dda90e', size=20)
+    "mostrar el nombre de los jugadores"
+    gamelib.draw_text("Jugador 1: " + JUGADOR_1, 60, 375, fill='#dda90e', size=12)
+    gamelib.draw_text("Jugador 2: " + JUGADOR_2, 240, 375, fill='#dda90e', size=12)
 
 
 def main():
     juego = juego_crear()
-
+    turno = JUGADOR_2
     # Ajustar el tamaño de la ventana
     gamelib.resize(ANCHO_VENTANA, ALTO_VENTANA)
 
@@ -89,7 +98,7 @@ def main():
         # Todas las instrucciones que dibujen algo en la pantalla deben ir
         # entre `draw_begin()` y `draw_end()`:
         gamelib.draw_begin()
-        juego_mostrar(juego)
+        juego_mostrar(juego, turno)
         gamelib.draw_end()
 
         # Terminamos de dibujar la ventana, ahora procesamos los eventos (si el
@@ -109,6 +118,9 @@ def main():
         if ev.type == gamelib.EventType.ButtonPress:
             # El usuario presionó un botón del mouse
             x, y = ev.x, ev.y # averiguamos la posición donde se hizo click
-            juego = juego_actualizar(juego, x, y)
+            if not esta_ocupado(juego, x // 30, y // 30):
+                juego = juego_actualizar(juego, x, y, turno)
+                turno = alternar_jugador(turno)
+
 
 gamelib.init(main)
