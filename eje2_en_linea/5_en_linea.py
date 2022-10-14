@@ -4,34 +4,19 @@ ANCHO_VENTANA = 300
 ALTO_VENTANA = 390
 JUGADOR_1 = "X"
 JUGADOR_2 = "O"
-def alternar_jugador(turno):
-    """Determinar de quién es el turno"""
-    """alternar entre los dos jugadores"""
-    if turno == JUGADOR_1:
-        turno = JUGADOR_2
-    else:
-        turno = JUGADOR_1
+
 def juego_crear():
-    """Crear el tablero"""
-    """el tablero es un diccionario que tiene como claves las posiciones del tablero y como valor el símbolo del jugador que
-    hizo la jugada en esa posición. Por ejemplo, si el jugador 1 hizo una jugada en la posición (0, 0), entonces el diccionario
-    tendrá la clave (0, 0) con el valor "x". Si el jugador 2 hizo una jugada en la posición (1, 2), entonces el diccionario tendrá
-    la clave (1, 2) con el valor "o"."""
+    """Crear el tablero
+    El tablero es un diccionario que tiene como claves las posiciones del tablero y como valor el símbolo del jugador que
+    hizo la jugada en esa posición."""
     juego = {}
     for i in range(10):
         for j in range(10):
             juego[i, j] = 0
     return juego
-
-
 def alternar_jugador(turno):
-    """Determinar de quién es el turno"""
     """alternar entre los dos jugadores"""
-    if turno == JUGADOR_1:
-        return JUGADOR_2
-    else:
-        return JUGADOR_1
-
+    return JUGADOR_2 if turno == JUGADOR_1 else JUGADOR_1
 def juego_actualizar(juego, x, y, turno):
     """Actualizar el estado del juego
     x e y son las coordenadas (en pixels) donde el usuario hizo click.
@@ -39,24 +24,12 @@ def juego_actualizar(juego, x, y, turno):
     del tablero; en ese caso determina el nuevo estado del juego y lo
     devuelve.
     """
-    """En la función juego_actualizar tenemos que actualizar el tablero con la jugada del usuario.
-    Para eso, primero tenemos que averiguar en qué celda del tablero se hizo click.
-    Para eso, tenemos que dividir la posición del click por el tamaño de cada celda.
-    """
     x = x // 30
     y = y // 30
-    """juego es un diccionario que tiene como claves las posiciones del tablero y como valor el símbolo del jugador que hizo la jugada en esa posición.
-    Tambien debo cambiar el turno del jugador
-    """
     juego[x, y] = turno
-
     return juego
-
 def esta_ocupado(juego, x, y):
     """Determinar si una celda está ocupada"""
-    """En la función esta_ocupado tenemos que determinar si una celda está ocupada.
-    es decir no contiene a uno de los jugadores
-    """
     return juego[x, y] != 0
 
 def juego_mostrar(juego, turno):
@@ -85,7 +58,6 @@ def juego_mostrar(juego, turno):
     "mostrar el nombre de los jugadores"
     gamelib.draw_text("Jugador 1: " + JUGADOR_1, 60, 375, fill='#dda90e', size=12)
     gamelib.draw_text("Jugador 2: " + JUGADOR_2, 240, 375, fill='#dda90e', size=12)
-
 
 def main():
     juego = juego_crear()
@@ -121,6 +93,5 @@ def main():
             if not esta_ocupado(juego, x // 30, y // 30):
                 juego = juego_actualizar(juego, x, y, turno)
                 turno = alternar_jugador(turno)
-
 
 gamelib.init(main)
