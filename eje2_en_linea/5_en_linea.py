@@ -7,8 +7,8 @@ ALTO_PIXELS = 30
 MAX_ALTO = 10
 MAX_ANCHO = 10
 
-JUGADOR_1 = "G"
-JUGADOR_2 = "E"
+JUGADOR_1 = "X"
+JUGADOR_2 = "O"
 
 def juego_crear():
     #Crear el tablero

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/Tp1" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/TP1" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/ej1_areaDeUnPoligono" vcs="Git" />
   </component>
 </project>

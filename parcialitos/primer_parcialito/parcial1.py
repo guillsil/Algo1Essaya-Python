@@ -59,4 +59,3 @@ def censurar(texto, lista_palabras):
             if texto[i].lower() == lista_palabras[j].lower():
                 texto[i] = "*" * len(texto[i])
     return " ".join(texto)
-print(censurar("Hola mundo Guillermo Silva carlo tu eres el mejor", ["mejor", "eres", "Silva", "CARLO"]))
