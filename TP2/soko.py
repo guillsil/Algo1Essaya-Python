@@ -16,6 +16,8 @@ ESTE = (1, 0)
 NORTE = (0, -1)
 SUR = (0, 1)
 
+LISTA_DE_SIMBOLOS = ["#", "$", ".", "@", " ", "*", "+"]
+
 
 '''Crea una grilla a partir de la descripción del estado inicial.
 
@@ -40,15 +42,56 @@ SUR = (0, 1)
         
     ])
     '''
-"borrar"
-LISTA = ["#####", "#.$ #", "#@  #", "#####"]
-LISTA2 = ["  #####$", "##$ $.#$", "#.@$  #$", "#   $.#$", "#.#    #", "# $.$:##", "#    $.#", "########"]
+def dimensiones(grilla):
+    '''Devuelve una tupla con la cantidad de columnas y filas de la grilla (col, fil)'''
+    return grilla[4]
+"""print(dimensiones(crear_grilla(LISTA2)))"""
+
+def completar_grilla(grilla):
+    """Completa la grilla con espacios vacios"""
+    tupla_vacia = []
+    for i in range(grilla[4][1]):
+        for j in range(grilla[4][0]):
+            if (j,i) not in grilla[0] and (j,i) not in grilla[1] and (j,i) not in grilla[2] and (j,i) not in grilla[3] :
+                tupla_vacia.append((j,i))
+    return tupla_vacia
+
+def hallar_max_columnas(desc):
+    """Devuelve la maxima cantidad de columnas de la grilla"""
+    max_col = 0
+    for i in range(len(desc)):
+        if len(desc[i]) > max_col:
+            max_col = len(desc[i])
+    return max_col
+
+def leer_niveles():
+    """Lee los niveles del archivo niveles.txt y los devuelve en una lista de strings"""
+    with open("niveles.txt", "r") as archivo:
+        """saltar la primera linea"""
+        archivo.readline()
+        """leer el resto del archivo"""
+        niveles = []
+        nivel = []
+        for linea in archivo:
+            if linea != "\n":
+                nivel.append(linea.strip())
+            else:
+                niveles.append(nivel)
+                nivel = []
+                archivo.readline()
+                """descartar los nombres de los niveles"""
+                if "#" not in linea and "$" not in linea and "@" not in linea and "." not in linea:
+                    archivo.readline()
+        niveles.append(nivel)
+    return niveles
 def crear_grilla(desc):
-    #descompone una cadena en una lista de tuplas cuyo contenido representa la (col, fil) de un objeto
+    #descompone una una lista de strings en una lista de listas de strings
     paredes = []
     cajas = []
     jugador = []
     objetivos = []
+    vacio = []
+    max_col = 0
     for j in range(len(desc)):
         #j es la fila
         for k in range(len(desc[j])):
@@ -67,15 +110,15 @@ def crear_grilla(desc):
             elif desc[j][k] == "+":
                 jugador.append((k,j))
                 objetivos.append((k,j))
-    grilla = [paredes, cajas, jugador, objetivos, (len(desc[0]), len(desc))]
+    """hallar el max columnas"""
+    max_col = hallar_max_columnas(desc)
+    espacio_vacio = completar_grilla((paredes, cajas, jugador, objetivos, (max_col, len(desc))))
+    grilla = [paredes, cajas, jugador, objetivos, (max_col, len(desc)), espacio_vacio]
     # grilla devuelve listas de tuplas con las coordenadas de las paredes, cajas, jugador y objetivos
     #tambien devuelve una tupla con la cantidad de columnas y filas de la grilla(dimension)
     return grilla
 
-def dimensiones(grilla):
-    '''Devuelve una tupla con la cantidad de columnas y filas de la grilla (col, fil)'''
-    return grilla[4]
-"""print(dimensiones(crear_grilla(LISTA2)))"""
+
 
 
 def hay_pared(grilla, c, f):
@@ -159,12 +202,10 @@ def mover(grilla, direccion):
         grilla2[2].remove(jugador)
         grilla2[2].append((jugador[0]+movimiento[0], jugador[1]+movimiento[1]))
         return grilla2
-
-
-
-
 def cargar_terreno(grilla):
-    '''Carga el terreno en la grilla.'''
+    """Carga el terreno en la grilla."""
+    print(grilla[4][0])
+    print(grilla[4][1])
     for i in range(grilla[4][0]):
         for j in range(grilla[4][1]):
             if hay_pared(grilla, j, i):
@@ -201,13 +242,18 @@ def pedir_movimiento():
         else:
             print("Direccion invalida, intente nuevamente")
             continue
+"""leer los nivele del archivo niveles.txt"""
 
-"""def main():
+
+
+
+
+def main():
     '''Función principal del programa.'''
-    grilla = crear_grilla(LISTA2)
+    grilla = crear_grilla(leer_niveles()[0])
     while not juego_ganado(grilla):
         cargar_terreno(grilla)
         grilla = mover(grilla, pedir_movimiento())
     cargar_terreno(grilla)
     print("Ganaste!")
-main()"""
+main()
