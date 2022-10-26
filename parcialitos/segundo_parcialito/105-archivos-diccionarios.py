@@ -11,11 +11,16 @@ para el mismo lugar).
 El tipo de dato para el "momento" no importa, tratarlo como una cadena."""
 def personas_en_un_mismo_momento(nombre_archivo, nombre_persona):
     archivo = open(nombre_archivo, 'r')
-    personas = set()
+    personas = []
+    dic_personas = {}
     for linea in archivo:
         datos = linea.strip().split(';')
         if datos[0] == nombre_persona:
-            personas.add(datos[1])
+            dic_personas[datos[1]] = datos[2]
+        elif datos[1] in dic_personas:
+            if datos[2] == dic_personas[datos[1]]:
+                personas.append(datos[0])
     archivo.close()
-    return personas
+    return (personas)
+print(personas_en_un_mismo_momento('contactos.csv', 'Guillermo'))
 

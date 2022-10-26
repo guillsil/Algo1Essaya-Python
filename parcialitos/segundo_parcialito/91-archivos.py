@@ -10,6 +10,7 @@ grupo uno por línea.
 Nota: al finalizar la ejecución de la función (haya ocurrido un error o no), todos los archivos abiertos deben
 quedar cerrados"""
 def dividir_alumnos(nombre_archivo):
+
     archivo = open(nombre_archivo, 'r')
     grupos = [[], [], []]
     for linea in archivo:
