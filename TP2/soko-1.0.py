@@ -8,20 +8,19 @@ JUGADOR = "@"
 EMOGI_JUGADOR = "\U0001F9B9"
 ESPACIO = " "
 EMOGI_ESPACIO = "\U00002B1C"
-OBJETIVO_CAJA = "*"
-OBJETIVO_JUGADOR = "+"
+EMOGI_OBJETIVO_CAJA = "*"
+EMOGI_OBJETIVO_JUGADOR = "+"
 
-LISTA_DE_SIMBOLOS = [PARED, CAJA, JUGADOR, OBJETIVO, ESPACIO, EMOGI_PARED, EMOGI_CAJA, EMOGI_JUGADOR, EMOGI_OBEJTIVO, EMOGI_ESPACIO, OBJETIVO_CAJA, OBJETIVO_JUGADOR]
 OESTE = (-1, 0)
 ESTE = (1, 0)
 NORTE = (0, -1)
 SUR = (0, 1)
 
-'''Crea una grilla a partir de la descripción del estado inicial.
+LISTA_DE_SIMBOLOS = ["#", "$", ".", "@", " ", "*", "+"]
 
+'''Crea una grilla a partir de la descripción del estado inicial.
     La descripción es una lista de cadenas, cada cadena representa una
     fila y cada caracter una celda. Los caracteres pueden ser los siguientes:
-
     Caracter  Contenido de la celda
     --------  ---------------------
            #  Pared
@@ -31,120 +30,132 @@ SUR = (0, 1)
            *  Objetivo + Caja
            +  Objetivo + Jugador
     Ejemplo:
-
     # >>> crear_grilla([
         '#####',
         '#.$ #',
         '#@  #',
         '#####',
-        
+
     ])
     '''
-def grilla_a_diccionario(grilla):
-    """"devuelve un diccionario donde la clave es la posicion de cada elemento y el valor es el simbolo que representa"""
-    diccionario = {}
-    for i in range(len(grilla)):
-        for j in range(len(grilla[i])):
-            diccionario[grilla[i][j]] = LISTA_DE_SIMBOLOS[i]
-    return diccionario
 
 
-def imprimir_grilla(grilla):
-    """Imprime la grilla"""
-    diccionario = grilla_a_diccionario(grilla)
-    for i in range(grilla[4][1]):
-        for j in range(grilla[4][0]):
-            if (j,i) in diccionario:
-                print(diccionario[(j,i)], end="")
-            else:
-                print(" ", end="")
-        print()
 def dimensiones(grilla):
     '''Devuelve una tupla con la cantidad de columnas y filas de la grilla (col, fil)'''
     return grilla[4]
+
+
 """print(dimensiones(crear_grilla(LISTA2)))"""
 
+
+def completar_grilla(grilla):
+    """Completa la grilla con espacios vacios"""
+    tupla_vacia = []
+    for i in range(grilla[4][1]):
+        for j in range(grilla[4][0]):
+            if (j, i) not in grilla[0] and (j, i) not in grilla[1] and (j, i) not in grilla[2] and (j, i) not in grilla[
+                3]:
+                tupla_vacia.append((j, i))
+    return tupla_vacia
+
+
 def hallar_max_columnas(desc):
-    """Devuelve la maxima cantidad de columnas de la desc"""
+    """Devuelve la maxima cantidad de columnas de la grilla"""
     max_col = 0
     for i in range(len(desc)):
         if len(desc[i]) > max_col:
             max_col = len(desc[i])
     return max_col
 
-def completar_grilla(desc):
-    """Recibe una lista de string y devuelve una lista de string complentando los espacios en blanco del final de cada
-     string, teniendo en cuenta la cantidad de columnas maxima"""
-    max_col = hallar_max_columnas(desc)
-    for i in range(len(desc)):
-        while len(desc[i]) < max_col:
-            desc[i] = desc[i] + " "
-    return desc
 
-def leer_nivel(archivo_nivel, nivel):
-    """Busca el nivel solicitado en el archivo de niveles y lo devuelve como una lista de strings"""
-    nivel = nivel + 1
-    archivo = open(archivo_nivel, "r")
-    desc = []
-    for linea in archivo:
-        if linea.startswith("Level " + str(nivel)):
-            for linea in archivo:
-                if linea.startswith("Level "):
-                    return desc
-                else:
-                    if linea != "":
-                        desc.append(linea.rstrip())
-    #borrar el ultimo elemento de la lista
-    desc.pop()
-    return desc
+def leer_niveles():
+    """Lee los niveles del archivo niveles.txt y los devuelve en una lista de strings"""
+    with open("niveles.txt", "r") as archivo:
+        """saltar la primera linea"""
+        archivo.readline()
+        """leer el resto del archivo"""
+        niveles = []
+        nivel = []
+        for linea in archivo:
+            if linea != "\n":
+                nivel.append(linea.strip())
+            else:
+                niveles.append(nivel)
+                nivel = []
+                archivo.readline()
+                """descartar los nombres de los niveles"""
+                if "#" not in linea and "$" not in linea and "@" not in linea and "." not in linea:
+                    archivo.readline()
+        niveles.append(nivel)
+    return niveles
+
 
 def crear_grilla(desc):
-    """Crea una grilla a partir de la descripcion del estado inicial"""
+    # descompone una una lista de strings en una lista de listas de strings
     paredes = []
     cajas = []
     jugador = []
     objetivos = []
-    vacios = []
-    max_col = hallar_max_columnas(desc)
+    vacio = []
+    max_col = 0
     for j in range(len(desc)):
-        for k in range(max_col):
-            if desc[j][k] == PARED:
+        # j es la fila
+        for k in range(len(desc[j])):
+            # k es la columna
+            if desc[j][k] == "#":
                 paredes.append((k, j))
-            elif desc[j][k] == CAJA:
+            elif desc[j][k] == "$":
                 cajas.append((k, j))
-            elif desc[j][k] == JUGADOR:
+            elif desc[j][k] == "@":
                 jugador.append((k, j))
-            elif desc[j][k] == OBJETIVO:
+            elif desc[j][k] == ".":
                 objetivos.append((k, j))
-            elif desc[j][k] == OBJETIVO_CAJA:
+            elif desc[j][k] == "*":
                 cajas.append((k, j))
                 objetivos.append((k, j))
-            elif desc[j][k] == OBJETIVO_JUGADOR:
+            elif desc[j][k] == "+":
                 jugador.append((k, j))
                 objetivos.append((k, j))
-            else:
-                vacios.append((k, j))
-    return paredes, cajas, jugador, objetivos, (max_col, len(desc))
+    """hallar el max columnas"""
+    max_col = hallar_max_columnas(desc)
+    espacio_vacio = completar_grilla((paredes, cajas, jugador, objetivos, (max_col, len(desc))))
+    grilla = [paredes, cajas, jugador, objetivos, (max_col, len(desc)), espacio_vacio]
+    # grilla devuelve listas de tuplas con las coordenadas de las paredes, cajas, jugador y objetivos
+    # tambien devuelve una tupla con la cantidad de columnas y filas de la grilla(dimension)
+    return grilla
 
 
 def hay_pared(grilla, c, f):
     '''Devuelve True si hay una pared en la columna y fila (c, f).'''
-    return (c,f) in grilla[0]
+    return (c, f) in grilla[0]
+
+
 """print(hay_pared(crear_grilla(LISTA2), 0, 1))"""
+
 
 def hay_objetivo(grilla, c, f):
     '''Devuelve True si hay un objetivo en la columna y fila (c, f).'''
-    return (c,f) in grilla[3]
+    return (c, f) in grilla[3]
+
+
 """print(hay_objetivo(crear_grilla(LISTA2), 1, 2))"""
+
 
 def hay_caja(grilla, c, f):
     '''Devuelve True si hay una caja en la columna y fila (c, f).'''
-    return (c,f) in grilla[1]
+    return (c, f) in grilla[1]
+
+
 """print(hay_caja(crear_grilla(LISTA2), 3, 2))"""
+
+
 def hay_jugador(grilla, c, f):
     '''Devuelve True si el jugador está en la columna y fila (c, f).'''
-    return (c,f) in grilla[2]
+    return (c, f) in grilla[2]
+
+
 """print(hay_jugador(crear_grilla(LISTA2), 2, 2))"""
+
 
 def juego_ganado(grilla):
     '''Devuelve True si el juego está ganado.'''
@@ -160,12 +171,15 @@ def juego_ganado(grilla):
     else:
         return True
 
+
 def copia_profunda(lista):
     """Realiza una copia profunda de una lista con sus sublistas y develve la misma sin modificar la original"""
     copia = []
     for i in lista:
         copia.append(i[:])
     return copia
+
+
 def mover(grilla, direccion):
     '''Mueve el jugador en la dirección indicada.
     La dirección es una tupla con el movimiento horizontal y vertical. Dado que
@@ -185,34 +199,37 @@ def mover(grilla, direccion):
     grilla2 = copia_profunda(grilla)
     jugador = grilla2[2][0]
     movimiento = direccion
-    if hay_pared(grilla2, jugador[0]+movimiento[0], jugador[1]+movimiento[1]):
+    if hay_pared(grilla2, jugador[0] + movimiento[0], jugador[1] + movimiento[1]):
         # si hay una pared en la direccion del movimiento, no se puede mover
         return grilla2
-    elif hay_caja(grilla2, jugador[0]+movimiento[0], jugador[1]+movimiento[1]):
-        if hay_pared(grilla2, jugador[0]+2*movimiento[0], jugador[1]+2*movimiento[1]):
+    elif hay_caja(grilla2, jugador[0] + movimiento[0], jugador[1] + movimiento[1]):
+        if hay_pared(grilla2, jugador[0] + 2 * movimiento[0], jugador[1] + 2 * movimiento[1]):
             # si hay una pared en la direccion del movimiento, no se puede mover
             return grilla2
-        elif hay_caja(grilla2, jugador[0]+2*movimiento[0], jugador[1]+2*movimiento[1]):
+        elif hay_caja(grilla2, jugador[0] + 2 * movimiento[0], jugador[1] + 2 * movimiento[1]):
             # si hay una caja en la direccion del movimiento, no se puede mover
             return grilla2
         else:
             # si no hay nada en la direccion del movimiento, se puede mover
-            grilla2[1].remove((jugador[0]+movimiento[0], jugador[1]+movimiento[1]))
-            grilla2[1].append((jugador[0]+2*movimiento[0], jugador[1]+2*movimiento[1]))
+            grilla2[1].remove((jugador[0] + movimiento[0], jugador[1] + movimiento[1]))
+            grilla2[1].append((jugador[0] + 2 * movimiento[0], jugador[1] + 2 * movimiento[1]))
             grilla2[2].remove(jugador)
-            grilla2[2].append((jugador[0]+movimiento[0], jugador[1]+movimiento[1]))
+            grilla2[2].append((jugador[0] + movimiento[0], jugador[1] + movimiento[1]))
             return grilla2
 
     else:
         # si no hay nada en la direccion del movimiento, se puede mover
         grilla2[2].remove(jugador)
-        grilla2[2].append((jugador[0]+movimiento[0], jugador[1]+movimiento[1]))
+        grilla2[2].append((jugador[0] + movimiento[0], jugador[1] + movimiento[1]))
         return grilla2
-def cargar_terreno(dic_grilla):
-    """Carga el terreno en la grilla."""
 
+
+def cargar_terreno(grilla):
+    """Carga el terreno en la grilla."""
+    print(grilla[4][0])
+    print(grilla[4][1])
     for i in range(grilla[4][0]+1):
-        for j in range(grilla[4][1]-2):
+        for j in range(grilla[4][1]-1):
             if hay_pared(grilla, j, i):
                 print(EMOGI_PARED, end="")
             elif hay_objetivo(grilla, j, i):
@@ -229,6 +246,7 @@ def cargar_terreno(dic_grilla):
             else:
                 print(EMOGI_ESPACIO, end="")
         print()
+
 
 def pedir_movimiento():
     '''Pide al usuario que ingrese un movimiento y devuelve la dirección
@@ -248,19 +266,16 @@ def pedir_movimiento():
             print("Direccion invalida, intente nuevamente")
             continue
 
-print(leer_nivel("niveles.txt", 154))
-print(completar_grilla(leer_nivel("niveles.txt", 154)))
-grilla = crear_grilla(completar_grilla(leer_nivel("niveles.txt", 154)))
-print(grilla_a_diccionario(grilla))
-imprimir_grilla(grilla)
+
+"""leer los nivele del archivo niveles.txt"""
 
 
-"""def main():
+def main():
     '''Función principal del programa.'''
-    grilla = crear_grilla(completar_grilla(leer_nivel("niveles.txt", 2)))
+    grilla = crear_grilla(leer_niveles()[3])
     while not juego_ganado(grilla):
         cargar_terreno(grilla)
         grilla = mover(grilla, pedir_movimiento())
     cargar_terreno(grilla)
     print("Ganaste!")
-main()"""
+main()
