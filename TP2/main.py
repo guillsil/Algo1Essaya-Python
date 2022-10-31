@@ -6,6 +6,7 @@ ALTO_VENTANA = 300
 
 def main():
     # Inicializar el estado del juego
+    grilla
 
     gamelib.resize(ANCHO_VENTANA, ALTO_VENTANA)
 
@@ -22,3 +23,5 @@ def main():
         # Actualizar el estado del juego, según la `tecla` presionada
 
 gamelib.init(main)
+
+main()

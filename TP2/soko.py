@@ -1,3 +1,4 @@
+import gamelib
 PARED = "#"
 EMOGI_PARED = "\U0001F533"
 CAJA = "$"
@@ -10,6 +11,12 @@ ESPACIO = " "
 EMOGI_ESPACIO = "\U00002B1C"
 OBJETIVO_CAJA = "*"
 OBJETIVO_JUGADOR = "+"
+
+ANCHO_VENTANA = 360
+ALTO_VENTANA = 420
+ANCHO_CELDA = 60
+ALTO_CELDA = 60
+
 
 LISTA_DE_SIMBOLOS = [PARED, CAJA, JUGADOR, OBJETIVO, ESPACIO, EMOGI_PARED, EMOGI_CAJA, EMOGI_JUGADOR, EMOGI_OBEJTIVO, EMOGI_ESPACIO, OBJETIVO_CAJA, OBJETIVO_JUGADOR]
 OESTE = (-1, 0)
@@ -79,23 +86,26 @@ def completar_grilla(desc):
     for i in range(len(desc)):
         while len(desc[i]) < max_col:
             desc[i] = desc[i] + " "
+    # borrar la ultima cadena si es toda vacia (si el nivel termina con una linea en blanco)
+    if desc[-1] == " " * max_col:
+        desc.pop()
     return desc
 
 def leer_nivel(archivo_nivel, nivel):
-    """Busca el nivel solicitado en el archivo de niveles y lo devuelve como una lista de strings"""
+    """Busca el nivel solicitado en el archivo de niveles y lo devuelve como una lista de strings, noce debe devolver
+    una linea vacia al final"""
     nivel = nivel + 1
     archivo = open(archivo_nivel, "r")
     desc = []
     for linea in archivo:
-        if linea.startswith("Level " + str(nivel)):
+        if linea.startswith("Level " + str(nivel)) :
             for linea in archivo:
                 if linea.startswith("Level "):
                     return desc
                 else:
                     if linea != "":
                         desc.append(linea.rstrip())
-    #borrar el ultimo elemento de la lista
-    desc.pop()
+    archivo.close()
     return desc
 
 def crear_grilla(desc):
@@ -208,11 +218,12 @@ def mover(grilla, direccion):
         grilla2[2].remove(jugador)
         grilla2[2].append((jugador[0]+movimiento[0], jugador[1]+movimiento[1]))
         return grilla2
-def cargar_terreno(dic_grilla):
+def cargar_terreno(grilla):
     """Carga el terreno en la grilla."""
-
-    for i in range(grilla[4][0]+1):
-        for j in range(grilla[4][1]-2):
+    print(grilla[4][0])
+    print(grilla[4][1])
+    for i in range(grilla[4][0]):
+        for j in range(grilla[4][1]):
             if hay_pared(grilla, j, i):
                 print(EMOGI_PARED, end="")
             elif hay_objetivo(grilla, j, i):
@@ -229,6 +240,7 @@ def cargar_terreno(dic_grilla):
             else:
                 print(EMOGI_ESPACIO, end="")
         print()
+
 
 def pedir_movimiento():
     '''Pide al usuario que ingrese un movimiento y devuelve la dirección
@@ -248,19 +260,100 @@ def pedir_movimiento():
             print("Direccion invalida, intente nuevamente")
             continue
 
-print(leer_nivel("niveles.txt", 154))
-print(completar_grilla(leer_nivel("niveles.txt", 154)))
-grilla = crear_grilla(completar_grilla(leer_nivel("niveles.txt", 154)))
-print(grilla_a_diccionario(grilla))
+
+print(leer_nivel("niveles.txt", 5))
+print(completar_grilla(leer_nivel("niveles.txt", 5)))
+grilla = crear_grilla(completar_grilla(leer_nivel("niveles.txt", 5)))
 imprimir_grilla(grilla)
+grilla_a_diccionario(grilla)
+print(grilla_a_diccionario(grilla))
+
+def juego_mostrar(grilla):
+    """En la función juego_mostrar tenemos que utilizar las funciones de Gamelib para dibujar el tablero
+    ¡No es necesario dibujar nada muy sofisticado! Debería ser suficiente con usar las funciones
+    draw_text y draw_rectangle/draw_line y gamelib.draw_image."""
+    """Dibujar el tablero"""
+    #Dibujar el fondo
+    gamelib.draw_rectangle(0, 0, ANCHO_VENTANA, ALTO_VENTANA, fill='#080F28')
+    #Dibujar el tablero
+    for i in range(6):
+        for j in range(7):
+            gamelib.draw_line(i * 60, 0, i * 60, 360, fill='#dda90e', width=2)
+            gamelib.draw_line(0, j * 60, 420, j * 60, fill='#dda90e', width=2)
+    #Dibujar las paredes
+    for i in range(6):
+        for j in range(7):
+            if hay_pared(grilla, i, j):
+                gamelib.draw_image("img/wall.gif",60*i,60*j)
+            elif hay_caja(grilla, i, j):
+                gamelib.draw_image("img/box.gif",60*i,60*j)
+            elif hay_objetivo(grilla, i, j):
+                gamelib.draw_image("img/ground.gif",60*i,60*j)
+                gamelib.draw_image("img/goal.gif",60*i,60*j)
+            elif hay_jugador(grilla, i, j):
+                gamelib.draw_image("img/ground.gif",60*i,60*j)
+                gamelib.draw_image("img/player.gif",60*i,60*j)
+            else:
+                gamelib.draw_image("img/ground.gif",60*i,60*j)
+
+def mover_jugador(grilla, movimiento):
+    """Mueve al jugador en la dirección indicada, si es posible.
+    Devuelve la nueva grilla.
+    """
+    jugador = grilla[2][0]
+    grilla2 = grilla_a_diccionario(grilla)
+    if hay_pared(grilla2, jugador[0]+movimiento[0], jugador[1]+movimiento[1]):
+        # si hay una pared en la direccion del movimiento, no se puede mover
+        return grilla2
+    elif hay_caja(grilla2, jugador[0]+movimiento[0], jugador[1]+movimiento[1]):
+        # si hay una caja en la direccion del movimiento, no se puede mover
+        return grilla2
+    else:
+        # si no hay nada en la direccion del movimiento, se puede mover
+        grilla2[2].remove(jugador)
+        grilla2[2].append((jugador[0]+movimiento[0], jugador[1]+movimiento[1]))
+        return grilla2
 
 
-"""def main():
-    '''Función principal del programa.'''
-    grilla = crear_grilla(completar_grilla(leer_nivel("niveles.txt", 2)))
-    while not juego_ganado(grilla):
-        cargar_terreno(grilla)
-        grilla = mover(grilla, pedir_movimiento())
-    cargar_terreno(grilla)
-    print("Ganaste!")
-main()"""
+
+def main():
+    # Inicializar el estado del juego
+    nivel = 0
+    grilla = crear_grilla(completar_grilla(leer_nivel("niveles.txt", nivel)))
+
+    gamelib.resize(ANCHO_VENTANA, ALTO_VENTANA)
+
+    while gamelib.is_alive():
+        gamelib.draw_begin()
+        # Dibujar la pantalla
+        juego_mostrar(grilla)
+        gamelib.draw_end()
+
+        ev = gamelib.wait(gamelib.EventType.KeyPress)
+        if not ev:
+            break
+
+        tecla = ev.key
+        if tecla == "W" or tecla == "w":
+            movimiento = NORTE
+            grilla = mover_jugador(grilla, movimiento)
+        elif tecla == "S" or tecla == "s":
+            movimiento = SUR
+            grilla = mover_jugador(grilla, movimiento)
+        elif tecla == "A" or tecla == "a":
+            movimiento = OESTE
+            grilla = mover_jugador(grilla, movimiento)
+        elif tecla == "D" or tecla == "d":
+            movimiento = ESTE
+            grilla = mover_jugador(grilla, movimiento)
+        elif tecla == "Q" or tecla == "q":
+            break
+        else:
+            print("Direccion invalida, intente nuevamente")
+            continue
+
+        # Actualizar el estado del juego, según la `tecla` presionada
+        # ...
+        
+
+gamelib.init(main)
