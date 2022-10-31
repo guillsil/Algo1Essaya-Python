@@ -1,13 +1,8 @@
-Up = NORTE
-Left = OESTE
-Down = SUR
-Right = ESTE
+w = (0, -1)
+a = (-1, 0)
+s = (0, 1)
+d = (1, 0)
 
-w = NORTE
-a = OESTE
-s = SUR
-d = ESTE
-
-r = REINICIAR
+q = REINICIAR
 
 Escape = SALIR
