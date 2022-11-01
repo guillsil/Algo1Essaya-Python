@@ -1,14 +1,11 @@
+
 import gamelib
+
 PARED = "#"
-EMOGI_PARED = "\U0001F533"
 CAJA = "$"
-EMOGI_CAJA = "\U0001F5C4"
 OBJETIVO = "."
-EMOGI_OBEJTIVO = "\U0001F539"
 JUGADOR = "@"
-EMOGI_JUGADOR = "\U0001F9B9"
 ESPACIO = " "
-EMOGI_ESPACIO = "\U00002B1C"
 OBJETIVO_CAJA = "*"
 OBJETIVO_JUGADOR = "+"
 
@@ -16,32 +13,7 @@ ANCHO_CELDA = 60
 ALTO_CELDA = 60
 
 
-LISTA_DE_SIMBOLOS = [PARED, CAJA, JUGADOR, OBJETIVO, ESPACIO, EMOGI_PARED, EMOGI_CAJA, EMOGI_JUGADOR, EMOGI_OBEJTIVO, EMOGI_ESPACIO, OBJETIVO_CAJA, OBJETIVO_JUGADOR]
 
-
-'''Crea una grilla a partir de la descripción del estado inicial.
-
-    La descripción es una lista de cadenas, cada cadena representa una
-    fila y cada caracter una celda. Los caracteres pueden ser los siguientes:
-
-    Caracter  Contenido de la celda
-    --------  ---------------------
-           #  Pared
-           $  Caja
-           @  Jugador
-           .  Objetivo
-           *  Objetivo + Caja
-           +  Objetivo + Jugador
-    Ejemplo:
-
-    # >>> crear_grilla([
-        '#####',
-        '#.$ #',
-        '#@  #',
-        '#####',
-        
-    ])
-    '''
 
 def dimensiones(grilla):
     '''Devuelve una tupla con la cantidad de columnas y filas de la grilla (col, fil)'''
@@ -136,6 +108,8 @@ def copia_profunda(lista):
     for i in lista:
         copia.append(i[:])
     return copia
+
+
 def mover(grilla, movimiento):
     '''Mueve el jugador en la dirección indicada.
     La dirección es una tupla con el movimiento horizontal y vertical. Dado que
@@ -178,33 +152,7 @@ def mover(grilla, movimiento):
         grilla2[2].append((jugador[0]+movimiento[0], jugador[1]+movimiento[1]))
         return grilla2
 
-def actualizar_estado(tecla, grilla):
-    """
-    Actualiza el estado del juego, según la `tecla` presionada.
-    """
-    """Debo abrir el archivos de teclas y ver que tecla corresponde a que movimiento"""
-    with open("teclas.txt", "r") as archivo:
-        teclas = archivo.readlines()
 
-    if tecla == "W" or tecla == "w":
-        movimiento = NORTE
-        grilla = mover(grilla, movimiento)
-    elif tecla == "S" or tecla == "s":
-        movimiento = SUR
-        grilla = mover(grilla, movimiento)
-    elif tecla == "A" or tecla == "a":
-        movimiento = OESTE
-        grilla = mover(grilla, movimiento)
-    elif tecla == "D" or tecla == "d":
-        movimiento = ESTE
-        grilla = mover(grilla, movimiento)
-    elif tecla == "Q" or tecla == "q":
-        # tecla para reiniciar nivel
-        grilla = reiniciar_nivel(nivel)
-    else:
-        print("Direccion invalida, intente nuevamente")
-        continue
-    return grilla
 def juego_mostrar(grilla):
     """En la función juego_mostrar tenemos que utilizar las funciones de Gamelib para dibujar el tablero
     ¡No es necesario dibujar nada muy sofisticado! Debería ser suficiente con usar las funciones
@@ -247,3 +195,4 @@ def reiniciar_nivel(nivel_actual):
     """Reinicia el nivel."""
     grilla = crear_grilla(completar_grilla(leer_nivel("niveles.txt", nivel_actual)))
     return grilla
+

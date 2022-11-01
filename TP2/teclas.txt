@@ -1,7 +1,12 @@
-w = (0, -1)
-a = (-1, 0)
-s = (0, 1)
-d = (1, 0)
+Up = NORTE
+Left = OESTE
+Down = SUR
+Right = ESTE
+
+w = NORTE
+a = OESTE
+s = SUR
+d = ESTE
 
 q = REINICIAR
 
