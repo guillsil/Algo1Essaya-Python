@@ -11,3 +11,5 @@ d = ESTE
 q = REINICIAR
 
 Escape = SALIR
+
+e = NEXT_LEVEL

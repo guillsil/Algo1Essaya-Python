@@ -5,10 +5,6 @@ import soko
 ANCHO_VENTANA = 300
 ALTO_VENTANA = 300
 
-OESTE = (-1, 0)
-ESTE = (1, 0)
-NORTE = (0, -1)
-SUR = (0, 1)
 
 
 
@@ -17,10 +13,7 @@ def main():
     nivel = 0
     grilla = soko.crear_grilla(soko.completar_grilla(soko.leer_nivel("niveles.txt", nivel)))
 
-    max_col = soko.hallar_max_columnas(soko.completar_grilla(soko.leer_nivel("niveles.txt", nivel)))
-
-    ancho_ventana = max_col * 60
-    alto_ventana = grilla[4][1] * 60
+    ancho_ventana, alto_ventana = soko.refrescar_ventana(grilla, nivel)
     gamelib.resize(ancho_ventana, alto_ventana)
 
     while gamelib.is_alive():
@@ -37,40 +30,13 @@ def main():
             break
         # Actualizar el estado del juego, según la `tecla` presionada
         tecla = ev.key
-        if tecla == "W" or tecla == "w" or tecla == "Up":
-            movimiento = NORTE
-            grilla = soko.mover(grilla, movimiento)
-        elif tecla == "S" or tecla == "s" or tecla == "Down":
-            movimiento = SUR
-            grilla = soko.mover(grilla, movimiento)
-        elif tecla == "A" or tecla == "a" or tecla == "Left":
-            movimiento = OESTE
-            grilla = soko.mover(grilla, movimiento)
-        elif tecla == "D" or tecla == "d" or tecla == "Right":
-            movimiento = ESTE
-            grilla = soko.mover(grilla, movimiento)
-        elif tecla == "Q" or tecla == "q":
-            #tecla para reiniciar nivel
-            grilla = soko.reiniciar_nivel(nivel)
-        elif tecla == "E" or tecla == "e":
-            #tecla para pasar de nivel
-            nivel += 1
-            grilla = soko.crear_grilla(soko.completar_grilla(soko.leer_nivel("niveles.txt", nivel)))
-            max_col = soko.hallar_max_columnas(soko.completar_grilla(soko.leer_nivel("niveles.txt", nivel)))
-            ancho_ventana = max_col * 60
-            alto_ventana = grilla[4][1] * 60
-            gamelib.resize(ancho_ventana, alto_ventana)
-        else:
-            print("Direccion invalida, intente nuevamente")
-            continue
+        grilla, nivel = soko.actualizar_estado(grilla, tecla, nivel)
         # Verificar si el jugador ganó o perdió
         if soko.juego_ganado(grilla):
             print("Ganaste!")
             nivel += 1
             grilla = soko.crear_grilla(soko.completar_grilla(soko.leer_nivel("niveles.txt", nivel)))
-            max_col = soko.hallar_max_columnas(soko.completar_grilla(soko.leer_nivel("niveles.txt", nivel)))
-            ancho_ventana = max_col * 60
-            alto_ventana = grilla[4][1] * 60
+            ancho_ventana, alto_ventana = soko.refrescar_ventana(grilla, nivel)
             gamelib.resize(ancho_ventana, alto_ventana)
         #gano el juego completo
         if nivel > 153:

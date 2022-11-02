@@ -17,3 +17,31 @@ def imprimir_grilla(grilla):
             else:
                 print(" ", end="")
         print()
+
+ """if tecla == "W" or tecla == "w" or tecla == "Up":
+        movimiento = NORTE
+        grilla = soko.mover(grilla, movimiento)
+    elif tecla == "S" or tecla == "s" or tecla == "Down":
+        movimiento = SUR
+        grilla = soko.mover(grilla, movimiento)
+    elif tecla == "A" or tecla == "a" or tecla == "Left":
+        movimiento = OESTE
+        grilla = soko.mover(grilla, movimiento)
+    elif tecla == "D" or tecla == "d" or tecla == "Right":
+        movimiento = ESTE
+        grilla = soko.mover(grilla, movimiento)
+    elif tecla == "Q" or tecla == "q":
+        #tecla para reiniciar nivel
+        grilla = soko.reiniciar_nivel(nivel)
+    elif tecla == "E" or tecla == "e":
+        #tecla para pasar de nivel
+        nivel += 1
+        grilla = soko.crear_grilla(soko.completar_grilla(soko.leer_nivel("niveles.txt", nivel)))
+        max_col = soko.hallar_max_columnas(soko.completar_grilla(soko.leer_nivel("niveles.txt", nivel)))
+        ancho_ventana = max_col * 60
+        alto_ventana = grilla[4][1] * 60
+        gamelib.resize(ancho_ventana, alto_ventana)
+    else:
+        print("Direccion invalida, intente nuevamente")
+        return grilla
+    """

@@ -12,6 +12,10 @@ OBJETIVO_JUGADOR = "+"
 ANCHO_CELDA = 60
 ALTO_CELDA = 60
 
+OESTE = (-1, 0)
+ESTE = (1, 0)
+NORTE = (0, -1)
+SUR = (0, 1)
 
 
 
@@ -195,4 +199,62 @@ def reiniciar_nivel(nivel_actual):
     """Reinicia el nivel."""
     grilla = crear_grilla(completar_grilla(leer_nivel("niveles.txt", nivel_actual)))
     return grilla
+def cargar_teclas(archivo):
+    """Recibe un archivo de teclas donde cada linea tiene la siguiente forma <Tecla> = <Accion>, se debera delvolver un
+    diccionario con la accion como clave y la tecla como valor, tener en cuenta que varias teclas pueden tener la misma accion"""
+    teclas = {}
+    with open(archivo, "r") as archivo:
+        for linea in archivo:
+            linea = linea.strip()
+            linea = linea.split(" = ")
+            #ignorar lineas vacias
+            if linea[0] == "":
+                continue
+            #si hay teclas que hacen lo mismo se guardan en una lista
+            if linea[1] in teclas:
+                teclas[(linea[1])].append(linea[0])
+            else:
+                teclas[(linea[1])] = [linea[0]]
+    return teclas
+print(cargar_teclas("teclas.txt"))
+
+
+def actualizar_estado(grilla, tecla, nivel):
+    """Actualiza el estado del juego, según la `tecla` presionada.
+    Devuelve el nuevo estado del juego.
+    """
+    teclas = cargar_teclas("teclas.txt")
+    for accion in teclas:
+        if accion == "NORTE":
+            if tecla in teclas[accion]:
+                grilla = mover(grilla, (0, -1))
+        elif accion == "SUR":
+            if tecla in teclas[accion]:
+                grilla = mover(grilla, (0, 1))
+        elif accion == "ESTE":
+            if tecla in teclas[accion]:
+                grilla = mover(grilla, (1, 0))
+        elif accion == "OESTE":
+            if tecla in teclas[accion]:
+                grilla = mover(grilla, (-1, 0))
+        elif accion == "REINICIAR":
+            if tecla in teclas[accion]:
+                grilla = reiniciar_nivel(nivel)
+        elif accion == "SALIR":
+            if tecla in teclas[accion]:
+                gamelib.quit()
+        elif accion == "NEXT_LEVEL":
+            if tecla in teclas[accion]:
+                nivel += 1
+                grilla = crear_grilla(completar_grilla(leer_nivel("niveles.txt", nivel)))
+                ancho_ventana, alto_ventana = refrescar_ventana(grilla, nivel)
+                gamelib.resize(ancho_ventana, alto_ventana)
+    return grilla, nivel
+
+def refrescar_ventana(grilla, nivel):
+    """Refresca la ventana del juego."""
+    max_col = hallar_max_columnas(completar_grilla(leer_nivel("niveles.txt", nivel)))
+    ancho_ventana = max_col * 60
+    alto_ventana = grilla[4][1] * 60
+    return ancho_ventana, alto_ventana
 
