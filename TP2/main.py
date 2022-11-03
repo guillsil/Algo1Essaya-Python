@@ -1,16 +1,10 @@
-import soko
 import gamelib
 import soko
-
-ANCHO_VENTANA = 300
-ALTO_VENTANA = 300
-
-
 
 
 def main():
     # Inicializar el estado del juego
-    nivel = 0
+    nivel = 152
     grilla = soko.crear_grilla(soko.completar_grilla(soko.leer_nivel("niveles.txt", nivel)))
 
     ancho_ventana, alto_ventana = soko.refrescar_ventana(grilla, nivel)
@@ -41,5 +35,6 @@ def main():
         #gano el juego completo
         if nivel > 153:
             print("Ganaste el juego completo!")
+            
             break
 gamelib.init(main)

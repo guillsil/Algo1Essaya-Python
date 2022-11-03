@@ -1,4 +1,3 @@
-
 import gamelib
 
 PARED = "#"
@@ -254,7 +253,5 @@ def actualizar_estado(grilla, tecla, nivel):
 def refrescar_ventana(grilla, nivel):
     """Refresca la ventana del juego."""
     max_col = hallar_max_columnas(completar_grilla(leer_nivel("niveles.txt", nivel)))
-    ancho_ventana = max_col * 60
-    alto_ventana = grilla[4][1] * 60
-    return ancho_ventana, alto_ventana
+    return max_col * 60, grilla[4][1] * 60
 
