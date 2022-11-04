@@ -8,8 +8,8 @@ ESPACIO = " "
 OBJETIVO_CAJA = "*"
 OBJETIVO_JUGADOR = "+"
 
-ANCHO_CELDA = 60
-ALTO_CELDA = 60
+ANCHO_CELDA = 64
+ALTO_CELDA = 64
 
 OESTE = (-1, 0)
 ESTE = (1, 0)
@@ -164,22 +164,26 @@ def juego_mostrar(grilla):
     max_col = hallar_max_columnas(grilla)
     #Dibujar las paredes
     for i in range(max_col):
+        #i es la columna
         for j in range(max_fil):
+            #j es la fila
             if hay_pared(grilla, i, j):
-                gamelib.draw_image("img/wall.gif",60*i,60*j)
+                gamelib.draw_image("img/ground.gif", ANCHO_CELDA * i, ALTO_CELDA * j)
+                gamelib.draw_image("img/wall.gif",ANCHO_CELDA*i,ALTO_CELDA*j)
+
             elif hay_caja(grilla, i, j):
-                gamelib.draw_image("img/ground.gif",60*i,60*j)
-                gamelib.draw_image("img/box.gif",60*i,60*j)
+                gamelib.draw_image("img/ground.gif",ANCHO_CELDA*i,ALTO_CELDA*j)
+                gamelib.draw_image("img/box.gif",ANCHO_CELDA*i,ALTO_CELDA*j)
             elif hay_objetivo(grilla, i, j):
-                gamelib.draw_image("img/ground.gif",60*i,60*j)
-                gamelib.draw_image("img/goal.gif",60*i,60*j)
+                gamelib.draw_image("img/ground.gif",ANCHO_CELDA*i,ALTO_CELDA*j)
+                gamelib.draw_image("img/goal.gif",ANCHO_CELDA*i,ALTO_CELDA*j)
                 if hay_jugador(grilla, i, j):
-                    gamelib.draw_image("img/player.gif",60*i,60*j)
+                    gamelib.draw_image("img/player.gif",ANCHO_CELDA*i,ALTO_CELDA*j)
             elif hay_jugador(grilla, i, j):
-                gamelib.draw_image("img/ground.gif",60*i,60*j)
-                gamelib.draw_image("img/player.gif",60*i,60*j)
+                gamelib.draw_image("img/ground.gif",ANCHO_CELDA*i,ALTO_CELDA*j)
+                gamelib.draw_image("img/player.gif",ANCHO_CELDA*i,ALTO_CELDA*j)
             else:
-                gamelib.draw_image("img/ground.gif",60*i,60*j)
+                gamelib.draw_image("img/ground.gif",ANCHO_CELDA*i,ALTO_CELDA*j)
 def juego_ganado(grilla):
     '''Devuelve True si el juego está ganado.'''
     valores = []
@@ -215,7 +219,7 @@ def cargar_teclas(archivo):
             else:
                 teclas[(linea[1])] = [linea[0]]
     return teclas
-print(cargar_teclas("teclas.txt"))
+
 
 
 def actualizar_estado(grilla, tecla, nivel):
@@ -253,5 +257,5 @@ def actualizar_estado(grilla, tecla, nivel):
 def refrescar_ventana(grilla, nivel):
     """Refresca la ventana del juego."""
     max_col = hallar_max_columnas(completar_grilla(leer_nivel("niveles.txt", nivel)))
-    return max_col * 60, grilla[4][1] * 60
+    return max_col * ANCHO_CELDA, grilla[4][1] * ALTO_CELDA
 

@@ -9,7 +9,14 @@ s = SUR
 d = ESTE
 
 q = REINICIAR
+Q = REINICIAR
 
 Escape = SALIR
 
 e = NEXT_LEVEL
+E = NEXT_LEVEL
+
+W = NORTE
+A = OESTE
+S = SUR
+D = ESTE

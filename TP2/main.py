@@ -35,6 +35,5 @@ def main():
         #gano el juego completo
         if nivel > 153:
             print("Ganaste el juego completo!")
-            
             break
 gamelib.init(main)
