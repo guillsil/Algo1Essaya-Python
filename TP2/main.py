@@ -4,7 +4,7 @@ import soko
 
 def main():
     # Inicializar el estado del juego
-    nivel = 152
+    nivel = 0
     grilla = soko.crear_grilla(soko.completar_grilla(soko.leer_nivel("niveles.txt", nivel)))
 
     ancho_ventana, alto_ventana = soko.refrescar_ventana(grilla, nivel)
