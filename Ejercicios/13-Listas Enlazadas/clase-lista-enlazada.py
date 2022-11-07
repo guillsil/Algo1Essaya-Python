@@ -59,8 +59,7 @@ class ListaEnlazada:
         self.len -= 1
 
     def insert(self, i, x):
-        """debe agregar el elemento x en la posición i
-        (y levantar una excepción si la posición i es inválida)"""
+        """Inserta el elemento x en la posición i"""
         if i < 0 or i > self.len:
             raise IndexError("list index out of range")
         nuevo = _Nodo(x)
