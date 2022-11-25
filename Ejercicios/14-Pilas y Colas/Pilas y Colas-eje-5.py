@@ -23,6 +23,4 @@ p.apilar(1)
 p.apilar(2)
 p.apilar(3)
 
-
-
 print(p.obtener_maximo())
