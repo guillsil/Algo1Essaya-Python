@@ -41,6 +41,17 @@ class Pila:
         '''
         return self.tope is None
 
+    def __str__(self):
+        '''
+        Devuelve una cadena con los elementos de la pila
+        '''
+        cadena = ""
+        nodo = self.tope
+        while nodo:
+            cadena += str(nodo.dato) + ""
+            nodo = nodo.prox
+        return cadena
+
 
 class _Nodo:
     def __init__(self, dato, prox=None):

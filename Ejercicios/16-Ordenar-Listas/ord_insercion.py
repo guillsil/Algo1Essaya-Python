@@ -23,4 +23,8 @@ def ord_insercion(lista):
         # al de la posición i, reubicarlo dentro del segmento [0:i]
         if lista[i + 1] < lista[i]:
             reubicar(lista, i + 1)
-        print("DEBUG: ", lista)
+
+    return lista
+
+print(ord_insercion([9, 8, 7, 6, 5, 4, 3, 2, 1]))
+

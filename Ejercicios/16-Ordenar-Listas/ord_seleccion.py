@@ -8,7 +8,7 @@ def buscar_max(lista, a, b):
             pos_max = i
     return pos_max
 
-def ordenar(lista):
+def ord_seleccion(lista):
     """Ordena una lista de elementos según el método de selección.
     Pre: los elementos de la lista deben ser comparables.
      Post: la lista está ordenada."""
@@ -25,5 +25,8 @@ def ordenar(lista):
         print("DEBUG: ", p, n, lista)
 
         # reducir el segmento en 1
-        n = n - 1
+        n -= 1
+
+print(ord_seleccion([3,0,4,2,5,7,4,1]))
+
 
