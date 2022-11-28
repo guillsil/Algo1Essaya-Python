@@ -9,4 +9,4 @@ def matriz_identidad(n):
                 print(0, end=" ")
         print()
 
-matriz_identidad(5)
+matriz_identidad(50)

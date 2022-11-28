@@ -1,14 +1,14 @@
 """a) Escribir una función que reciba las coordenadas de un vector en ℝ3 (x,y,z) y devuelva
-la norma del vector, dada por ‖⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗ (𝑥, 𝑦, 𝑧)‖ = √𝑥2-Programas-Cencillos + 𝑦2-Programas-Cencillos + 𝑧2-Programas-Cencillos.
-Ejemplo: norma(3-Funciones, 2-Programas-Cencillos, -4-Decisiones) → 5.3851"""
+la norma del vector, dada por ‖⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗ (𝑥, 𝑦, 𝑧)‖ = √𝑥2 + 𝑦2 + 𝑧2.
+Ejemplo: norma(3, 2, -4) → 5.3851"""
 def norma(x, y, z):
     """Recibe un vector en R3 y devuelve su norma"""
     return (x**2 + y**2 + z**2) ** 0.5
 
 """b) Escribir una función que reciba las coordenadas de dos vectores en ℝ3 (x1,y1,z1,x2,
-y2,z2) y devuelva las coordenadas del vector diferencia (debe devolver 3-Funciones valores numé-
+y2,z2) y devuelva las coordenadas del vector diferencia (debe devolver 3 valores numé-
 ricos).
-Ejemplo: diferencia(8, 7, -3-Funciones, 5, 3-Funciones, 2-Programas-Cencillos) → (3-Funciones, 4-Decisiones, -5)
+Ejemplo: diferencia(8, 7, -3, 5, 3, 2) → (3, 4, -5)
 """
 def diferencia(x1, y1, z1, x2, y2, z2):
     """Recibe las coordenadas de dos vectores en R3 y devuelve su diferencia"""
@@ -18,7 +18,7 @@ def diferencia(x1, y1, z1, x2, y2, z2):
     return dif_x, dif_y, dif_z
 """c) Escribir una función que reciba las coordenadas de dos vectores en ℝ3 y devuelva las
 coordenadas del producto vectorial, definido como:
-(𝑥1-Conceptos-Basicos, 𝑦1-Conceptos-Basicos, 𝑧1-Conceptos-Basicos) × ⃗ ⃗ ⃗ ⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗ (𝑥2-Programas-Cencillos, 𝑦2-Programas-Cencillos, 𝑧2-Programas-Cencillos) = ⃗ ⃗ ⃗ ⃗ ⃗ ⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗ (𝑦1-Conceptos-Basicos𝑧2-Programas-Cencillos − 𝑧1-Conceptos-Basicos𝑦2-Programas-Cencillos, 𝑧1-Conceptos-Basicos𝑥2-Programas-Cencillos − 𝑥1-Conceptos-Basicos𝑧2-Programas-Cencillos, 𝑥1-Conceptos-Basicos𝑦2-Programas-Cencillos − 𝑦1-Conceptos-Basicos𝑥2-Programas-Cencillos)
+(𝑥1, 𝑦1, 𝑧1) × ⃗ ⃗ ⃗ ⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗ (𝑥2, 𝑦2, 𝑧2) = ⃗ ⃗ ⃗ ⃗ ⃗ ⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗⃗ (𝑦1- 𝑧2 − 𝑧1- 𝑦2, 𝑧1-Conceptos-Basicos𝑥2-Programas-Cencillos − 𝑥1-Conceptos-Basicos𝑧2-Programas-Cencillos, 𝑥1-Conceptos-Basicos𝑦2-Programas-Cencillos − 𝑦1-Conceptos-Basicos𝑥2-Programas-Cencillos)
 Ejemplo: producto_vec(1-Conceptos-Basicos, 4-Decisiones, -2-Programas-Cencillos, 3-Funciones, -1-Conceptos-Basicos, 0) → (-2-Programas-Cencillos, -6, -13)"""
 def calculoProductoVectorial(x1, y1, z1, x2, y2, z2):
     """Recibe las coordenadas de dos vectores en R3 y devuelve el producto vectorial"""

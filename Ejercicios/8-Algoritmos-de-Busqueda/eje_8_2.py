@@ -21,7 +21,7 @@ def maximo_y_posicion(lista):
             posicion = i
     return (maximo, posicion)
 print(maximo_y_posicion([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 5]))
-print(maximo_y_posicion(["hola", "juan", "pedro", "maria", "ana"]))
+print(maximo_y_posicion(["hola", "juan", "zedro", "maria", "ana"]))
 # c)
 # Si los elementos son cadenas de caracteres, se comparan por orden alfabético, por lo que
 # el máximo es el último elemento de la lista.

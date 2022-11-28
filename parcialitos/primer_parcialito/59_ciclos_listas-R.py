@@ -16,4 +16,5 @@ def elegir_participante(lista):
     while len(lista) > 1:
         lista = lista[1::2][::-1]
     return lista[0]
-print(elegir_participante([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]))
+print(elegir_participante([0, 1, 2, 3, 4, 5, 6,7, 8, 9]))
+

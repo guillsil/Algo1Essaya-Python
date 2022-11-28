@@ -1,10 +1,10 @@
 """
-a) Escribir una función que dado un número entero devuelva 1-Conceptos-Basicos si el mismo
+a) Escribir una función que dado un número entero devuelva 1 si el mismo
 es impar y 0 si fuera par.
-b) Escribir una función que dado un número entero devuelva 0 si el mismo es impar y 1-Conceptos-Basicos si
+b) Escribir una función que dado un número entero devuelva 0 si el mismo es impar y 1 si
 fuera par.
 c) Escribir una función que dado un número entero devuelva el dígito de las unidades. Por
-ejemplo, para 153 debe devolver 3-Funciones.
+ejemplo, para 153 debe devolver 3.
 d) Escribir una función que dado un número devuelva el primer número múltiplo de 10
 inferior a él. Por ejemplo, para 153 debe devolver 150."""
 #a)
@@ -29,12 +29,13 @@ print(fusion(2))
 
 #c)
 def digitoEnUnidades(num):
-    print(len(str(num)))
+    print("digito" + " " + str(len(str(num))))
 digitoEnUnidades(200000)
 
 #d)
 def numMultiplo10(num):
     return num%10
+
 def numeroInferior(num):
     return num - numMultiplo10(num)
 

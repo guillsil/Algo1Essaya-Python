@@ -10,4 +10,4 @@ def buscar(cadena, lista):
             lista_encontrados.append(lista[i])
     return lista_encontrados
 agenda = [("Juan Perez", "12345678"), ("Maria Lopez", "87654321"), ("Juan Gomez", "11111111")]
-print(buscar("Juan Perez", agenda))
+print(buscar("Juan", agenda))

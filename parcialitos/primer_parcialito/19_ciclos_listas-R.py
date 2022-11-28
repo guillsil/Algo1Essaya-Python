@@ -8,11 +8,13 @@ def laberinto(laberinto):
     pasos = 0
     i = 0
     j = 0
-    while i != len(laberinto) - 1 or j != len(laberinto) - 1:
-        pasos += 1
-        if laberinto[i][j][1] == 'v':
-            i += laberinto[i][j][0]
-        else:
-            j += laberinto[i][j][0]
-    return pasos
-print(laberinto([[(1, 'v'), (1, 'h'), (1, 'h')], [(1, 'v'), (1, 'v'), (1, 'h')], [(1, 'v'), (1, 'v'), (1, 'v')]]))
+    try:
+        while True:
+            pasos += 1
+            if laberinto[i][j][1] == 'h':
+                j += laberinto[i][j][0]
+            else:
+                i += laberinto[i][j][0]
+    except IndexError:
+        return pasos
+print(laberinto([[(1, 'v'), (1, 'h'), (1, 'h')], [(1, 'v'), (1, 'h')], [(1, 'v'), (1, 'v'), (1, 'v')]]))

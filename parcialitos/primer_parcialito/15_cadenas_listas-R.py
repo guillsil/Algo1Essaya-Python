@@ -10,11 +10,30 @@ b. Escribir un programa que utilice la función, pidiendole al usuario que ingre
   programa no lanza error) y volviéndole a pedir que ingrese los valores necesarios hasta que cumpla con las condiciones
   necesarias.
 """
+#a)
 def slogan(nombre, n):
     """Devuelve el slogan"""
     slogan = ""
     for i in range(n):
         slogan += nombre[:2] + ", "
-    slogan += nombre + " " + nombre[0] + nombre[1] * n
+    slogan += nombre + " " + nombre[:2] + nombre[1]* n
     return slogan
-print(slogan("Alan", 5))
+#b)
+
+def pedir_nombre_y_n():
+    """Pide el nombre y el n al usuario"""
+    nombre = input("Ingrese el nombre: ")
+    n = input("Ingrese el n: ")
+    while not nombre.isalpha() and len(nombre) > 0 and not n.isdigit():
+        print("El nombre debe ser una cadena de caracteres y el n un número.")
+        nombre = input("Ingrese el nombre: ")
+        n = input("Ingrese el n: ")
+    return nombre, int(n)
+
+def main():
+    """Función principal"""
+    nombre, n = pedir_nombre_y_n()
+    print(slogan(nombre, n))
+main()
+
+

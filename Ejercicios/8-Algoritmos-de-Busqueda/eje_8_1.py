@@ -12,14 +12,12 @@ def coincidencias(lista, elemento):
             contador += 1
     return contador
 print(coincidencias([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 5], 5))
-print(coincidencias(["hola", 2, 3, 4, "juan", 6, 7, 8, "juan", 10, 5], "juan"))
 # b)
 def primera_coincidencia(lista, elemento):
     for i in range(len(lista)):
         if lista[i] == elemento:
             return i
 print(primera_coincidencia([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 5], 5))
-print(primera_coincidencia(["hola", 2, 3, 4, "juan", 6, 7, 8, "juan", 10, 5], "juan"))
 # c)
 def todas_coincidencias(lista, elemento):
     posiciones = []
@@ -28,4 +26,3 @@ def todas_coincidencias(lista, elemento):
             posiciones.append(i) #append agrega un elemento al final de la lista
     return posiciones
 print(todas_coincidencias([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 5], 5))
-print(todas_coincidencias(["hola", 2, 3, 4, "juan", 6, 7, 8, "juan", 10, 5], "juan"))
