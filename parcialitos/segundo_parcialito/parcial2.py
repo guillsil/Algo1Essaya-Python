@@ -19,41 +19,50 @@ class Partido:
         self.equipo2 = equipo2
         self.goles1 = 0
         self.goles2 = 0
-        self.goles1_lista = []
-        self.goles2_lista = []
+        self.goleadores1 = []
+        self.goleadores2 = []
     def registrar_gol(self, equipo, jugador):
         if equipo == self.equipo1:
             self.goles1 += 1
-            self.goles1_lista.append(jugador)
+            self.goleadores1.append(jugador)
         elif equipo == self.equipo2:
             self.goles2 += 1
-            self.goles2_lista.append(jugador)
+            self.goleadores2.append(jugador)
         else:
             raise ValueError("El equipo {} no juega el partido".format(equipo))
     def __str__(self):
-        return "{} {} ({})\n{} {} ({})".format(self.equipo1, self.goles1, ", ".join(self.goles1_lista), self.equipo2, self.goles2, ", ".join(self.goles2_lista))
+        return "{} {} ({})\n{} {} ({})".format(self.equipo1, self.goles1, ", ".join(self.goles1_lista), self.equipo2,
+                                               self.goles2, ", ".join(self.goles2_lista))
+
 #2)
-"""Dado un archivo que Registra las ventas de entradas de los partidos del mundial en formato  csv el cual contine  las columnas
-nombre_comprador, equipo1, equipo2, escribir una función que devuelva al equipo mas popular, del mundial según la cantidad 
-de ventas. Cada filadel archivo corresponde a una entrada vendida y el mismo no posee encabesado .Si hay más de un quipo con la mayor 
-cantidad de ventas , debe devolverse cualquiera de ellos. 
-a"""
+"""Dado un archivo que Registra las ventas de entradas de los partidos del mundial en formato  csv el cual contine  
+las columnas nombre_comprador, equipo1, equipo2, escribir una función que devuelva al equipo mas popular, del mundial 
+según la cantidad de ventas. Cada filadel archivo corresponde a una entrada vendida y el mismo no posee encabesado 
+.Si hay más de un quipo con la mayor  cantidad de ventas , debe devolverse cualquiera de ellos. 
+"""
 def equipo_mas_popular(archivo):
     equipos = {}
-    with open(archivo, "r") as f:
+    with open(archivo) as f:
         for linea in f:
-            equipo = linea.split(",")[1]
-            if equipo in equipos:
-                equipos[equipo] += 1
+            equipo = linea.split(",")
+            if equipo[1] in equipos:
+                equipos[equipo[1]] += 1
             else:
-                equipos[equipo] = 1
+                equipos[equipo[1]] = 1
+            if equipo[2] in equipos:
+                equipos[equipo[2]] += 1
+            else:
+                equipos[equipo[2]] = 1
+
     maximo = 0
-    equipo = ""
+    max_vendedor = ""
     for equipo, ventas in equipos.items():
         if ventas > maximo:
             maximo = ventas
-            equipo = equipo
-    return equipo
+            max_vendedor = equipo
+    return max_vendedor
+print(equipo_mas_popular("entradas.csv"))
+
 #3)
 """Escribir una función que devuelva un diccionario de países , cuyos valores sean una lista de todos los equipos de todos los 
 equipos a los cuales pertenecen sus jugadores(sin repetirlos). La función recibe un diccionario que tiene como claves jugadores y 
@@ -89,15 +98,18 @@ diccionario2 = {
     "PSG" : ["Neymar", "Paredes", "Messi"],
     "Benfica" : ["Otamendi"]
 }
-def paises_con_equipos(diccionario1, diccionario2):
-    paises = {}
-    for equipo, jugadores in diccionario2.items():
+def paises_con_equipos(jugador_pais, equipo_jugadores):
+    resultado = {}
+    for equipo, jugadores in equipo_jugadores.items():
         for jugador in jugadores:
-            pais = diccionario1[jugador]
-            if pais in paises:
-                paises[pais].append(equipo)
+            pais = jugador_pais[jugador]
+            if pais in resultado:
+                #resultado es un diccionario, resultado[pais] es una lista
+                if equipo not in resultado[pais]:
+                    resultado[pais].append(equipo)
             else:
-                paises[pais] = [equipo]
-    return paises
+                resultado[pais] = [equipo]
+    return resultado
 print(paises_con_equipos(diccionario1, diccionario2))
+
 

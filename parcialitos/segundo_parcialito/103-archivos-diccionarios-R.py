@@ -7,18 +7,16 @@ donde cada producto está una única vez y la cantidad total es la cantidad de t
 Nota: al finalizar la ejecución de la función (haya ocurrido un error o no), todos los archivos abiertos deben quedar
 cerrados."""
 def resumen_pedidos(pedidos):
-    try:
-        archivo = open("resumen_pedidos.txt", "w")
-        diccionario = {}
-        for pedido in pedidos:
-            for producto in pedido:
-                if producto in diccionario:
-                    diccionario[producto] += pedido[producto]
-                else:
-                    diccionario[producto] = pedido[producto]
-        for producto in diccionario:
-            archivo.write(producto + ";" + str(diccionario[producto]) + "")
-        archivo.close()
-    except:
-        archivo.close()
-        return "Error"
+    productos = {}
+    for pedido in pedidos:
+        for producto, cantidad in pedido.items():
+            if producto in productos:
+                productos[producto] += cantidad
+            else:
+                productos[producto] = cantidad
+    with open("resumen_pedidos.txt", "w") as f:
+        for producto, cantidad in productos.items():
+            f.write(f"{producto};{cantidad}")
+    return productos
+
+print(resumen_pedidos({"leche": 2, "pan": 1, "queso": 1}))

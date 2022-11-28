@@ -4,12 +4,15 @@ Si es igual, debe felicitar al usuario y mostrar en cuántos intentos adivinó. 
 pero el usuario debe adivinar para terminar el programa."""
 def adivinar_numero(numero_secreto):
     """Adivina el número secreto"""
+    contador = 0
     numero = int(input("Ingrese un número: "))
     while numero != numero_secreto:
         if numero > numero_secreto:
             print("El número es menor")
+            contador += 1
         else:
             print("El número es mayor")
+            contador += 1
         numero = int(input("Ingrese un número: "))
-    print("Felicitaciones, adivinaste el número")
-adivinar_numero(5)
+    print("Felicitaciones, adivinaste el número en", contador, "intentos")
+adivinar_numero(10)

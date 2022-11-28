@@ -1,0 +1,3 @@
+leche;1
+pan;1
+huevos;1

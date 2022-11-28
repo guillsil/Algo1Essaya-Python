@@ -23,15 +23,18 @@ def obtener_maximo(lista):
     for linea in lista:
         if len(linea) > maximo:
             maximo = len(linea)
-    return maximo
-print(obtener_maximo(pedir_lineas()))
+    return maximo-1
+
 
 def imprimir_marco(lista):
     """Imprime las líneas encerradas en un marco"""
     maximo = obtener_maximo(lista)
-
     print("*" * (maximo + 4))
     for linea in lista:
-        print("*", linea, " " * (maximo - len(linea)), "*", sep="")
+        if len(linea) < maximo:
+            print("*", linea, " " * (maximo - len(linea)), "*")
+        else:
+            print("*", linea, "*")
     print("*" * (maximo + 4))
+
 imprimir_marco(pedir_lineas())
