@@ -14,10 +14,11 @@ class ListaEnlazada:
         lista = []
         while actual != None:
             lista.append(str(actual.dato))
-            actual = actual.siguiente
+            actual = actual.prox
         return f"Lista Enlazada({', '.join(lista)})"
     def __len__(self):
         return self.len
+
     def pop(self, i=None):
         if i is None:
             i = self.len - 1

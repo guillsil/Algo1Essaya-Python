@@ -1,7 +1,3 @@
-class _Nodo:
-    def __init__(self, dato, prox=None):
-        self.dato = dato
-        self.prox = prox
 class Cola:
     '''Representa a una cola, con operaciones de encolar y 
        desencolar. El primero en ser encolado es también el primero
@@ -43,13 +39,8 @@ class Cola:
     def esta_vacia(self):
         '''Devuelve True o False según si la cola está vacía o no'''
         return self.frente is None
-    def __str__(self):
-        '''Devuelve el contenido de la cola como una cadena'''
-        s = ""
-        nodo = self.frente
-        while nodo is not None:
-            s += str(nodo.dato) + " "
-            nodo = nodo.prox
-        return s
 
-
+class _Nodo:
+    def __init__(self, dato, prox=None):
+        self.dato = dato
+        self.prox = prox

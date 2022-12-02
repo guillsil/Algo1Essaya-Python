@@ -43,14 +43,14 @@ class Pila:
 
     def __str__(self):
         '''
-        Devuelve una cadena con los elementos de la pila.
+        Devuelve una representación en cadena de la pila
         '''
-        pila = []
+        cadena = ""
         nodo = self.tope
-        while nodo:
-            pila.append(nodo.dato)
+        while nodo is not None:
+            cadena += str(nodo.dato) + ""
             nodo = nodo.prox
-        return str(pila)
+        return cadena
 
 
 class _Nodo:
