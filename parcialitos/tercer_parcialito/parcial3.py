@@ -83,4 +83,22 @@ cola.encolar(7)
 print(cola)
 print(elementos_detras(cola, 3))
 
+"""Escribir una funcion recursiva que dadas dos listas de enteros devuelva , devuelva una nueva lista donde 
+cade i-esimo elemento representa la suma de los i-esimos elementos de cada lista. Sino cuentan con la misma cantidad de 
+elementos, la lista resultante deberá tener la misma cantidad de elementos que la menor de las listas.
+Por ejemplo: para las listas [3, 4, 1, 0, 0] y [0, 2, 7] debe devolver [3, 6, 8]"""
+def sumar_listas(lista1, lista2):
+    """Recibe dos listas de enteros y devuelve una lista con la suma de los elementos de cada lista, hasta la misma
+     cantidad de elementos que la menor de las listas. """
+    if len(lista1) == 0:
+        return lista2
+    if len(lista2) == 0:
+        return lista1
+    if len(lista1) > len(lista2):
+        return [lista1[0] + lista2[0]] + sumar_listas(lista1[1:len(lista2)], lista2[1:len(lista2)])
+    else:
+        return [lista1[0] + lista2[0]] + sumar_listas(lista1[1:len(lista1)], lista2[1:len(lista1)])
+
+print(sumar_listas([3, 4, 1, 3, 6], [0, 2, 7, 7, 8, 9, 0]))
+
 
