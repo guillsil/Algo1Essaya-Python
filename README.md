@@ -4,6 +4,6 @@ Este es un repositorio con todo el contenido realizado en esta materia: ejercici
 
 5 En Linea:
 
-![5-EN-LINEA](readmi/desarrollo-5-en-linea.png)
+![5-EN-LINEA](readme/desarrollo-5-en-linea.png)
 
 
