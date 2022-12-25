@@ -1,0 +1,26 @@
+Up = NORTE
+Left = OESTE
+Down = SUR
+Right = ESTE
+
+w = NORTE
+a = OESTE
+s = SUR
+d = ESTE
+
+f = REINICIAR
+F = REINICIAR
+
+
+Escape = SALIR
+
+e = NEXT_LEVEL
+E = NEXT_LEVEL
+
+q = PREV_LEVEL
+Q = PREV_LEVEL
+
+W = NORTE
+A = OESTE
+S = SUR
+D = ESTE
