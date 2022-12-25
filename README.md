@@ -12,10 +12,12 @@ Sokoban Tp2:
 Sokoban Tp3:
 ![SOKOBAN](readme/desarrollo-sokoban.png)
 
-##Tecnologias 
-Estos proyectos fueron realizados con:
-*Python 
-*Librerias(gamelib)
+## Tecnologias 
+
+Estos proyectos fueron realizados con: 
+
+* Python 
+* Librerias(gamelib)
 
 
 
