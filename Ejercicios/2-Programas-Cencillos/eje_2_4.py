@@ -2,9 +2,9 @@
 conversión de temperaturas, desde 0 °F hasta 120 °F, de 10 en 10."""
 from eje_2_3 import gradosAcelcius
 
-def main():
+def pedrito():
     for i in range(0,120,10):
         convercion = gradosAcelcius(i)
-        print(i, convercion)
+        print("Fahrenheit: "+str(i)+" = Celsius: "+ str(int(convercion)))
         
-main()
+pedrito()

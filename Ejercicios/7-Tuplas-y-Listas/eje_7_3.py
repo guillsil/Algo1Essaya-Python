@@ -9,7 +9,7 @@ para ello, deberán recibir una tupla de tuplas, conteniendo el nombre y el gén
 # a)
 def campaña_electoral(nombres):
     for nombre in nombres:
-        print("Estimado", nombre, ", vote por mí.")
+        print(f"Estimado {nombre}, vote por mí.")
 """campaña_electoral(("Juan", "Pedro", "María", "Ana", "Guillermo"))"""
 # b)
 def campana_electoral_con_posicion(nombres, p, n):

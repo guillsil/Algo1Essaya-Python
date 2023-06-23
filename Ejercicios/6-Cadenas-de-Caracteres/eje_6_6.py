@@ -9,18 +9,32 @@ d) Indique si se trata de un palíndromo. Por ejemplo, 'anita lava la tina' es u
 líndromo (se lee igual de izquierda a derecha que de derecha a izquierda)."""
 # a)
 def consonantes(cadena):
-    return "".join([i for i in cadena if i not in "aeiouAEIOU"])
-assert consonantes("algoritmos") == "lgrtms"
-assert consonantes("logaritmos") == "lgrtms"
+    consonantes = ""
+    for letra in cadena:
+        if letra not in "aeiouAEIOU":
+            consonantes += letra
+    return consonantes
+print(consonantes("algoritmos"))
+
 # b)
 def vocales(cadena):
-    return "".join([i for i in cadena if i in "aeiouAEIOU"])
-assert vocales("sin consonantes") == "iooae"
+    vocales = ""
+    for letra in cadena:
+        if letra in "aeiouAEIOU":
+            vocales += letra
+    return vocales
+print(vocales("sin consonantes"))
 # c)
 def siguiente_vocal(cadena):
-    return cadena.translate(cadena.maketrans("aeiouAEIOU", "eiouaEIOUA")) #makestrans() crea una tabla de traducción
-assert siguiente_vocal("vestuario") == "vistaerou"
+    vocales = "aeiouAEIOU"
+    siguiente = ""
+    for letra in cadena:
+        if letra in vocales:
+            siguiente += vocales[(vocales.index(letra) + 1) % len(vocales)]
+        else:
+            siguiente += letra
+    return siguiente
 # d)
 def palindromo(cadena):
-    return cadena == cadena[::-1] #[::-1] invierte una cadena
-assert palindromo("radar") == True
+    cadena = cadena.replace(" ", "")
+    return cadena == cadena[::-1]

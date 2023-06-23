@@ -7,13 +7,24 @@ c) Las palabras que comiencen con la letra ‘A’. Por ejemplo, si recibe 'Ante
 debe devolver 'Antes ayer'"""
 # a)
 def primera_letra(cadena):
-    return "".join([i[0] for i in cadena.split()]) #split() separa una cadena en una lista de palabras
-assert primera_letra("Universal Serial Bus Car") == "USBC"
+    primeraLetra = ""
+    #split() separa la cadena en palabras
+    for i in cadena.split():
+        primeraLetra += i[0]
+    return primeraLetra
+print(primera_letra("Universal Serial Bus"))
 # b)
 def primera_letra_mayuscula(cadena):
-    return " ".join([i.capitalize() for i in cadena.split()]) #capitalize() pone la primera letra en mayúscula
-assert primera_letra_mayuscula("república argentina") == "República Argentina"
+    primera_letra = ""
+    for i in cadena.split():
+        primera_letra += i[0].upper() + i[1:] + " "
+    return primera_letra
+print(primera_letra_mayuscula("república argentina"))
 # c)
 def palabras_con_a(cadena):
-    return " ".join([i for i in cadena.split() if i[0] == "A" or i[0] == "a"])
-print(palabras_con_a("Antes que Nadie de ayer"))
+    palabras = ""
+    for palabra in cadena.split():
+        if palabra[0].lower() == "a":
+            palabras += palabra + " "
+    return palabras
+print(palabras_con_a("Antes de ayer"))

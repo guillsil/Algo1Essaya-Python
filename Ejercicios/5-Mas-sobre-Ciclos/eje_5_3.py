@@ -8,50 +8,73 @@ cada vez mayor, utilizando la función sleep del módulo time.
 d) Modificar el programa anterior para que sea una función que devuelva si el usuario
 ingresó o no la contraseña correctamente, mediante un valor booleano (True o False)."""
 import time
-# a)
 CONTRASENA = "1234"
-def escontraseña(contrasena):
-    # Devuelve True si la contraseña es correcta, False si no lo es.
-    return contrasena == CONTRASENA
+#a)
+"""
+
 def contrasena():
-    ingreso = input("Ingrese la contraseña: ")
-    while not escontraseña(ingreso):
-        ingreso = input("Ingrese la contraseña: ")
-    print("Contraseña correcta")
+    while True:
+        contrasenia = input("Ingrese la contraseña: ")
+        if contrasenia == CONTRASENA:
+            print("Contraseña correcta")
+            break
+        else:
+            print("Contraseña incorrecta")
+            continue
+contrasena()"""
+
 #b)
-def contrasenaB():
-    ingreso = input("Ingrese la contraseña: ")
-    intentos = 1
-    while not escontraseña(ingreso) and intentos < 3:
-        ingreso = input("Ingrese la contraseña: ")
-        intentos += 1
-    if intentos == 3:
-        print("Contraseña incorrecta , Intentos agotados")
-    else:
-        print("Contraseña correcta")
+MAXINTENTOS = 3
+"""def contrasenaB():
+    intentos = 0
+    while True and intentos < MAXINTENTOS:
+        contrasenia = input("Ingrese la contraseña: ")
+        if contrasenia == CONTRASENA:
+            print("Contraseña correcta")
+            break
+        else:
+            print("Contraseña incorrecta")
+            intentos += 1
+            continue
+    if intentos == MAXINTENTOS:
+        print("Intentos agotados")
+
+contrasenaB()"""
+
 #c)
-def contrasenaC():
-    ingreso = input("Ingrese la contraseña: ")
-    intentos = 1
-    while not escontraseña(ingreso) and intentos < 3:
-        ingreso = input("Ingrese la contraseña: ")
-        intentos += 1
-        time.sleep(1*intentos)
-    if intentos == 3:
-        print("Contraseña incorrecta , Intentos agotados")
-    else:
-        print("Contraseña correcta")
+"""def contrasenaC():
+    intentos = 0
+    while True and intentos < MAXINTENTOS:
+        contrasenia = input("Ingrese la contraseña: ")
+        if contrasenia == CONTRASENA:
+            print("Contraseña correcta")
+            break
+        else:
+            print("Contraseña incorrecta")
+            intentos += 1
+            time.sleep(1*intentos)
+            continue
+    if intentos == MAXINTENTOS:
+        print("Intentos agotados")
+
+contrasenaC()"""
+
 #d)
 def contrasenaD():
-    ingreso = input("Ingrese la contraseña: ")
-    intentos = 1
-    while not escontraseña(ingreso) and intentos < 3:
-        ingreso = input("Ingrese la contraseña: ")
-        intentos += 1
-        time.sleep(1*intentos)
-    if intentos == 3:
-        return False
-    else:
-        return True
-print(contrasenaD())
+    intentos = 0
+    while True and intentos < MAXINTENTOS:
+        contrasenia = input("Ingrese la contraseña: ")
+        if contrasenia == CONTRASENA:
+            print("Contraseña correcta")
+            return True
+        else:
+            print("Contraseña incorrecta")
+            intentos += 1
+            time.sleep(1*intentos)
+            continue
 
+    
+    if intentos == MAXINTENTOS:
+        print("Intentos agotados")
+
+contrasenaD()

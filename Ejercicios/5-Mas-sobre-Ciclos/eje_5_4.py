@@ -3,7 +3,7 @@ obtenga un número aleatorio secreto, y luego permita al usuario ingresar númer
 si son menores o mayores que el número a adivinar, hasta que el usuario ingrese el número
 correcto."""
 import random
-def adivinar():
+"""def adivinar():
     n = random.randrange(1, 100)
     ingreso = int(input("Ingrese un numero: "))
     contador = 0
@@ -17,4 +17,17 @@ def adivinar():
         ingreso = int(input("Ingrese un numero: "))
     print("El numero es correcto")
     return contador
-print(adivinar())
+print(adivinar())"""
+
+def adivinar2():
+    n = random.randrange(1, 100)
+    while True:
+        ingreso = int(input("Ingrese un numero: "))
+        if ingreso > n:
+            print("El numero es menor")
+        elif ingreso < n:
+            print("El numero es mayor")
+        else:
+            print("El numero es correcto")
+            break
+adivinar2()

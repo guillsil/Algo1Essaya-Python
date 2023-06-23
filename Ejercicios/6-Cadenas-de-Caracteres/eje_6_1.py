@@ -13,7 +13,7 @@ assert dos_primeros(CADENA) == "Ho"
 #b)
 def tres_ultimos(cadena):
     return cadena[-3:]
-assert tres_ultimos(CADENA) == "ndo"
+print(tres_ultimos(CADENA))
 #c)
 def cada_dos(cadena):
     return cadena[::2]

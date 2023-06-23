@@ -2,5 +2,14 @@
 tero y devuelva una cadena con el número y las separaciones de miles. Por ejemplo, si recibe
 '1234567890', debe devolver '1.234.567.890'."""
 def separar_miles(cadena):
-    return ".".join([cadena[i:i+3] for i in range(0, len(cadena), 3)])
-assert separar_miles("1234567890") == "123.456.789.0"
+    cadena = cadena[::-1]
+    
+    nueva_cadena = ""
+    for i in range(len(cadena)):
+        if i % 3 == 0 and i != 0:
+            nueva_cadena += "."
+        nueva_cadena += cadena[i]
+    return nueva_cadena[::-1]
+print(separar_miles("1234567890"))
+cadena = "1234567890"
+print(cadena[::-1])

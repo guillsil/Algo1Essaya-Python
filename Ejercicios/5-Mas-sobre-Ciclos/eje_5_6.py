@@ -13,6 +13,11 @@ def es_potencia_de_dos(n):
             return True
         i *= 2
     return False
+def es_potencia_de_dos2(n):
+    while n > 1:
+        n /= 2
+    return n == 1
+print(es_potencia_de_dos(8))
 # b)
 def suma_potencias_de_dos(n1, n2):
     suma = 0

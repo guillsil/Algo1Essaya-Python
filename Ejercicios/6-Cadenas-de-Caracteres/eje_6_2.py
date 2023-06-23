@@ -11,6 +11,8 @@ d) Inserte el caracter cada 3 dígitos en la cadena. Ej. '2552552550' y '.' debe
 def insertar_caracter(cadena, caracter):
     return caracter.join(cadena) #join() une los elementos de una lista en una cadena
 assert insertar_caracter("separar", ",") == "s,e,p,a,r,a,r"
+#join() que hace? une los elementos de una lista en una cadena con el caracter que se le pasa como parametro 
+# (en este caso ",")
 # b)
 def reemplazar_espacios(cadena, caracter):
     return cadena.replace(" ", caracter) #replace() reemplaza un caracter por otro

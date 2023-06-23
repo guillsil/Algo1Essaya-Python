@@ -12,3 +12,12 @@ def sucesion():
         ingreso = int(input("Ingrese un numero: "))
     return contador, suma, suma/contador
 print(sucesion())
+def sucesion2():
+    while True:
+        ingreso = int(input("Ingrese un numero: "))
+        if ingreso == -1:
+            break
+        suma += ingreso
+        contador += 1
+    return contador, suma, suma/contador
+print(sucesion2())
