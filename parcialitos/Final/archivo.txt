@@ -1,0 +1,1 @@
+Hola, esto es un ejemplo de texto con varias palabras. Los sets en Python son útiles para trabajar con colecciones de elementos únicos. Puedes realizar operaciones de conjunto como la unión, intersección y diferencia. Además, los sets eliminan automáticamente los elementos duplicados. Es importante tener en cuenta que los sets no mantienen un orden específico de los elementos.
