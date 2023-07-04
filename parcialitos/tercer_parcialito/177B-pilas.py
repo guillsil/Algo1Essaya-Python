@@ -1,0 +1,1 @@
+"""Dada una pila de enteros, escribir una función que determine si es piramidal. Una pila de enteros es piramidal si cada elemento es menor a su elemento inferior (el elemento inferior es el siguiente en el sentido hacia la base de la pila). Al finalizar la ejecución, la pila debe quedar en el mismo estado con el que empezó."""

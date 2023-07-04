@@ -51,6 +51,11 @@ class Pila:
             cadena += str(nodo.dato) + ""
             nodo = nodo.prox
         return cadena
+    def __iter__(self):
+        '''
+        Devuelve un iterador de la pila
+        '''
+        return _IteradorPila(self.tope)
 
 
 class _Nodo:

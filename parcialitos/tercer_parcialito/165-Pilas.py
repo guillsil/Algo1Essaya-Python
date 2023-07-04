@@ -5,3 +5,4 @@ una función que, dada una pila y una cadena, realice sobre la pila las operacio
 luego devuelva la sumatoria de los elementos que quedaron en la pila al terminar las operaciones.
 Nota: Se garantiza que el orden de las operaciones indicadas por la cadena pueden realizarse sobre la pila
 recibida por parámetro. Ejemplo: procesar('85x179xx') → (8 + 1) → 9"""
+
