@@ -109,6 +109,29 @@ print(l)
 """#3
 Existiendo la clase Persona, que posee el método  obtener_hijos() -> List [Persona], se pide implementar una función
 contar_descendientes (persona: Persona) -> int que cuente cuántos descendientes tiene dicha persona (es decir. hijos + nietos + bisnietcs + etc), utilizando recursión."""
+class Persona():
+    def __init__(self, nombre, hijos):
+        self.nombre = nombre
+        self.hijos = hijos
+
+    def obtener_hijos(self):
+        return self.hijos
+    def __str__(self):
+        return self.nombre
+    def contar_descendientes(self):
+        return self.contar_descendientes_aux(self.hijos)
+    def contar_descendientes_aux(self, hijos):
+        if hijos == []:
+            return 0
+        else:
+            return len(hijos) + sum([self.contar_descendientes_aux(h.obtener_hijos()) for h in hijos])
+        
+p1 = Persona("Juan", [])
+p2 = Persona("Pedro", [p1])
+p3 = Persona("Ana", [p2])
+
+print(p3.contar_descendientes())
+
 
 
 
