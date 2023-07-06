@@ -35,29 +35,80 @@ class ListaEnlazada:
             actual = actual.siguiente
         return "[" + " ".join(elementos) + "]"
     def downsamp(self, k):
-        if self.primero is None:
-            raise Exception("Lista Vacia")
-        if k < 0:
-            raise Exception("k no puede ser menor que 0")
-        nodo_actual = self.primero
-        nodo_anterior = None 
+        if k <= 1 or self.primero is None:
+            return
+
+        actual = self.primero
+        anterior = None
         indice = 1
-        while nodo_actual is not None:
-            if k % indice == 0:
-                #mantengo el nodo actual 
-                nodo_anterior = nodo_actual
-                nodo_actual = nodo_actual.siguiente
-            else:
-                # Eliminamos el nodo actual
-                if nodo_anterior is None:
-                    # Si es el primer nodo, actualizamos el puntero al primero
-                    self.primero = nodo_actual.siguiente
-                    nodo_actual = self.primero
+
+        while actual is not None:
+            if indice > 1 and indice % k != 0:
+                if anterior is None:
+                    self.primero = actual.siguiente
                 else:
-                    # Si no es el primer nodo, ajustamos los punteros
-                    nodo_anterior.siguiente = nodo_actual.siguiente
-                    nodo_actual = nodo_actual.siguiente
-        indice += 1
+                    anterior.siguiente = actual.siguiente
+            else:
+                anterior = actual
+
+            actual = actual.siguiente
+            indice += 1
+        
+
+
+lista = ListaEnlazada()
+lista.agregar_elemento(1)
+lista.agregar_elemento(2)
+lista.agregar_elemento(3)
+lista.agregar_elemento(4)
+lista.agregar_elemento(5)
+
+print(lista)
+lista.downsamp(2)
+print(lista)
+
+"""Escribir una funcion recursiva que dada una cadena le haga un "flip" de mayúsculas, es decir, que devuelva 
+una nueva cadena con los caracteres en mínuscula trasnformados a mayúscula y los carecteres en mayúscula 
+transformados en minúscula"""
+#iterativo
+def intercambiar(cadena):
+    nueva_cadena = ""
+    for c in cadena:
+        if c == c.lower():
+            nueva_cadena += c.upper()
+        else:
+            nueva_cadena += c.lower()
+    return nueva_cadena
+cadena = "Hola"
+print(intercambiar(cadena))
+
+#recursivo
+
+def intercambiar2(cadena, indice=0):
+    nueva_cadena = ""
+    if indice >= len(cadena):
+        return nueva_cadena
+    if cadena[indice].islower():
+        nueva_cadena += cadena[indice].upper()
+    else:
+        nueva_cadena += cadena[indice].lower()
+    nueva_cadena += intercambiar2(cadena, indice+1)
+    return nueva_cadena
+
+cadena = "Hola"
+print(intercambiar2(cadena))
+
+"""
+A) Dada la lista [1,2,3,4,5,6,7,8,9,2], mostrar los pasos para ordenanrla mediante inserción y mergesort
+B)Desarrolar en no as de 5 renglones , cual es el mejor entre esos dos métodos para lista dada y por que ?
+"""
+
+
+
+
+
+
+
 
 
 
