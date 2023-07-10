@@ -94,8 +94,36 @@ la clase ColaConCapacidadMaxima, que tenga los mismos métodos de Cola, y ademá
 • En el constructor debe recibir la capacidad máxima.
 • Al encolar debe lanzar una excepción si no hay capacidad disponible.
 • Debe tener un método esta_llena() que indica si la cola está llena o no, en tiempo constante."""
-from cola import Cola
+class Nodo():
+    def __init__(self, dato, prox=None):
+        self.dato = dato
+        self.siguiente = prox
 
+class Cola():
+    def __init__(self):
+        self.primero = None
+        self.ultimo = None
+    
+    def esta_vacia(self):
+        return self.primero is None
+    
+    def encolar(self, dato):
+        nuevo = Nodo(dato)
+        if self.esta_vacia():
+            self.primero = nuevo
+        else:
+            self.ultimo.siguiente = nuevo
+        self.ultimo = nuevo
+
+    def desencolar(self):
+        if self.esta_vacia():
+            raise ValueError("La cola esta vacia")
+        dato = self.primero.dato
+        self.primero = self.primero.siguiente
+        if self.primero is None:
+            self.ultimo = None
+        return dato
+    
 class ColaConCapacidadMaxima(Cola):
     def __init__(self, capacidad_maxima):
         super().__init__()
@@ -105,10 +133,17 @@ class ColaConCapacidadMaxima(Cola):
     def encolar(self, dato):
         if self.cantidad_elementos == self.capacidad_maxima:
             raise ValueError("La cola esta llena")
-        else:
-            self.cantidad_elementos += 1
-            return super().encolar(dato)
+        self.cantidad_elementos += 1
+        return super().encolar(dato)
+    
+    def desencolar(self):
+        return super().desencolar()
+    
+    def esta_llena(self):
+        return self.cantidad_elementos == self.capacidad_maxima
         
+
+
 
                     
 

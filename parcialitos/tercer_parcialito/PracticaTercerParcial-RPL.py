@@ -18,6 +18,7 @@ class Nodo:
 class ListaEnlazada:
     def __init__(self):
         self.primero = None
+        self.cant = 0
 
     def agregar_elemento(self, dato):
         nodo = Nodo(dato)
@@ -28,6 +29,7 @@ class ListaEnlazada:
             while actual.siguiente is not None:
                 actual = actual.siguiente
             actual.siguiente = nodo
+        self.cant += 1
 
     def __str__(self):
         if self.primero is None:
@@ -40,26 +42,35 @@ class ListaEnlazada:
             actual = actual.siguiente
         return "[" + " ".join(elementos) + "]"
     def rotar(self, n):
+        """Rotar la lista en N posiciones. El método debe modificar la lista y no devolver una nueva."""
+
         if self.primero is None:
             raise Exception("Lista Vacia")
         if n == 0:
-            return
+            return 
         if n > self.cant:
             n = n % self.cant
         if n == self.cant:
             return
         
         nodo_actual = self.primero
-        nodo_aux = None
-        for i in range(n):
-            nodo_aux = nodo_actual
+        nodo_anterior = None
+        contador = 0
+    
+        while contador < n:
+            nodo_anterior = nodo_actual
             nodo_actual = nodo_actual.siguiente
-        nodo_aux.siguiente = None
-        nodo_aux = nodo_actual
+            contador += 1
+
+        nodo_anterior.siguiente = None
+        temporal = nodo_actual
+
         while nodo_actual.siguiente is not None:
             nodo_actual = nodo_actual.siguiente
+
         nodo_actual.siguiente = self.primero
-        self.primero = nodo_aux
+        self.primero = temporal
+
     
 
 lista = ListaEnlazada()
@@ -72,8 +83,11 @@ lista.agregar_elemento(6)
 lista.agregar_elemento(7)
 lista.agregar_elemento(8)
 
-"""print(lista)
-lista.rotar(2)"""
+print(lista)
+lista.rotar(2)
+print(lista)
+
+
 
 """Implementar un método de la clase ListaEnlazada que elimine sobre la misma lista los elementos consecutivos repetidos. La misma está implementada con únicamente una referencia al primer nodo self.prim y cada nodo tiene los atributos para su dato dato y su próximo nodo prox.
 
@@ -111,6 +125,7 @@ class ListaEnlazada:
         return "[" + " ".join(elementos) + "]"
     
     def eleiminar_consecutivos(self):
+        """Elimina los elementos consecutivos repetidos de la lista"""
         if self.primero is None:
             raise Exception("Lista Vacia")
         nodo_actual = self.primero
@@ -132,7 +147,137 @@ lista.agregar_elemento(4)
 lista.agregar_elemento(1)
 lista.agregar_elemento(4)
 
-print(lista)
+"""print(lista)
 lista.eleiminar_consecutivos()
-print(lista)
+print(lista)"""
+
+"""Sea la siguiente operación, aplicable a cualquier número entero positivo:
+
+    Si el número es par, se divide por 2.
+    Si el número es impar, se multiplica por 3 y se suma 1.
+
+La conjetura de Collatz dice que, para cualquier número con el que comencemos, si aplicamos la operación sucesivamente, siempre alcanzaremos el número 1. Escribir la función recursiva collatz(n) que imprime la secuencia de operaciones comenzando desde el número n, y terminando en el número 1.
+
+Ejemplo:
+
+>>> collatz(5)
+5
+16
+8
+4
+2
+1
+"""
+#iterativo:
+def collatzs(numero):
+    
+    print(numero)
+    while numero != 1:
+        if numero % 2==0:
+            numero = numero / 2
+            print(int(numero))
+            
+        else:
+            numero = numero*3 +1
+            print(int(numero))
+print(collatzs(5))
+
+#recursiva
+
+def collatzs2(numero):
+    """Realiza la conjetura de collatz de manera recursiva"""
+    print(numero, end="\n")
+    if numero == 1:
+        return
+    if numero % 2==0:
+        collatzs2(int(numero/2))
+    else:
+        collatzs2(int(numero*3 +1))
+
+
+print(collatzs2(5))
+
+"""Implementar una función intercalar(colas) que reciba una secuencia de colas y devuelva una cola con los elementos de todas las colas intercalados, manteniendo el orden relativo. Las colas originales deben quedar vacías.
+
+Ejemplo 1:
+
+intercalar([Cola(1, 2), Cola(3, 4, 5, 6), Cola(7)])
+ -> 
+Cola(1, 3, 7, 2, 4, 5, 6)
+
+Ejemplo 2:
+
+intercalar([Cola(0), Cola(10, 11), Cola(20, 21)])
+ ->
+Cola(0, 10, 20, 11, 21) """
+from cola import Cola
+
+def intercalar(colas):
+    cola_intercolada = Cola()
+    
+    for cola in colas:
+        while not cola.esta_vacia():
+            cola_intercolada.encolar(cola.desencolar())
+
+    return cola_intercolada
+
+cola = Cola()
+cola.encolar(1)
+cola.encolar(2)
+cola.encolar(3)
+cola.encolar(4)
+
+cola2 = Cola()
+cola2.encolar(5)
+cola2.encolar(6)
+cola2.encolar(7)
+cola2.encolar(8)
+
+cola3 = Cola()
+cola3.encolar(9)
+
+print(intercalar([cola, cola2, cola3]))
+
+"""Implementar una función intercalar(pilas) que reciba una secuencia de pilas y devuelva una pila con los elementos de todas las pilas intercalados, manteniendo el orden relativo. Las pilas originales deben quedar vacías.
+Ejemplo:
+intercalar([Pila(1, 2), Pila(3, 4, 5, 6), Pila(7)])
+    ->
+Pila(7, 3, 1, 6, 4, 2)
+"""
+from pila import Pila
+
+def intercalar_pilas(pilas):
+    pila_intercolada = Pila()
+
+    for pila in pilas:
+        while not pila.esta_vacia():
+            pila_intercolada.apilar(pila.desapilar())
+
+    return pila_intercolada
+
+
+pila1= Pila()
+pila1.apilar(1)
+pila1.apilar(2)
+pila1.apilar(3)
+
+pila2= Pila()
+pila2.apilar(4)
+pila2.apilar(5)
+pila2.apilar(6)
+
+pila3= Pila()
+pila3.apilar(7)
+pila3.apilar(8)
+pila3.apilar(9)
+
+print(intercalar_pilas([pila1, pila2, pila3]))
+
+
+
+
+
+
+
+
         

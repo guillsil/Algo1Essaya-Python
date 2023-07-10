@@ -1,3 +1,7 @@
+class _Nodo:
+    def __init__(self, dato, prox=None):
+        self.dato = dato
+        self.prox = prox
 
 class Pila:
     def __init__(self):
@@ -48,7 +52,7 @@ class Pila:
         cadena = ""
         nodo = self.tope
         while nodo is not None:
-            cadena += str(nodo.dato) + " "
+            cadena += str(nodo.dato) + ""
             nodo = nodo.prox
         return cadena
     def __iter__(self):
@@ -58,7 +62,4 @@ class Pila:
         return _IteradorPila(self.tope)
 
 
-class _Nodo:
-    def __init__(self, dato, prox=None):
-        self.dato = dato
-        self.prox = prox
+
