@@ -274,6 +274,22 @@ pila3.apilar(9)
 print(intercalar_pilas([pila1, pila2, pila3]))
 
 
+"""Se encontraron incongruencias en los planes preventivos de la pandemia de COBID20. El plan del país lleva una serie de fases a cumplir las cuales estan insertadas en una cola de menor a mayor. De alguna manera hay fases intercaladas que no estaban en el plan y se nos exige removerlas.
+
+Se pide entonces escribir una función que dada dicha cola de fases, la modifique de forma que sólo quede una serie de fases ordenadas.
+
+Ejemplo 1:
+
+sale <| 1 2 6 3 5 4 5 6 7 |< entra
+debería quedar la cola:
+sale <| 1 2 6 7 |< entra
+
+Ejemplo 2:
+
+sale <| 1 5 4 3 2 8 |< entra
+debería quedar la cola:
+sale <| 1 5 8 |< entra"""
+
 
 
 
