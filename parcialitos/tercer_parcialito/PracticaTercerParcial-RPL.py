@@ -11,6 +11,7 @@ le.rotar(2) -> [3, 4, 5, 6, 7, 8, 1, 2]
 le.rotar(11) -> [4, 5, 6, 7, 8, 1, 2, 3]
 le.rotar(10) -> [3, 4, 5, 6, 7, 8, 1, 2]"""
 class Nodo:
+
     def __init__(self, dato):
         self.dato = dato
         self.siguiente = None
@@ -68,8 +69,7 @@ class ListaEnlazada:
         while nodo_actual.siguiente is not None:
             nodo_actual = nodo_actual.siguiente
 
-        nodo_actual.siguiente = self.primero
-        self.primero = temporal
+        nodo_actual.siguiente , self.primero = self.primero, temporal
 
     
 
@@ -83,13 +83,14 @@ lista.agregar_elemento(6)
 lista.agregar_elemento(7)
 lista.agregar_elemento(8)
 
-print(lista)
-lista.rotar(2)
-print(lista)
+#print(lista)
+#lista.rotar(2)
+#print(lista)
 
 
 
-"""Implementar un método de la clase ListaEnlazada que elimine sobre la misma lista los elementos consecutivos repetidos. La misma está implementada con únicamente una referencia al primer nodo self.prim y cada nodo tiene los atributos para su dato dato y su próximo nodo prox.
+"""Implementar un método de la clase ListaEnlazada que elimine sobre la misma lista los elementos consecutivos repetidos. La misma está 
+implementada con únicamente una referencia al primer nodo self.prim y cada nodo tiene los atributos para su dato dato y su próximo nodo prox.
 
 Ejemplo:
 
@@ -128,17 +129,14 @@ class ListaEnlazada:
         """Elimina los elementos consecutivos repetidos de la lista"""
         if self.primero is None:
             raise Exception("Lista Vacia")
-        nodo_actual = self.primero
-        nodo_anterior = Nodo(None)
-        while nodo_actual is not None:
-            if nodo_anterior.dato == nodo_actual.dato:
-                nodo_actual = nodo_actual.siguiente
-                nodo_anterior.siguiente = nodo_actual
+        actual = self.primero
+
+        while actual.siguiente is not None:
+            if actual.dato == actual.siguiente.dato:
+                actual.siguiente = actual.siguiente.siguiente
             else:
-                nodo_anterior = nodo_actual
-                nodo_actual = nodo_actual.siguiente
-        return self.primero
-    
+                actual = actual.siguiente
+
 lista = ListaEnlazada()
 lista.agregar_elemento(3)
 lista.agregar_elemento(4)
@@ -147,16 +145,18 @@ lista.agregar_elemento(4)
 lista.agregar_elemento(1)
 lista.agregar_elemento(4)
 
-"""print(lista)
-lista.eleiminar_consecutivos()
-print(lista)"""
+#print(lista)
+#lista.eleiminar_consecutivos()
+#print(lista)
 
 """Sea la siguiente operación, aplicable a cualquier número entero positivo:
 
     Si el número es par, se divide por 2.
     Si el número es impar, se multiplica por 3 y se suma 1.
 
-La conjetura de Collatz dice que, para cualquier número con el que comencemos, si aplicamos la operación sucesivamente, siempre alcanzaremos el número 1. Escribir la función recursiva collatz(n) que imprime la secuencia de operaciones comenzando desde el número n, y terminando en el número 1.
+La conjetura de Collatz dice que, para cualquier número con el que comencemos, si aplicamos la operación sucesivamente, 
+siempre alcanzaremos el número 1. Escribir la función recursiva collatz(n) que imprime la secuencia de operaciones 
+comenzando desde el número n, y terminando en el número 1.
 
 Ejemplo:
 
@@ -180,7 +180,7 @@ def collatzs(numero):
         else:
             numero = numero*3 +1
             print(int(numero))
-print(collatzs(5))
+#print(collatzs(5))
 
 #recursiva
 
@@ -195,9 +195,10 @@ def collatzs2(numero):
         collatzs2(int(numero*3 +1))
 
 
-print(collatzs2(5))
+#print(collatzs2(5))
 
-"""Implementar una función intercalar(colas) que reciba una secuencia de colas y devuelva una cola con los elementos de todas las colas intercalados, manteniendo el orden relativo. Las colas originales deben quedar vacías.
+"""Implementar una función intercalar(colas) que reciba una secuencia de colas y devuelva una cola con los elementos de todas las colas 
+intercalados, manteniendo el orden relativo. Las colas originales deben quedar vacías.
 
 Ejemplo 1:
 
@@ -212,31 +213,36 @@ intercalar([Cola(0), Cola(10, 11), Cola(20, 21)])
 Cola(0, 10, 20, 11, 21) """
 from cola import Cola
 
-def intercalar(colas):
-    cola_intercolada = Cola()
-    
+def estan_vacias(colas):
+    """Devuelve True si todas las colas estan vacias"""
     for cola in colas:
-        while not cola.esta_vacia():
-            cola_intercolada.encolar(cola.desencolar())
+        if not cola.esta_vacia():
+            return False
+    return True
+def intercalar(colas):
+    """Devuelve una cola con los elementos de todas las colas intercalados"""
+    cola_intercalada = Cola()
+    while not estan_vacias(colas):
+        for cola in colas:
+            if not cola.esta_vacia():
+                cola_intercalada.encolar(cola.desencolar())
+    return cola_intercalada
 
-    return cola_intercolada
 
 cola = Cola()
 cola.encolar(1)
 cola.encolar(2)
-cola.encolar(3)
-cola.encolar(4)
 
 cola2 = Cola()
+cola2.encolar(3)
+cola2.encolar(4)
 cola2.encolar(5)
 cola2.encolar(6)
-cola2.encolar(7)
-cola2.encolar(8)
 
 cola3 = Cola()
-cola3.encolar(9)
+cola3.encolar(7)
 
-print(intercalar([cola, cola2, cola3]))
+#print(intercalar([cola, cola2, cola3]))
 
 """Implementar una función intercalar(pilas) que reciba una secuencia de pilas y devuelva una pila con los elementos de todas las pilas intercalados, manteniendo el orden relativo. Las pilas originales deben quedar vacías.
 Ejemplo:
@@ -246,49 +252,75 @@ Pila(7, 3, 1, 6, 4, 2)
 """
 from pila import Pila
 
-def intercalar_pilas(pilas):
-    pila_intercolada = Pila()
-
+def estan_vacias_p(pilas):
     for pila in pilas:
-        while not pila.esta_vacia():
-            pila_intercolada.apilar(pila.desapilar())
-
-    return pila_intercolada
+        if not pila.esta_vacia():
+            return False
+    return True
+def intercalar_pilas(pilas):
+    """Devuelve una pila con los elementos de todas las pilas intercalados"""
+    pila_intercalada = Pila()
+    while not estan_vacias_p(pilas):
+        for pila in pilas:
+            if not pila.esta_vacia():
+                pila_intercalada.apilar(pila.desapilar())
+    return pila_intercalada
 
 
 pila1= Pila()
 pila1.apilar(1)
 pila1.apilar(2)
-pila1.apilar(3)
 
 pila2= Pila()
+pila2.apilar(3)
 pila2.apilar(4)
 pila2.apilar(5)
 pila2.apilar(6)
 
 pila3= Pila()
 pila3.apilar(7)
-pila3.apilar(8)
-pila3.apilar(9)
-
-print(intercalar_pilas([pila1, pila2, pila3]))
 
 
-"""Se encontraron incongruencias en los planes preventivos de la pandemia de COBID20. El plan del país lleva una serie de fases a cumplir las cuales estan insertadas en una cola de menor a mayor. De alguna manera hay fases intercaladas que no estaban en el plan y se nos exige removerlas.
+#print(intercalar_pilas([pila1, pila2, pila3]))
 
-Se pide entonces escribir una función que dada dicha cola de fases, la modifique de forma que sólo quede una serie de fases ordenadas.
 
-Ejemplo 1:
+"""Escribir una función reemplazar que tome una pila y dos valores, valor_nuevo y valor_viejo, y reemplace en la pila todas las
+ocurrencias de valor_viejo por valor_nuevo. Al finalizar la ejecución, los elementos de la pila deben quedar en el mismo orden
+en el que se encontraban originalmente.
 
-sale <| 1 2 6 3 5 4 5 6 7 |< entra
-debería quedar la cola:
-sale <| 1 2 6 7 |< entra
+Ejemplo para una pila con elementos [1, 2, 1, 4, 5, 1, 7, 8]:
 
-Ejemplo 2:
+reemplazar(pila, 1, 3) -> [3, 2, 3, 4, 5, 3, 7, 8]
+"""
+def reemplazar(pila, valor, valor_n):
+    cola_aux = Cola()
+    while not pila.esta_vacia():
+        elemento = pila.desapilar
+        if elemento == valor:
+            cola_aux.encolar(valor_n)
+        else:
+            cola_aux.encolar(elemento)
 
-sale <| 1 5 4 3 2 8 |< entra
-debería quedar la cola:
-sale <| 1 5 8 |< entra"""
+    while not cola_aux.esta_vacia():
+        pila.apilar(cola_aux.desencolar())
+
+    return pila
+
+pila = Pila()
+pila.apilar(1)
+pila.apilar(2)
+pila.apilar(1)
+pila.apilar(4)
+pila.apilar(5)
+pila.apilar(1)
+pila.apilar(7)
+pila.apilar(8)
+
+print(pila)
+pila = reemplazar(pila, 1, 3)
+print(pila)
+
+
 
 
 

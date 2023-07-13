@@ -99,29 +99,133 @@ from pila import Pila
 from cola import Cola
 
 def mover_pares(pila):
-    pila_aux = Pila()
-    cola_aux = Cola()
+    pilas_pares = Pila()
+    pilas_impares = Pila()
     while not pila.esta_vacia():
         elemento = pila.desapilar()
         if elemento % 2 == 0:
-            pila_aux.apilar(elemento)
+            pilas_pares.apilar(elemento)
         else:
-            cola_aux.encolar(elemento)
-    while not pila_aux.esta_vacia():
-        pila.apilar(pila_aux.desapilar())
-    while not cola_aux.esta_vacia():
-        pila.apilar(cola_aux.desencolar())
+            pilas_impares.apilar(elemento)
+    while not pilas_impares.esta_vacia():
+        pila.apilar(pilas_impares.desapilar())
+    while not pilas_pares.esta_vacia():
+        pila.apilar(pilas_pares.desapilar())
 
-
+#Prueba
 pila = Pila()
-pila.apilar(5)
-pila.apilar(8)
-pila.apilar(9)
-pila.apilar(3)
 pila.apilar(1)
-print(pila)
-mover_pares(pila)
-print(pila)
+pila.apilar(2)
+pila.apilar(3)
+pila.apilar(4)
+pila.apilar(5)
+#print(pila)
+#mover_pares(pila)
+#print(pila)
+
+""""
+4)Escribir un método de ListaEnlazadas que elimina los elementos duplicados contiguos . Ejemplo:
+>>> l = ListaEnlazada([5, 2, 2, 2, 3, 8, 3, 2, 5, 5])
+>>> l.eliminar_duplicados_contiguos()
+>>> l
+ListaEnlazada(5, 2, 3, 8, 3, 2, 5)
+"""
+class Nodo:
+    def __init__(self, dato):
+        self.dato = dato
+        self.siguiente = None
+
+class ListaEnlazada:
+    def __init__(self):
+        self.primero = None
+
+    def agregar_elemento(self, dato):
+        nodo = Nodo(dato)
+        if self.primero is None:
+            self.primero = nodo
+        else:
+            actual = self.primero
+            while actual.siguiente is not None:
+                actual = actual.siguiente
+            actual.siguiente = nodo
+
+    def __str__(self):
+        if self.primero is None:
+            return "[]"
+
+        actual = self.primero
+        elementos = []
+        while actual is not None:
+            elementos.append(str(actual.dato))
+            actual = actual.siguiente
+        return "[" + " ".join(elementos) + "]"
+
+    def eliminar_dupliados_contiguos(self):
+        if self.primero is None:
+            raise Exception("Lista Vacia")
+
+        actual = self.primero
+
+        while actual.siguiente is not None:
+            if actual.dato == actual.siguiente.dato:
+                actual.siguiente = actual.siguiente.siguiente
+            else:
+                actual = actual.siguiente
+
+#Prueba
+lista = ListaEnlazada()
+lista.agregar_elemento(5)
+lista.agregar_elemento(2)
+lista.agregar_elemento(2)
+lista.agregar_elemento(2)
+lista.agregar_elemento(3)
+lista.agregar_elemento(8)
+lista.agregar_elemento(3)
+lista.agregar_elemento(2)
+lista.agregar_elemento(5)
+lista.agregar_elemento(5)
+#print(lista)
+#lista.eliminar_dupliados_contiguos()
+#print(lista)
+
+
+"""5). Un producto es apto celiacos si no contiene TACC, es decir que uo contiene trigo. avena,
+cebada ni Centeno.
+Un supermercado tiene una base de datos de productos almacenada en un archivo CSV con el 
+formato : id;nombre;ingredientes
+Por ejemplo, una línea del archivo podria
+1234; Choclo amarillo entero 350g;Granos de choclo, agua, sal, acido citrico, acido ascorbico
+
+Escribir la función separar(entrada, con_tacc, sin_tacc) que recibe la ruta del archivo CSV
+de entrada y dos rutas de solida. La función debe clasificar los productos según si tienen o no
+TAC.C, y escribir en uno u otro archivo según el caso. Los archivos de salida debeti quedar con
+el mismo formato que el de entrada"""
+
+import csv
+
+def separar(ruta_archivo, con_tacc, sin_tacc):
+    with open(ruta_archivo, "r") as archivo:
+        archivo_reader = csv.reader(archivo)
+        with open(con_tacc, "w") as archivo_con_tacc, open(sin_tacc, "w") as archivo_sin_tacc:
+            archivo_con_tacc_writer = csv.writer(archivo_con_tacc)
+            archivo_sin_tacc_writer = csv.writer(archivo_sin_tacc)
+            for linea in archivo_reader:
+                if "trigo" in linea[2].lower() or "avena" in linea[2].lower() or "cebada" in linea[2].lower() or "centeno" in linea[2].lower():
+                    archivo_con_tacc_writer.writerow(linea)
+                else:
+                    archivo_sin_tacc_writer.writerow(linea)
+
+
+#Prueba
+separar("productos.csv", "con_tacc.csv", "sin_tacc.csv")
+
+
+
+
+
+
+
+
 
 
 
