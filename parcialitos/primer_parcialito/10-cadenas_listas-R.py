@@ -1,4 +1,5 @@
-"""Escribir un programa que le pida al usuario que ingrese un número entero positivo n y una cadena, e imprima
+"""Escribir un programa que le pida al usuario que ingrese un número entero positivo n y una cadena,
+e imprima
 la misma cadena pero con un guión (-) cada n lugares.
 Ejemplo: n = 2, cadena = Esto es un ejemplo.; debe imprimir Es-to- e-s -un- e-je-mp-lo-."""
 def imprimir_cadena(n, cadena):
@@ -11,3 +12,6 @@ def imprimir_cadena(n, cadena):
         print(caracter, end="")
         contador += 1
 imprimir_cadena(2, "Esto es un ejemplo.")
+
+def imprimir_cadena2(n, cadena):
+    for i in range(len(cadena)):

@@ -1,10 +1,12 @@
-"""Escribir una función que dada una matriz representada como una lista de listas, donde cada elemento de
+"""Escribir una función que dada una matriz representada como una lista de listas, donde cada
+elemento de
 la matriz es una tupla que representa el puntaje de un pais con el formato (<Pais>, <Puntaje>), devuelva una lista
 con todos los paises que tengan el mayor puntaje para su columna . En caso de empate , se puede elegir cualquiera .
 Por ejemplo para la matriz:
 [[(Argentina, 10), (Brasil, 20), (Alemania, 30)],
 [(Portugal, 20), (Dinamarca, 30), (Paraguay, 40)],
 [(Croacia, 30), (Brasil, 40), (Honduras, 50)]]
+>>> []
 """
 def paises_con_mejor_puntaje(matriz):
     lista_paises = []
@@ -13,15 +15,30 @@ def paises_con_mejor_puntaje(matriz):
         for j in range(len(matriz)):
             if matriz[j][i][1] > puntaje_maximo:
                 puntaje_maximo = matriz[j][i][1]
+
         for j in range(len(matriz)):
             if matriz[j][i][1] == puntaje_maximo:
                 lista_paises.append(matriz[j][i][0])
     return lista_paises
+
+def paises_con_mejor_puntaje2(matriz):
+    lista_paises = []
+    for columna in matriz[0]:
+        puntaje_maximo = 0
+        for fila in matriz:
+            if fila[0][1] > puntaje_maximo:
+                puntaje_maximo = fila[0][1]
+        for fila in matriz:
+            if fila[0][1] == puntaje_maximo:
+                lista_paises.append(fila[0][0])
+    return lista_paises
+
 matriz = [[("Argentina", 10), ("Brasil", 20), ("Alemania", 30)],
 [("Portugal", 20), ("Dinamarca", 30), ("Paraguay", 40)],
 [("Croacia", 30), ("Brasil", 40), ("Honduras", 50)]]
 
-"""print(paises_con_mejor_puntaje(matriz))"""
+print(paises_con_mejor_puntaje2(matriz))
+print(paises_con_mejor_puntaje2(matriz))
 
 
 """Escribir una funcion que le pida al usuario un resultado de un partido hasta que ingreseuno valido. Un resultado 

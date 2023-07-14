@@ -1,19 +1,23 @@
 """
 1)Escribir una funcion imprimir_notables que reciba una secuencia de movimiento de la forma
-<personaje>,<movimiento> y un numero k. La funcion debe imprimir por pantalla todos los movimientos "notables" de cada personaje y cuántas veces se usaron .
-Se dice que un Movimiento es "notable" si el personaje lo utilizó más de k veces durante la partida . Se deben mostrar todos los movimientos notables . Se puede mostrar los movimientoss en cualquier orden.Ejemplo:
->>> movimientos = [("pikachu", "impactrueno"), ("Charizard", "Lanzallamas"), ("Charizard", "Lanzallamas"), ("pikachu", "Ataque Rapído"), ("pikachu", "Ataque Rapído", ("Charizard", "Lanzallamas"))]
->>> imprimir_notable(movimientos, 1)
+<personaje>,<movimiento> y un numero k. La funcion debe imprimir por pantalla todos los movimientos "notables" de cada
+personaje y cuántas veces se usaron .
+Se dice que un Movimiento es "notable" si el personaje lo utilizó más de k veces durante la partida . Se deben mostrar
+todos los movimientos notables . Se puede mostrar los movimientoss en cualquier orden.Ejemplo:
+>> movimientos = [("pikachu", "impactrueno"), ("Charizard", "Lanzallamas"), ("Charizard", "Lanzallamas"),
+("pikachu", "Ataque Rapído"), ("pikachu", "Ataque Rapído", ("Charizard", "Lanzallamas"))]
+>> imprimir_notable(movimientos, 1)
 Charizard - Lanzallamas (3)
 Pikachu - Ataque Rapido (2)
 """
 def imprimir_notables(movimientos, k):
     movimiento_notables = {}
     for personaje, movimiento in movimientos:
-        if personaje in movimiento_notables:
-            movimiento_notables[personaje][movimiento] = movimiento_notables[personaje].get(movimiento, 0) + 1
-        else:
+        if personaje not  in movimiento_notables:
             movimiento_notables[personaje] = {movimiento: 1}
+        else:
+            movimiento_notables[personaje][movimiento] = movimiento_notables[personaje].get(movimiento, 0) + 1
+            #get() devuelve el valor del elemento con la clave especificada. Si la clave no existe, devuelve el valor
 
     for personaje, movimientos in movimiento_notables.items():
         for movimiento, cantidad in movimientos.items():
@@ -25,7 +29,10 @@ movimientos = [("pikachu", "impactrueno"), ("Charizard", "Lanzallamas"), ("Chari
 imprimir_notables(movimientos, 1)
 
 """Se cuenta con un  archivo en formato csv que guarda información de pasajes de avión, respetando la siguiente
-estructura: fecha, destino, precio. Escribir una función que dada la ruta del archivo, devuelva un diccionario cuyas claves sean cada uno de los destinos, y el valor asociado a cada clave una tupla (fecha, precio) con el pasaje más barato para el destino. Al finalizar la ejecucion de la funcón (haya ocurrido un error o no), todos los archivos abiertos deben quedar cerrados"""
+estructura: fecha, destino, precio. Escribir una función que dada la ruta del archivo, devuelva un diccionario cuyas 
+claves sean cada uno de los destinos, y el valor asociado a cada clave una tupla (fecha, precio) con el pasaje más barato
+ para el destino. Al finalizar la ejecucion de la funcón (haya ocurrido un error o no), todos los archivos abiertos deben 
+quedar cerrados"""
 import csv 
 
 def obtener_menor_precio(ruta_archivo):

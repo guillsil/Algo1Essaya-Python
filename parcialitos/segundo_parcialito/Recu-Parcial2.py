@@ -23,12 +23,15 @@ def procesar_archivo(ruta):
     try:
         with open(ruta) as archivo:
             productos = {}
+            linea = archivo.readline()
             for linea in archivo:
                 producto, cantidad = linea.split(",")
                 if producto not in productos:
                     productos[producto] = int(cantidad)
                 else:
                     productos[producto] += int(cantidad)
+
+
         return productos
     except FileNotFoundError:
         print("El archivo no existe.")
@@ -67,8 +70,8 @@ class Partido:
         self.equipo_visitante = equipo_visitante
         self.goles_local = 0
         self.goles_visitante = 0
-        self.ganador = None
-        self.perdedor = None
+        self.ganador = ""
+        self.perdedor = ""
 
     def cargar_resultado(self, goles_local, goles_visitante):
         self.goles_local = goles_local

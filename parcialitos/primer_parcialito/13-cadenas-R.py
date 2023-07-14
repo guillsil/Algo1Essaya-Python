@@ -1,4 +1,5 @@
-"""Escribir una función que reciba un número complejo representado como una tupla de la forma (parte_real, parte_imaginaria)
+"""Escribir una función que reciba un número complejo representado como una tupla de la
+forma (parte_real, parte_imaginaria)
 y devuelva su representación binómica en una cadena.
 Ejemplo:
 >> representacion_binomica((3, 6))

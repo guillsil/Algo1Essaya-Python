@@ -1,6 +1,10 @@
-"""1. Implementar la función mezcla_de_preguntas(preguntas_categoria, orden) que recibe un diccionario con N "mazos" de categorías con preguntas para el Preguntados (cada mazo está representado como Pila), y que debe retornar una nueva Pila con todas las
-preguntas. alternando 1 pregunta de cada categoría según el orden dado por eI parámetro orden. Las preguntas en el tope de cada mazo deben quedar en eI tope de la Pila resultante. La función debe vaciar todas las pilas del diccionario.
-Se puede asumir que todos los mazos tienen la misma cantidad de preguntas, y que las categorias de orden coinciden con las claves del
+"""1. Implementar la función mezcla_de_preguntas(preguntas_categoria, orden) que recibe un diccionario con N "mazos" de
+categorías con preguntas para el Preguntados (cada mazo está representado como Pila), y que debe retornar una nueva Pila
+con todas las
+preguntas. alternando 1 pregunta de cada categoría según el orden dado por eI parámetro orden. Las preguntas en el tope de
+ cada mazo deben quedar en eI tope de la Pila resultante. La función debe vaciar todas las pilas del diccionario.
+Se puede asumir que todos los mazos tienen la misma cantidad de preguntas, y que las categorias de orden coinciden con
+ las claves del
 diccionario preguntas_categoria. Ejemplo, donde a modo ilustrativo, eI primer elemento de cada pila vendría a ser eI elemento
 del tope:
 preguntas_categona = { "Ciencia": Pila( [CI, C2, C3)), Pila([DI, D2, D3]) }
@@ -44,7 +48,8 @@ print(pila_pregunta.desapilar())
 print(pila_pregunta.desapilar())
 
 """#2 
-Dada una clase ListaEnIazada, la cuál solo cuenta con una referencia al primer nodo, escribir eI método nplicar(x, N) que modifica la lista enlazada de tal forma que los elementos igual a x de la misma se ven duplicados N veces. Se puede asumir que N
+Dada una clase ListaEnIazada, la cuál solo cuenta con una referencia al primer nodo, escribir eI método nplicar(x, N) 
+que modifica la lista enlazada de tal forma que los elementos igual a x de la misma se ven duplicados N veces. Se puede asumir que N
 mayor a cero. EI método no debe iterar la lista más de una vez. Ejemplos de cómo quedaría la lista antes y después de llamar al metodo.
 l = 6 -> 8 -> 6 -> 5 -> 5
 l.aplicar(6, 3) # l = 6 -> 6 -> 6 -> 8 -> 6 -> 6 -> 6 -> 5 -> 5 -> 5 -> 5 -> 5
@@ -108,7 +113,8 @@ print(l)
 
 """#3
 Existiendo la clase Persona, que posee el método  obtener_hijos() -> List [Persona], se pide implementar una función
-contar_descendientes (persona: Persona) -> int que cuente cuántos descendientes tiene dicha persona (es decir. hijos + nietos + bisnietcs + etc), utilizando recursión."""
+contar_descendientes (persona: Persona) -> int que cuente cuántos descendientes tiene dicha persona 
+(es decir. hijos + nietos + bisnietcs + etc), utilizando recursión."""
 class Persona():
     def __init__(self, nombre, hijos):
         self.nombre = nombre

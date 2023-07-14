@@ -69,5 +69,28 @@ Ingrese una frecuencia: 1
 Ingrese una frase: Otra frase devuelta
 O-t-r-a- -f-r-a-s-e- -d-e-v-u-e-l-t-a
 """
+def imprimir_n():
+    n = int(input("Ingrese una frecuencia: "))
+    cadena = input("Ingrese una frase: ")
+    for i in range(len(cadena)):
+        if i % n == 0:
+            if i != 0:
+                print("-", end="")
 
+        print(cadena[i], end="")
+    print()
 
+imprimir_n()
+
+"""Escribir un programa que pida dos números enteros al usuario (a y b) e imprima los primeros a múltiplos de b.
+
+El programa debe validar que cada número que ingrese el usuario sea un entero positivo y, en caso de que no lo sea, solicitarlo nuevamente (hasta que se ingrese algo correcto).
+
+Ejemplo:
+
+Ingrese el número 'a': 4
+Ingrese el número 'b': 6
+6
+12
+18
+24"""

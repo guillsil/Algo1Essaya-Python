@@ -1,4 +1,5 @@
-"""1. 'Tras la crisis deportiva y econÓ1nica que atraviesa CI Club Atletico Independiente que ha a la renuncia ele Fabián Doman a su cargo como presidente. IOS dirigentes estudian analizar dcportivrxs para tomar una (lecisión eon respecto al futuro del club.
+"""1. 'Tras la crisis deportiva y econÓ1nica que atraviesa CI Club Atletico Independiente que ha a la renuncia
+ele Fabián Doman a su cargo como presidente. IOS dirigentes estudian analizar dcportivrxs para tomar una (lecisión eon respecto al futuro del club.
 como presidente. Los dirigentes estudian analizar los resultados deportivoss para tomar una (lecisión eon respecto al futuro del club.
 Para ayudar a la dirigencia del club, se pide implementar una fición llamada rondimiontÓ que reciba corno parámetro una matriz de
 " partidos' • que contiene la información de los resultados cada partido y (levuelva lista el rendimiento del equipo en

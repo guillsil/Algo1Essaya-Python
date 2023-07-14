@@ -9,8 +9,10 @@ Mati S, Fintech
 Nacho , API
 C, API
 Mauro , Backoffice
+
 Backoff ice->Javier , Mauro
 Fintech->Mati S"""
+
 import csv
 
 #1
@@ -23,7 +25,7 @@ def empleadosPorProyectos(ruta_entrada, ruta_salida):
         salida = csv.writer(archivo_salida)
         for linea in entrada:
             if len(linea) != 2:
-                continue
+                raise ValueError("El archivo de entrada no tiene el formato esperado")
             empleado, proyecto = linea[0], linea[1]
             if proyecto not in proyectos:
                 proyectos[proyecto] = [empleado]
@@ -32,7 +34,7 @@ def empleadosPorProyectos(ruta_entrada, ruta_salida):
             salida.writerow([proyecto, *empleados])
 
     
-empleadosPorProyectos("empleados.csv", "empleadosPorProyectos.csv")
+#empleadosPorProyectos("empleados.csv", "empleadosPorProyectos.csv")
 
 #2
 """2. Se pide implementar una función maximos_donantes(donaciones), que recibe una lista de tuplas las cuales
@@ -53,22 +55,26 @@ def regitroDonaciones(donaciones):
         donadores[donador] += monto
     return donadores
 def maximos_donantes(donadores):
-    maxDonadores = {}
+    maxDonadores = []
     maxMonto = 0
     for donador, monto in donadores.items():
         if monto > maxMonto:
             maxMonto = monto
-            maxDonadores = {donador}
+            if len(maxDonadores) > 0:
+                maxDonadores.clear()
+            else:
+                maxDonadores.append(donador)
+
         elif monto == maxMonto:
-            maxDonadores.add(donador)
+            maxDonadores.append(donador)
     return maxDonadores
 donaciones = [("MatiChurches" ,5000), ("FabiDoman" ,100), ("EIKun" ,5), ("RodriS" ,5000)]
 donadores = regitroDonaciones(donaciones)
 maxDonadores = maximos_donantes(donadores)
-print(f"Maximos donantes: {', '.join(maxDonadores)}")
+#3bbbprint(f"Maximos donantes: {', '.join(maxDonadores)}")
 
 #3
-"""3. Para un nuevo sistema de facultad, se pide ilnp ementar a case ateria, que necesi a e un nom rc y una can 1
+"""3. Para un nuevo sistema de facultad, se pide ilnp ementar a case Materia, que necesi a e un nom rc y una can 1
 para
 ser creada. Una Materia ademas cuenta con una nota (inicialmente sin asignar), y una lista de correlativas (las materias que necesitan
 estar aprobadas antes de poder cursar esa materia). Se busca que la clase tenga los siguientes métodos:

@@ -1,5 +1,7 @@
-"""Un pangrama es una frase o texto que usa todas las letras del alfabeto al menos una vez. Por ejemplo, la frase the
-quick brown fox jumps over the lazy dog es un pangrama en inglés, porque usa todas las letras del alfabeto inglés al
+"""Un pangrama es una frase o texto que usa todas las letras del alfabeto al menos una vez.
+Por ejemplo, la frase
+the quick brown fox jumps over the lazy dog es un pangrama en inglés, porque usa todas las letras del
+alfabeto inglés al
 menos una vez. Escribir una función que recibe una frase y devuelve True si es un pangrama y False en caso
 contrario. Nota: ignorar los espacios en blanco y los signos de puntuación. Ejemplo:
 >> pangrama("the quick brown fox jumps over the lazy dog")
@@ -16,7 +18,7 @@ def pangrama(frase):
 """print(pangrama("the quick brown fox jumps over the lazy dog"))"""
 
 """Escribir una funcion que reciba un numero n, y devuelva una matriz triangular superior de dimension n x n, en forma
-de lista de listas , cuyos elementos son los numeros del 1 al ken orden (siendo k la cantidad total de números a colocar)
+de lista de listas , cuyos elementos son los numeros del 1 al k en orden (siendo k la cantidad total de números a colocar)
 .por ejemplo para n = 4 debe devolver la sguiente matriz:
 [[1, 2, 3, 4],
 [0, 5, 6, 7],
@@ -43,7 +45,7 @@ def matriz_triangular(n):
             matriz[i][j] = k
             k += 1
     return matriz
-"""print(matriz_triangular(4))"""
+print(matriz_triangular(4))
 
 """"Escribir una funcion que le pida al usuario que ingrese un numero. Se debe validar la entrada del usuario
 según la siguientes condiciones:

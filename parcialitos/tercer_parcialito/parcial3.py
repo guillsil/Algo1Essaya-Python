@@ -24,6 +24,7 @@ class ListaEnlazada:
             lista.append(str(actual.dato))
             actual = actual.prox
         return f"Lista Enlazada({', '.join(lista)})"
+    #join() es un metodo de string que recibe una lista de strings y devuelve un string con todos los elementos de la lista
 
     def shift(self, n):
         """Elimina los primeros n elementos de la lista y devuelve una nueva lista con dichos elementos"""

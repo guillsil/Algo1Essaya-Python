@@ -59,32 +59,23 @@ print(li.impares())
 *) Para "No es tan fácil, que todo te salga bien" debe devolver 2.
 *) Para "No es tan fácil que todo te salga bien" debe devolver 1.
 """
-def cadena_a_lista(cadena):
-    if cadena == "":
-        return []
-    return [cadena[0]] + cadena_a_lista(cadena[1:])
-
-
-def pos_pares_lista(lista):
-    lista_par = []
-    for i in range(len(lista)):
-        if i % 2 == 0:
-            lista_par.append(lista[i])
-    return lista_par
-
-def cant_de_veces(cadena):
-    c = cadena[0]
-    lista_par = pos_pares_lista(cadena_a_lista(cadena))
-    return recursiva(c.lower(), lista_par[1:], 0)
-
-def recursiva(c, lista, i):
-    if i == len(lista):
+def contar(cadena):
+    if len(cadena) == 0:
         return 0
-    if lista[i].lower() == c:
-        return 1 + recursiva(c, lista, i + 1)
-    return recursiva(c, lista, i + 1)
-print(cant_de_veces("No es tan fácil, que todo te salga bien"))
-print(cant_de_veces("No es tan fácil que todo te salga bien"))
+    if len(cadena) == 1:
+        return 0
+    if len(cadena) == 2:
+        if cadena[0] == cadena[1]:
+            return 1
+        else:
+            return 0
+    if cadena[0] == cadena[2]:
+        return 1 + contar(cadena[1:])
+    else:
+        return contar(cadena[1:])
+#Probar
+print(contar("No es tan fácil, que todo te salga bien"))
+print(contar("No es tan fácil que todo te salga bien"))
 
 """Dada la lista [1, 2, 4, 5, 6, 3, 7, 8] escribir el seguimiento del algoritmo de ordenamiento por merge sort. 
 ¿Cual es la complejidad temporal del algoritmo en este arreglo? ¿hay algun otro algoritmo de ordenamiento que tenga
