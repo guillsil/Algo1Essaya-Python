@@ -1,30 +1,12 @@
 #ordnemaiento por seleccion
-def buscar_minimo(lista, inicio, fin):
-    """Devuelve el índice del mínimo elemento en un segmento de
-    lista de Python.
- 
-    La lista no debe ser vacía.
-    inicio y fin son posiciones válidas en la lista, con
-    inicio <= fin.
-    """
-    # Inicializo el mínimo al primer valor del segmento
-    pos_min = inicio
-    # Recorro el segmento para buscar el mínimo
-    for i in range(inicio+1, fin+1):
-        if lista[i] < lista[pos_min]:
-            pos_min = i
-    return pos_min
-
 def seleccion_sort(lista):
-    n = len(lista)
-    inicio = 0
-    while inicio < n-1:
-        # Encontrar el elemento mínimo en la sublista no ordenada
-        min_idx = buscar_minimo(lista, inicio, n-1)
+    for i in range(len(lista)):
+        minimo = i
+        for j in range(i + 1, len(lista)):
+            if lista[j] < lista[minimo]:
+                minimo = j
+        lista[i], lista[minimo] = lista[minimo], lista[i]
 
-        #Intercaambiar el elemento mínimo encontrado con el primer elemento de la sublista no ordenada
-        lista[inicio], lista[min_idx] = lista[min_idx], lista[inicio]
-        inicio += 1
         
 # Ejemplo de uso
 lista = [64, 25, 12, 22, 11]
@@ -32,18 +14,15 @@ seleccion_sort(lista)
 print(lista)
 
 #oredenamiento por insercion
-def reubicar(lista, posicion):
-    valor = lista[posicion]
-    while posicion > 0 and lista[posicion - 1] > valor:
-        lista[posicion] = lista[posicion - 1]
-        posicion -= 1
-    lista[posicion] = valor
 
 def ordenamiento_por_insercion(lista):
     for i in range(1, len(lista)):
         valor_actual = lista[i]
         posicion = i
-        reubicar(lista, posicion)
+        while posicion > 0 and lista[posicion - 1] > valor_actual:
+            lista[posicion] = lista[posicion - 1]
+            posicion -= 1
+        lista[posicion] = valor_actual
 
 # Ejemplo de uso
 lista = [5, 2, 4, 6, 1, 3, 10]
@@ -87,15 +66,16 @@ print(lista_ordenada)
 
 #ordenamiento quick sort
 def quicksort(lista):
-    if len(lista) <= 1:
+    if len(lista) < 2:
         return lista
-    else:
-        pivote = lista[-1]
-        menores = [x for x in lista[:-1] if x <= pivote]
-        mayores = [x for x in lista[:-1] if x > pivote]
-        return quicksort(menores) + [pivote] + quicksort(mayores)
+    pivote = lista[0]
+    menores = [x for x in lista[1:] if x <= pivote]
+    mayores = [x for x in lista[1:] if x > pivote]
 
-# Ejemplo de uso
-lista = [4, 2, 7, 1, 9, 5]
-resultado = quicksort(lista)
-print(resultado)
+    menores_ordenados = quicksort(menores)
+    mayores_ordenados = quicksort(mayores)
+
+    return menores_ordenados + [pivote] + mayores_ordenados
+
+print([2, 3, 4, 7, 1, 2, 5 , 6, 8, 9, 10, 11, 12, 13, 14, 15, 16])
+print(quicksort([2, 3, 4, 7, 1, 2, 5 , 6, 8, 9, 10, 11, 12, 13, 14, 15, 16]))

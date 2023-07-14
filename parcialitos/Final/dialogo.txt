@@ -1,0 +1,6 @@
+Persona1: Hola soy persona 1
+Persona2: Hola soy persona 2
+Persona3: Hola soy persona 3
+Persona1: Hola muchachos soy persona 1
+Persona2: Hola muchachos soy persona 2
+Persona3: Hola muchachos soy persona 3

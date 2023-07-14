@@ -295,11 +295,10 @@ reemplazar(pila, 1, 3) -> [3, 2, 3, 4, 5, 3, 7, 8]
 def reemplazar(pila, valor, valor_n):
     cola_aux = Cola()
     while not pila.esta_vacia():
-        elemento = pila.desapilar
+        elemento = pila.desapilar()
         if elemento == valor:
-            cola_aux.encolar(valor_n)
-        else:
-            cola_aux.encolar(elemento)
+            elemento = valor_n
+        cola_aux.encolar(elemento)
 
     while not cola_aux.esta_vacia():
         pila.apilar(cola_aux.desencolar())
@@ -319,6 +318,34 @@ pila.apilar(8)
 print(pila)
 pila = reemplazar(pila, 1, 3)
 print(pila)
+
+"""Implementar la función merge en forma recursiva. La función recibe dos listas ordenadas y devuelve una 
+lista con los elementos
+intercalados ordenadamente.
+
+Ejemplo:
+
+>>> merge([1, 2, 3, 4, 7], [5, 6])
+[1, 2, 3, 4, 5, 6, 7]"""
+
+def  merge(lista1, lista2):
+    i, j = 0, 0
+    resultado = []
+    while i < len(lista1) and j < len(lista2):
+        if lista1[i] < lista2[j]:
+            resultado.append(lista1[i])
+            i += 1
+        else:
+            resultado.append(lista2[j])
+            j += 1
+    resultado += lista1[i:]
+    resultado += lista2[j:]
+    return resultado
+lista1 = [1, 2, 3, 4, 7]
+lista2 = [5, 6]
+print(merge(lista1, lista2))
+
+
 
 
 
