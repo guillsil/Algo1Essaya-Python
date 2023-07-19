@@ -58,28 +58,45 @@ class Numerocional():
         return Numerocional(self.numerador // mcd, self.denominador // mcd)
 
 
-"""3. Implementar la función pascal (n: int) -> list[list[int]] que devuelve una lista con las 
-primeras n filas del triángulo de Pascal. Ejemplo:
-pascal (4) -> [[1], [1, 1], [1, 2, 1], [1, 3, 3, 1]]
-Nota: en el triángulo de Pascal, cada elemento es la suma de los dos elementos que están en
-la fila superior:
-    1
-   1 1
-  1 2 1
- 1 3 3 1
-"""
+
 #iterativo
 def pascal(n):
     lista = []
     for i in range(n):
-        lista.append([1])
+        lista.append([])
+        lista[i].append(1)
         for j in range(1, i):
             lista[i].append(lista[i-1][j-1] + lista[i-1][j])
-        if i != 0:
+        if(n != 0):
             lista[i].append(1)
     return lista
 print(pascal(4))
 
+"""4. Sea un archivo CSV que contiene el historial de tráfico de un sitio web, medido en cantidad de
+usuarios conectados, con el formato año, mes , día, cant_min, cant_media,cant_max (por ejemplo
+2626,61, 10,2214 ,5389, 11876).
+Escribir una función que recibe la ruta del archivo y devuelve un diccionario con la cantidad
+máxima de usuarios conectados de cada año,
+Cada fecha aparece a l0 sumo una vez. No se puede asumir que todas las fechas están en el
+archivo, o que están ordenadas. En caso de error al procesar una línea, ignorarla y pasar a la
+siguiente."""
+import csv
+def cant_max_reproducciones(ruta_archivo):
+    diccionario = {}
+    try:
+        with open(ruta_archivo, "r") as archivo:
+            archivo_reader = csv.reader(archivo)
+            for linea in archivo_reader:
+                if len(linea) != 6:
+                    raise ValueError("El archivo no tiene el formato correcto (1)")
 
-
+                if linea[0] not in diccionario:
+                    diccionario[linea[0]] = linea[5]
+                else:
+                    """si el año ya esta debo sumar la cantidad de reproducciones"""
+                    diccionario[linea[0]] = int(diccionario[linea[0]]) + int(linea[5])
+    except FileNotFoundError:
+        print("El archivo no existe")
+    return diccionario
+print(cant_max_reproducciones("archivo.csv"))
 
