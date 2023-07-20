@@ -103,3 +103,7 @@ print(cant_max_reproducciones("archivo.csv"))
 for i in range(100):
     print(f"HOLA {i}")
 
+"""5. Escribir una función que recibe una lista de números y devuelve una lista con los números
+pares de la lista original, pero sin usar el operador módulo (%)."""
+
+
