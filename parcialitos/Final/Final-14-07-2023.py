@@ -100,3 +100,6 @@ def cant_max_reproducciones(ruta_archivo):
     return diccionario
 print(cant_max_reproducciones("archivo.csv"))
 
+for i in range(100):
+    print(f"HOLA {i}")
+
