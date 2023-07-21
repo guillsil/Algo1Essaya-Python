@@ -101,6 +101,75 @@ def cant_max_reproducciones(ruta_archivo):
 print(cant_max_reproducciones("archivo.csv"))
 
 
+"""Implementar el metodo intercambiar_pares de la clase ListaEnlazada que intercambia cada par de elementos.
+Por ejemplo:
+lista = ListaEnlazada([1, 2, 3, 4, 5, 6, 7, 8, 9])
+lista.intercambiar_pares()
+lista.imprimir() # imprime 2 1 4 3 6 5 8 7 9
+"""
+class Nodo:
+    def __init__(self, dato, prox=None):
+        self.dato = dato
+        self.prox = prox
+
+class ListaEnlazada:
+    def __init__(self):
+        self.prim = None
+        self.len = 0
+
+    def __str__(self):
+        actual = self.prim
+        lista = []
+        while actual:
+            lista.append(str(actual.dato))
+            actual = actual.prox
+        return " ".join(lista)
+
+    def agregar(self, dato):
+        nodo = Nodo(dato)
+        if not self.prim:
+            self.prim = nodo
+        else:
+            actual = self.prim
+            while actual.prox:
+                actual = actual.prox
+            actual.prox = nodo
+        self.len += 1
+
+    def intercambiar_pares(self):
+        nueva = ListaEnlazada()
+        if self.prim is None:
+            raise ValueError("La lista esta vacia")
+
+        actual = self.prim
+        while actual is not None and actual.prox is not None:
+            nueva.agregar(actual.prox.dato)
+            nueva.agregar(actual.dato)
+            actual = actual.prox.prox
+        if actual is not None:
+             nueva.agregar(actual.dato)
+        return nueva
+
+    def intercambiar2(self):
+        if self.prim is None:
+            raise ValueError("La lista esta vacia")
+
+        actual = self.prim
+        while actual is not None and actual.prox is not None:
+            actual.dato, actual.prox.dato = actual.prox.dato, actual.dato
+            actual = actual.prox.prox
+        return self
 
 
 
+lista = ListaEnlazada()
+lista.agregar(1)
+lista.agregar(2)
+lista.agregar(3)
+lista.agregar(4)
+lista.agregar(5)
+lista.agregar(6)
+lista.agregar(7)
+print(lista)
+print(lista.intercambiar_pares())
+print(lista.intercambiar2())
