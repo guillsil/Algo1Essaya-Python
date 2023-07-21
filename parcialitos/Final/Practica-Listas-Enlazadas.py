@@ -407,6 +407,434 @@ lista.agregar(6)
 print(lista)
 print(lista.chop(1, 3))
 
+"""Multiplicar Nodos Específicos: Implementa el método multiplicar_nodos(x, N) para la clase ListaEnlazada, que modifique la lista
+enlazada de tal forma que los nodos con elementos iguales a x se vean multiplicados por N. No es necesario iterar la lista más de una vez.
+
+Ejemplo:
+l = ListaEnlazada([6, 8, 6, 5, 5])
+l.multiplicar_nodos(6, 3)
+l.imprimir() # imprime 6 -> 6 -> 6 -> 8 -> 6 -> 6 -> 6 -> 5 -> 5 -> 5 -> 5 -> 5
+
+"""
+class Nodo:
+    def __init__(self, dato, prox=None):
+        self.dato = dato
+        self.prox = prox
+
+class ListaEnlazada():
+    def __init__(self):
+        self.prim = None
+        self.len = 0
+
+    def __str__(self):
+        actual = self.prim
+        lista = []
+        while actual:
+            lista.append(str(actual.dato))
+            actual = actual.prox
+        return " ".join(lista)
+
+    def agregar(self, dato):
+        nodo = Nodo(dato)
+        if not self.prim:
+            self.prim = nodo
+        else:
+            actual = self.prim
+            while actual.prox:
+                actual = actual.prox
+            actual.prox = nodo
+        self.len += 1
+
+    def multiplicar_nodos(self, x, n):
+        if self.prim is None:
+            raise Exception("Lista VACIA")
+
+        actual = self.prim
+
+        while actual is not None:
+            if actual.dato == x:
+                for i in range(n-1):
+                    nodo = Nodo(x, actual.prox)
+                    actual.prox = nodo
+                    actual = actual.prox
+            actual = actual.prox
+        return self
+
+
+"""Combinar Listas Ordenadas en Sentido Inverso: Implementa el método combinar_inverso, que reciba otra ListaOrdenada y
+devuelva una nueva ListaOrdenada que contenga los elementos de ambas, pero en sentido inverso. Es decir, el último 
+elemento de la primera lista será el primero de la nueva lista, y viceversa.
+Ejemplo:
+l1 = ListaOrdenada([1, 3, 5, 7, 9])
+l2 = ListaOrdenada([2, 4, 6, 8, 10])
+l3 = l1.combinar_inverso(l2)
+l3.imprimir() # imprime 10 -> 9 -> 8 -> 7 -> 6 -> 5 -> 4 -> 3 -> 2 -> 1"""
+class Nodo:
+    def __init__(self, dato, prox=None):
+        self.dato = dato
+        self.prox = prox
+from pila import Pila
+class ListaEnlazada():
+    def __init__(self):
+        self.prim = None
+        self.len = 0
+
+    def __str__(self):
+        actual = self.prim
+        lista = []
+        while actual:
+            lista.append(str(actual.dato))
+            actual = actual.prox
+        return " ".join(lista)
+
+    def agregar(self, dato):
+        nodo = Nodo(dato)
+        if not self.prim:
+            self.prim = nodo
+        else:
+            actual = self.prim
+            while actual.prox:
+                actual = actual.prox
+            actual.prox = nodo
+        self.len += 1
+
+    def combinar_inverso(self, otro):
+        pila1 = Pila()
+        pila2 = Pila()
+        nueva_lista = ListaEnlazada()
+        actual1 = self.prim
+        actual2 = otro.prim
+
+        while actual1 is not None:
+            pila1.apilar(actual1.dato)
+            actual1 = actual1.prox
+        while actual2 is not None:
+            pila2.apilar(actual2.dato)
+            actual2 = actual2.prox
+
+        while not pila1.esta_vacia() and not pila2.esta_vacia():
+            if pila1.ver_tope() > pila2.ver_tope():
+                nueva_lista.agregar(pila1.desapilar())
+            else:
+                nueva_lista.agregar(pila2.desapilar())
+        while not pila1.esta_vacia():
+            nueva_lista.agregar(pila1.desapilar())
+        while not pila2.esta_vacia():
+            nueva_lista.agregar(pila2.desapilar())
+        return nueva_lista
+
+
+lista = ListaEnlazada()
+lista.agregar(1)
+lista.agregar(2)
+lista.agregar(3)
+lista.agregar(4)
+lista.agregar(5)
+lista.agregar(6)
+print(lista)
+lista2 = ListaEnlazada()
+lista2.agregar(7)
+lista2.agregar(8)
+lista2.agregar(9)
+lista2.agregar(10)
+lista2.agregar(11)
+lista2.agregar(12)
+print(lista2)
+print(lista.combinar_inverso(lista2))
+
+"""Eliminar k-ésimo Elemento: Implementa el método eliminar_kesimo(k) para la clase ListaEnlazada, que elimine el elemento
+que ocupa la posición k (contando desde 0) en la lista.
+
+Ejemplo:
+le = ListaEnlazada([1, 2, 3, 4, 5, 6])
+le.eliminar_kesimo(2)
+# Después de llamar al método, le = 1 -> 2 -> 4 -> 5 -> 6"""
+class Nodo:
+    def __init__(self, dato, prox=None):
+        self.dato = dato
+        self.prox = prox
+
+class ListaEnlazada():
+    def __init__(self):
+        self.prim = None
+        self.len = 0
+
+    def __str__(self):
+        actual = self.prim
+        lista = []
+        while actual:
+            lista.append(str(actual.dato))
+            actual = actual.prox
+        return " ".join(lista)
+
+    def agregar(self, dato):
+        nodo = Nodo(dato)
+        if not self.prim:
+            self.prim = nodo
+        else:
+            actual = self.prim
+            while actual.prox:
+                actual = actual.prox
+            actual.prox = nodo
+        self.len += 1
+    def método_eliminar_kesimo(self, k):
+        if self.prim is None:
+            raise  Exception("lista vacia")
+
+        actual = self.prim
+
+        while actual is not None:
+            if actual.dato == k:
+                actual.dato = actual.prox.dato
+                actual.prox = actual.prox.prox
+            actual = actual.prox
+        return self
+
+
+lista = ListaEnlazada()
+lista.agregar(1)
+lista.agregar(2)
+lista.agregar(3)
+lista.agregar(4)
+lista.agregar(5)
+lista.agregar(6)
+print(lista)
+print(lista.método_eliminar_kesimo(2))
+
+
+"""Particionar Lista: Implementa el método particionar(k) para la clase ListaEnlazada, que particione la lista en k sublistas.
+Cada sublista deberá contener elementos consecutivos de la lista original.
+
+Ejemplo:
+le = ListaEnlazada([1, 2, 3, 4, 5, 6, 7, 8, 9])
+sublistas = le.particionar(3)
+# Debe devolver: [[1, 2, 3], [4, 5, 6], [7, 8, 9]]"""
+class Nodo:
+    def __init__(self, dato, prox=None):
+        self.dato = dato
+        self.prox = prox
+
+class ListaEnlazada():
+    def __init__(self):
+        self.prim = None
+        self.len = 0
+
+    def __str__(self):
+        actual = self.prim
+        lista = []
+        while actual:
+            lista.append(str(actual.dato))
+            actual = actual.prox
+        return " ".join(lista)
+
+    def agregar(self, dato):
+        nodo = Nodo(dato)
+        if not self.prim:
+            self.prim = nodo
+        else:
+            actual = self.prim
+            while actual.prox:
+                actual = actual.prox
+            actual.prox = nodo
+        self.len += 1
+
+    def particionar(self, k):
+        if self.prim is None:
+            raise Exception("La lista esta vacia")
+
+        actual = self.prim
+        nueva_lista = ListaEnlazada()
+        lista = []
+        while actual is not None:
+            for i in range(k-1):
+                lista.append(actual.dato)
+                actual = actual.prox
+                if actual is None:
+                    break
+            nueva_lista.agregar(lista)
+            lista = []
+        return nueva_lista
+
+lista = ListaEnlazada()
+lista.agregar(1)
+lista.agregar(2)
+lista.agregar(3)
+lista.agregar(4)
+lista.agregar(5)
+lista.agregar(6)
+print(lista)
+print(lista.particionar(3))
+
+
+"""Eliminar Repetidos: Implementa el método eliminar_repetidos para la clase ListaEnlazada, que elimine todos los elementos repetidos de la lista.
+
+Ejemplo:
+le = ListaEnlazada([1, 2, 2, 3, 3, 4, 5, 5, 5])
+le.eliminar_repetidos()
+# Después de llamar al método, le = 1 -> 2 -> 3 -> 4 -> 5"""
+
+class Nodo:
+    def __init__(self, dato, prox=None):
+        self.dato = dato
+        self.prox = prox
+
+class ListaEnlazada():
+    def __init__(self):
+        self.prim = None
+        self.len = 0
+
+    def __str__(self):
+        actual = self.prim
+        lista = []
+        while actual:
+            lista.append(str(actual.dato))
+            actual = actual.prox
+        return " ".join(lista)
+
+    def agregar(self, dato):
+        nodo = Nodo(dato)
+        if not self.prim:
+            self.prim = nodo
+        else:
+            actual = self.prim
+            while actual.prox:
+                actual = actual.prox
+            actual.prox = nodo
+        self.len += 1
+
+    def eliminar_repetidos(self):
+        if self.prim is None:
+            raise Exception("La lista esta vacia")
+
+        actual = self.prim
+        while actual is not None and actual.prox is not None:
+            if actual.dato == actual.prox.dato:
+                actual.prox = actual.prox.prox
+            actual = actual.prox
+
+        return self
+
+lista = ListaEnlazada()
+lista.agregar(1)
+lista.agregar(2)
+lista.agregar(2)
+lista.agregar(3)
+lista.agregar(3)
+lista.agregar(4)
+lista.agregar(5)
+lista.agregar(5)
+lista.agregar(5)
+print(lista)
+print(lista.eliminar_repetidos())
+
+
+"""Revertir Nodos: Implementa el método revertir_nodos para la clase ListaEnlazada, que invierta el orden de los nodos en la lista.
+
+Ejemplo:
+le = ListaEnlazada([1, 2, 3, 4, 5])
+le.revertir_nodos()
+# Después de llamar al método, le = 5 -> 4 -> 3 -> 2 -> 1
+"""
+class Nodo:
+    def __init__(self, dato, prox=None):
+        self.dato = dato
+        self.prox = prox
+
+class ListaEnlazada():
+    def __init__(self):
+        self.prim = None
+        self.len = 0
+
+    def __str__(self):
+        actual = self.prim
+        lista = []
+        while actual:
+            lista.append(str(actual.dato))
+            actual = actual.prox
+        return " ".join(lista)
+
+    def agregar(self, dato):
+        nodo = Nodo(dato)
+        if not self.prim:
+            self.prim = nodo
+        else:
+            actual = self.prim
+            while actual.prox:
+                actual = actual.prox
+            actual.prox = nodo
+        self.len += 1
+
+    def revertir_nodos(self):
+        if self.prim is None:
+            raise Exception("La lista esta vacia")
+
+        actual = self.prim
+        pila = Pila()
+
+        while actual is not None:
+            pila.apilar(actual.dato)
+            actual = actual.prox
+
+        while not pila.esta_vacia():
+            self.agregar(pila.desapilar())
+        return self
+
+
+
+"""Particionar Lista en Dos Mitades: Implementa el método particionar_mitades para la clase ListaEnlazada, que particione la
+lista en dos mitades. Si la lista tiene un número impar de elementos, la primera mitad debe contener uno más que la segunda.
+
+Ejemplo:
+le = ListaEnlazada([1, 2, 3, 4, 5, 6])
+mitades = le.particionar_mitades()"""
+class Nodo:
+    def __init__(self, dato, prox=None):
+        self.dato = dato
+        self.prox = prox
+
+class ListaEnlazada():
+    def __init__(self):
+        self.prim = None
+        self.len = 0
+
+    def __str__(self):
+        actual = self.prim
+        lista = []
+        while actual:
+            lista.append(str(actual.dato))
+            actual = actual.prox
+        return " ".join(lista)
+
+    def agregar(self, dato):
+        nodo = Nodo(dato)
+        if not self.prim:
+            self.prim = nodo
+        else:
+            actual = self.prim
+            while actual.prox:
+                actual = actual.prox
+            actual.prox = nodo
+        self.len += 1
+
+    def particionar_mitades(self):
+        if self.prim is None:
+            raise Exception("La lista esta vacia")
+
+        actual = self.prim
+        nueva_lista = ListaEnlazada()
+        lista = []
+        while actual is not None:
+            for i in range(self.len//2):
+                lista.append(actual.dato)
+                actual = actual.prox
+            nueva_lista.agregar(lista)
+            lista = []
+        return nueva_lista
+
+
+
+
+
 
 
 
