@@ -831,6 +831,72 @@ class ListaEnlazada():
             lista = []
         return nueva_lista
 
+"""Contar Apariciones: Implementa el método contar_apariciones(x) para la clase ListaEnlazada, que cuente cuántas veces aparece
+el elemento x en la lista.
+
+Ejemplo:
+le = ListaEnlazada([1, 2, 3, 2, 4, 2, 5])
+count = le.contar_apariciones(2)
+# Debe devolver: 3"""
+class Nodo:
+    def __init__(self, dato, prox=None):
+        self.dato = dato
+        self.prox = prox
+
+class ListaEnlazada():
+    def __init__(self):
+        self.prim = None
+        self.len = 0
+
+    def __str__(self):
+        actual = self.prim
+        lista = []
+        while actual:
+            lista.append(str(actual.dato))
+            actual = actual.prox
+        return " ".join(lista)
+
+    def agregar(self, dato):
+        nodo = Nodo(dato)
+        if not self.prim:
+            self.prim = nodo
+        else:
+            actual = self.prim
+            while actual.prox:
+                actual = actual.prox
+            actual.prox = nodo
+        self.len += 1
+
+    def contar_apariciones(self, x):
+        if self.prim is None:
+            raise Exception("Lista vacia")
+
+        actual = self.prim
+        contador = 0
+        while actual is not None:
+            if actual.dato == x:
+                contador += 1
+            actual = actual.prox
+        return contador
+
+lista = ListaEnlazada()
+lista.agregar(1)
+lista.agregar(2)
+lista.agregar(3)
+lista.agregar(4)
+lista.agregar(5)
+print(lista)
+print(lista.contar_apariciones(2))
+
+"""Concatenar Listas Enlazadas: Implementa un método concatenar para la clase ListaEnlazada, que reciba otra lista enlazada
+y la concatene al final de la lista actual.
+
+Ejemplo:
+lista1 = ListaEnlazada([1, 2, 3])
+lista2 = ListaEnlazada([4, 5, 6])
+lista1.concatenar(lista2)
+# Después de llamar al método, lista1 = 1 -> 2 -> 3 -> 4 -> 5 -> 6"""
+
 
 
 
