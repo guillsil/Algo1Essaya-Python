@@ -896,6 +896,123 @@ lista1 = ListaEnlazada([1, 2, 3])
 lista2 = ListaEnlazada([4, 5, 6])
 lista1.concatenar(lista2)
 # Después de llamar al método, lista1 = 1 -> 2 -> 3 -> 4 -> 5 -> 6"""
+class Nodo:
+    def __init__(self, dato, prox=None):
+        self.dato = dato
+        self.prox = prox
+
+class ListaEnlazada():
+    def __init__(self):
+        self.prim = None
+        self.len = 0
+
+    def __str__(self):
+        actual = self.prim
+        lista = []
+        while actual:
+            lista.append(str(actual.dato))
+            actual = actual.prox
+        return " ".join(lista)
+
+    def agregar(self, dato):
+        nodo = Nodo(dato)
+        if not self.prim:
+            self.prim = nodo
+        else:
+            actual = self.prim
+            while actual.prox:
+                actual = actual.prox
+            actual.prox = nodo
+        self.len += 1
+
+    def concatenar(self, otra):
+        if self.prim is None:
+            return otra
+        if otra.prim is None:
+            return self
+        actual = self.prim
+        while actual.prox is not None:
+            actual = actual.prox
+        actual.prox = otra.prim
+        return self
+
+lista = ListaEnlazada()
+lista.agregar(1)
+lista.agregar(2)
+lista.agregar(3)
+lista.agregar(4)
+lista.agregar(5)
+print(lista)
+lista2 = ListaEnlazada()
+lista2.agregar(6)
+lista2.agregar(7)
+lista2.agregar(8)
+print(lista.concatenar(lista2))
+
+"""Sumar Elementos en Listas Enlazadas: Implementa un método sumar_listas para la clase ListaEnlazada, que reciba otra lista
+enlazada (que se asume de la misma longitud) y devuelva una nueva lista con la suma de los elementos de ambas listas.
+
+Ejemplo:
+lista1 = ListaEnlazada([1, 2, 3])
+lista2 = ListaEnlazada([4, 5, 6])
+resultado = lista1.sumar_listas(lista2)
+# Debe devolver: 5 -> 7 -> 9"""
+class Nodo:
+    def __init__(self, dato, prox=None):
+        self.dato = dato
+        self.prox = prox
+
+class ListaEnlazada():
+    def __init__(self):
+        self.prim = None
+        self.len = 0
+
+    def __str__(self):
+        actual = self.prim
+        lista = []
+        while actual:
+            lista.append(str(actual.dato))
+            actual = actual.prox
+        return " ".join(lista)
+
+    def agregar(self, dato):
+        nodo = Nodo(dato)
+        if not self.prim:
+            self.prim = nodo
+        else:
+            actual = self.prim
+            while actual.prox:
+                actual = actual.prox
+            actual.prox = nodo
+        self.len += 1
+
+    def sumar_listas(self, otra):
+        if self.prim is None:
+            return otra
+        if otra.prim is None:
+            return self
+        actual = self.prim
+        actual2 = otra.prim
+        nueva = ListaEnlazada()
+        while actual is not None:
+            nueva.agregar(actual.dato + actual2.dato)
+            actual = actual.prox
+            actual2 = actual2.prox
+        return nueva
+
+lista = ListaEnlazada()
+lista.agregar(1)
+lista.agregar(2)
+lista.agregar(3)
+lista.agregar(4)
+lista.agregar(5)
+print(lista)
+lista2 = ListaEnlazada()
+lista2.agregar(6)
+lista2.agregar(7)
+lista2.agregar(8)
+print(lista2)
+print(lista.sumar_listas(lista2))
 
 
 
