@@ -9,7 +9,23 @@ diccionario preguntas_categoria. Ejemplo, donde a modo ilustrativo, eI primer el
 del tope:
 preguntas_categona = { "Ciencia": Pila( [CI, C2, C3)), Pila([DI, D2, D3]) }
 pila_preguntas (preguntas _ categoria, ["Deportes", "Ciencia"] )
+pila _ preguntas . 1. Implementar la función mezcla_de_preguntas(preguntas_categoria, orden) que recibe un diccionario con N "mazos" de
+categorías con preguntas para el Preguntados (cada mazo está representado como Pila), y que debe retornar una nueva Pila
+con todas las
+preguntas. alternando 1 pregunta de cada categoría según el orden dado por eI parámetro orden. Las preguntas en el tope de
+ cada mazo deben quedar en eI tope de la Pila resultante. La función debe vaciar todas las pilas del diccionario.
+Se puede asumir que todos los mazos tienen la misma cantidad de preguntas, y que las categorias de orden coinciden con
+ las claves del
+diccionario preguntas_categoria. Ejemplo, donde a modo ilustrativo, eI primer elemento de cada pila vendría a ser eI elemento
+del tope:
+preguntas_categona = { "Ciencia": Pila( [CI, C2, C3)), Pila([DI, D2, D3]) }
+pila_preguntas (preguntas _ categoria, ["Deportes", "Ciencia"] )
 pila _ preguntas . desapilar() "DI:¿Cuánto plata adeuda Independiente?"
+pila _ preguntas . desapilar() "CI: ¿Quién inventó eI Cálculo Lambda?"
+
+pila_preguntas. desapilar() "D2: ¿Cuántas UEFA CL tiene eI Inter Milán?"
+pila_preguntas. desapilar():
+ desapilar() # >> "C2: ¿Cuál es eI número atómico del Neón?desapilar() "DI:¿Cuánto plata adeuda Independiente?"
 pila _ preguntas . desapilar() "CI: ¿Quién inventó eI Cálculo Lambda?"
 
 pila_preguntas. desapilar() "D2: ¿Cuántas UEFA CL tiene eI Inter Milán?"

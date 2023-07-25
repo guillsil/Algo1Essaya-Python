@@ -1014,6 +1014,60 @@ lista2.agregar(8)
 print(lista2)
 print(lista.sumar_listas(lista2))
 
+"""Recorrido Inverso de una Lista Enlazada: Implementa una función recursiva recorrido_inverso(lista_enlazada)
+que reciba una lista enlazada y devuelva una nueva lista con los elementos en orden inverso.
+
+Ejemplo:
+le = ListaEnlazada([1, 2, 3, 4, 5])
+resultado = recorrido_inverso(le)
+# Debe devolver: ListaEnlazada([5, 4, 3, 2, 1])"""
+
+class Nodo:
+    def __init__(self, dato, prox=None):
+        self.dato = dato
+        self.prox = prox
+
+class ListaEnlazada():
+    def __init__(self):
+        self.prim = None
+        self.len = 0
+
+    def __str__(self):
+        actual = self.prim
+        lista = []
+        while actual:
+            lista.append(str(actual.dato))
+            actual = actual.prox
+        return " ".join(lista)
+
+    def agregar(self, dato):
+        nodo = Nodo(dato)
+        if not self.prim:
+            self.prim = nodo
+        else:
+            actual = self.prim
+            while actual.prox:
+                actual = actual.prox
+            actual.prox = nodo
+        self.len += 1
+
+    def recorrido_inverso(self):
+        if self.prim is None:
+            raise Exception("La lista esta vacia")
+
+        actual = self.prim
+        pila = Pila()
+
+        while actual is not None:
+            pila.apilar(actual.dato)
+            actual = actual.prox
+
+        while not pila.esta_vacia():
+            self.agregar(pila.desapilar())
+        return self
+    
+
+
 
 
 
