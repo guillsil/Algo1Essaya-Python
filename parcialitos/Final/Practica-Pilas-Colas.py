@@ -183,3 +183,135 @@ def rotar_cola(cola, k):
     return cola
 
 print(rotar_cola(cola, 2))
+
+"""Combinar Pilas: Implementa una función combinar_pilas(pila1, pila2) que reciba dos pilas y devuelva una nueva pila que contenga los
+elementos de ambas pilas combinados en orden. La primera pila debe ir al tope de la nueva pila."""
+
+def combinar_pilas(pila1, pila2):
+    pila3 = Pila()
+    while not pila1.esta_vacia():
+        pila3.apilar(pila1.desapilar())
+    while not pila2.esta_vacia():
+        pila3.apilar(pila2.desapilar())
+    return pila3
+
+"""Desencolar N Elementos: Implementa una función desencolar_n_elementos(cola, n) que desencole los primeros N elementos de una cola y 
+los devuelva como una nueva cola. Si N es mayor que la cantidad de elementos en la cola, debe devolver todos los elementos de 
+la cola original."""
+def desencolar_n_elementos(cola, n):
+    cola_aux = Cola()
+    len = 0
+    while not cola.esta_vacia():
+        cola_aux.encolar(cola.desencolar())
+        len += 1
+    if n > len:
+        return cola_aux
+
+    for i in range(n):
+        cola.encolar(cola_aux.desencolar())
+    return cola
+cola = Cola()
+cola.encolar(1)
+cola.encolar(2)
+cola.encolar(3)
+cola.encolar(4)
+desencolar_n_elementos(cola, 2)
+print(cola)
+
+"""Pila con Suma Acumulada: Implementa una clase PilaConSuma que tenga los mismos métodos de una pila tradicional (apilar y desapilar),
+pero además tenga un método obtener_suma_acumulada() que devuelva la suma acumulada de todos los elementos en la pila."""
+class PilaConSuma:
+    def __init__(self):
+        self.tope = None
+        self.suma = 0
+
+    def esta_vacia(self):
+        return self.tope is None
+
+    def apilar(self, dato):
+        nodo = _Nodo(dato, self.tope)
+        self.tope = nodo
+        self.suma += dato
+
+    def desapilar(self):
+        if self.esta_vacia():
+            raise ValueError("pila vacía")
+        dato = self.tope.dato
+        self.suma -= dato
+        self.tope = self.tope.prox
+        return dato
+
+    def obtener_suma_acumulada(self):
+        return self.suma
+
+    def ver_tope(self):
+        if self.esta_vacia():
+            raise ValueError("pila vacía")
+        return self.tope.dato
+
+    def __str__(self):
+        cadena = ""
+        nodo = self.tope
+        while nodo is not None:
+            cadena += str(nodo.dato) + ""
+            nodo = nodo.prox
+        return cadena
+
+"""Cola Prioritaria: Implementa una clase ColaPrioritaria que permita encolar elementos con una prioridad asociada. 
+Los elementos con mayor prioridad deben ser desencolados antes que aquellos con menor prioridad. 
+Puedes implementar la clase utilizando dos colas separadas para cada prioridad y alternando entre ellas al encolar."""
+
+class ColaPrioritaria:
+    def __init__(self):
+        self.cola1 = Cola()
+        self.cola2 = Cola()
+
+    def encolar(self, dato, prioridad):
+        if prioridad == 1:
+            self.cola1.encolar(dato)
+        else:
+            self.cola2.encolar(dato)
+
+    def desencolar(self):
+        if not self.cola1.esta_vacia():
+            return self.cola1.desencolar()
+        else:
+            return self.cola2.desencolar()
+
+    def ver_frente(self):
+        if not self.cola1.esta_vacia():
+            return self.cola1.ver_frente()
+        else:
+            return self.cola2.ver_frente()
+
+    def esta_vacia(self):
+        return self.cola1.esta_vacia() and self.cola2.esta_vacia()
+
+    def __str__(self):
+        return str(self.cola1) + str(self.cola2)
+
+cola = ColaPrioritaria()
+cola.encolar(1, 1)
+cola.encolar(2, 1)
+cola.encolar(3, 1)
+cola.encolar(4, 2)
+cola.encolar(5, 2)
+cola.encolar(6, 2)
+print(cola)
+
+"""Cola con Máximo: Implementa una clase ColaConMaximo que tenga los mismos métodos de una cola tradicional
+(encolar y desencolar), pero además tenga un método obtener_maximo() que devuelva el
+elemento máximo presente en la cola."""
+
+class ColaConMaximo:
+    def __init__(self):
+        self.cola = Cola()
+        self.maximo = None
+
+    def encolar(self, dato):
+        self.cola.encolar(dato)
+        if self.maximo is None or dato > self.maximo:
+            self.maximo = dato
+
+"""Pila Ordenada: Implementa una clase PilaOrdenada que acepte elementos en orden y asegure que siempre se mantenga ordenada 
+(por ejemplo, en orden ascendente). Al desapilar elementos, se deben mantener ordenados."""
