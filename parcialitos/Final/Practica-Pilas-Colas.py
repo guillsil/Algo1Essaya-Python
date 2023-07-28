@@ -2,7 +2,7 @@
 #Escribir la clase cola con los metodos encolar, desencolar, esta_vacia y ver_frente
 
 class _Nodo:
-    def __init__(self, dato, prox=None):
+    def __init__(self, dato=None, prox=None):
         self.dato = dato
         self.prox = prox
 
@@ -65,6 +65,8 @@ class Cola:
     '''Representa a una cola, con operaciones de encolar y
        desencolar. El primero en ser encolado es también el primero
        en ser desencolado.'''
+    #tiene que tener un nodo que apunte al frente y otro que apunte al ultimo
+
 
     def __init__(self):
         '''Crea una cola vacía'''
@@ -72,14 +74,16 @@ class Cola:
         self.ultimo = None
 
     def encolar(self, dato):
-        '''Agrega el elemento x como último de la cola.'''
+        #Agrega el elemento x como último de la cola.
+        #si la cola esta vacia, el frente y el ultimo son el mismo nodo
+        #si la cola no esta vacia, el ultimo nodo apunta al nuevo nodo
+        #el nuevo nodo pasa a ser el ultimo
         nodo = _Nodo(dato)
         if self.esta_vacia():
             self.frente = nodo
-        else:
+        if self.ultimo is not None:
             self.ultimo.prox = nodo
         self.ultimo = nodo
-
     def desencolar(self):
         '''Desencola el primer elemento y devuelve su valor
            Pre: la cola NO está vacía.
@@ -315,3 +319,21 @@ class ColaConMaximo:
 
 """Pila Ordenada: Implementa una clase PilaOrdenada que acepte elementos en orden y asegure que siempre se mantenga ordenada 
 (por ejemplo, en orden ascendente). Al desapilar elementos, se deben mantener ordenados."""
+class PilaOrdenada:
+    def __init__(self):
+        self.pila = Pila()
+        self.pila_aux = Pila()
+
+    def apilar(self, dato):
+        while not self.pila.esta_vacia() and self.pila.ver_tope() < dato:
+            self.pila_aux.apilar(self.pila.desapilar())
+        self.pila.apilar(dato)
+        while not self.pila_aux.esta_vacia():
+            self.pila.apilar(self.pila_aux.desapilar())
+
+
+
+
+
+
+
