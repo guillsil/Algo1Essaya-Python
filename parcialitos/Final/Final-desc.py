@@ -48,7 +48,7 @@ class ListaEnlazada:
 ascendente y devuelva una nueva lista enlazada que combine ambas en orden ascendente, sin duplicados.
 """
 
-def combinar_listas_ordenadas(lista1, lista2):
+"""def combinar_listas_ordenadas(lista1, lista2):
      if lista1.prim is None:
         return lista2
     if lista2.prim is None:
@@ -74,7 +74,7 @@ def combinar_listas_ordenadas(lista1, lista2):
         nueva.agregar(actual2.dato)
         actual2 = actual2.prox
     return nueva
-
+"""
 """Recorrer lista en sentido inverso: Implementa una función en la clase ListaEnlazada que recorra la lista
 enlazada de forma recursiva en sentido inverso, es decir, desde el último nodo hasta el primero.
 La función debe imprimir o devolver los valores de los nodos en este orden."""

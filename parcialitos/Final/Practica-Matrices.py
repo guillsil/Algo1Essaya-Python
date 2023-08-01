@@ -183,20 +183,34 @@ def inversa_matriz(matriz):
     return matriz_inversa
 
 def es_ortogonal(matriz):
+    """
+    Escribir una funcion que reciba un número entero n , y devuevlava una matriz triangular superior de dimension n x n,
+    en forma de lista de listas , cuyos elementos no nulos son los números naturales en orden .
+    Por ejemplo: para n = 4 , debe devolver la siguiente matriz:
+    [[1, 2, 3, 4],
+    [0, 5, 6, 7],
+    [0, 0, 8, 9],
+    [0, 0, 0, 10]]
+    """
 
+    def matriz_singular(n):
+        matriz = []
+        fila = []
+        k = 1
+        d = 0
+        for i in range(n):
+            for j in range(n):
+                if j >= d:
+                    fila.append(k)
+                    k += 1
+                else:
+                    fila.append(0)
+            matriz.append(fila)
+            fila = []
+            d += 1
+        return matriz
 
-
-
-"""Multiplicación de matrices cuadradas: Implementa una función multiplicar_matrices_cuadradas(matriz1, matriz2)
-que reciba dos matrices cuadradas del mismo tamaño y devuelva una nueva matriz que sea el resultado de multiplicarlas.
-Esta multiplicación se realiza multiplicando los elementos de cada fila de la primera matriz por los elementos
-correspondientes de cada columna de la segunda matriz y sumando los productos.
-Ejemplo:
-matriz1 = [[1, 2], [3, 4]]
-matriz2 = [[5, 6], [7, 8]]
-resultado = multiplicar_matrices_cuadradas(matriz1, matriz2)
-# Debe devolver: [[19, 22], [43, 50]]"""
-
+    print(matriz_singular(4))
 
 
 

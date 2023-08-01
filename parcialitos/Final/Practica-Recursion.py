@@ -219,4 +219,77 @@ def generar_subconjuntos(lista):
         nuevos_subconjuntos = [conjunto + [lista[-1]] for conjunto in subconjuntos_anteriores]
         return subconjuntos_anteriores + nuevos_subconjuntos
 
+"""
+Escribir en forma recursiva la función filtrar(cola, f) que recibe una cola y una funcion , y devuelve una nueva cola 
+que contiene los elemenetos para los cuales los elementos de f devuelve True. La cola recibida debe quedar 
+vacía al finalizar la ejecucion . Ejemplo:
+>>> filtrar(Cola([1, 2, 3, 4, 5]), es_par) -> Cola([2, 4])
+"""
+#Iterativo
+from cola import Cola
+def filtrar(cola, f):
+    cola_nueva = Cola()
+    while not cola.esta_vacia():
+        dato = cola.desencolar()
+        if f(dato):
+            cola_nueva.encolar(dato)
+    return cola_nueva
+
+#Recursivo
+def filtrar2(cola, f):
+    if cola.esta_vacia():
+        return cola
+    dato = cola.desencolar()
+    cola_filtrada = filtrar2(cola, f)
+    if f(dato):
+        cola_filtrada.encolar(dato)
+    return cola_filtrada
+
+
+cola = Cola()
+cola.encolar(1)
+cola.encolar(2)
+cola.encolar(3)
+cola.encolar(4)
+cola.encolar(5)
+print(filtrar2(cola, lambda x: x % 2 == 0))
+from pila import Pila
+"""
+Escribir en forma recursiva una función filtrar_lista(lista, f) que reciba una lista y una función f, y devuelva 
+una nueva lista que contenga los elementos para los cuales la función f devuelve True.
+"""
+def filtrar_listas(lista, f):
+    if len(lista) == 0:
+        return []
+    if f(lista[0]):
+        return [lista[0]] + filtrar_listas(lista[1:], f)
+    else:
+        return filtrar_listas(lista[1:], f)
+
+"""Filtrar una ListaEnlazada usando una función:
+Escribir en forma recursiva una función filtrar_lista_enlazada(lista_enlazada, f) que reciba una lista enlazada y 
+una función f, y devuelva una nueva lista enlazada que contenga los elementos para los cuales la función f devuelve True.
+La lista enlazada original debe quedar vacía al finalizar la ejecución."""
+from lista_enlazada import ListaEnlazada
+#iterativo
+def filtrar_lista_enlazada(lista, f):
+    if lista.prim is None:
+        raise ValueError("Lista Vacia")
+    actual = lista.prim
+    nueva_lista = ListaEnlazada
+    while actual is not None:
+        if f(actual.dato):
+            nueva_lista.agregar(actual.dato)
+        actual = actual.prox
+
+    return nueva_lista
+
+lista = ListaEnlazada()
+lista.agregar(1)
+lista.agregar(2)
+lista.agregar(3)
+lista.agregar(4)
+lista.agregar(5)
+print(filtrar_lista_enlazada(lista, lambda x: x % 2 == 0))
+
 
