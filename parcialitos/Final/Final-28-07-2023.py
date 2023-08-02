@@ -1,4 +1,5 @@
 """
+1
 a)
 Implementar la clase TrianguloRectangulo, con los siguientes métodos:
 • init que crea un triángulo rectángulo a partir de la longitud de sus catetos
@@ -56,6 +57,7 @@ tris = Triangulos([tri1, tri2, tri3])
 print(tris.sort())
 
 """
+2
 Escribir una funcion que reciba un número entero n , y devuevlava una matriz triangular superior de dimension n x n,
 en forma de lista de listas , cuyos elementos no nulos son los números naturales en orden .
 Por ejemplo: para n = 4 , debe devolver la siguiente matriz:
@@ -83,6 +85,7 @@ def matriz_singular(n):
 print(matriz_singular(4))
 
 """
+3
 Escribir en forma recursiva la función filtrar(cola, f) que recibe una cola y una funcion , y devuelve una nueva cola 
 que contiene los elemenetos para los cuales los elementos de f devuelve True. La cola recibida debe quedar 
 vacía al finalizar la ejecucion . Ejemplo:
@@ -119,6 +122,7 @@ print(filtrar2(cola, lambda x: x % 2 == 0))
 
 
 """
+4
 Implementar el método de ListaEnlazada partir(n) que devuelve una nueva ListaEnlazada , de forma tal que la lista original 
 quede con sus primeros n elementos , y la lista nueva con los elementos restantes . Ejemplo:
 >>> lista = ListaEnlazada([1, 2, 3, 4, 5])
@@ -157,7 +161,58 @@ class ListaEnlazada:
             actual.prox = nodo
         self.len += 1
 
+    def partir(self, n):
+        if self.prim is None:
+            raise ValueError("Lista Vacia")
+        nueva_lista = ListaEnlazada()
+        actual = self.prim
+        for i in range(n-1):
+            actual = actual.prox
+        nueva_lista.prim = actual.prox
+        actual.prox = None
+        return nueva_lista
 
+lista = ListaEnlazada()
+lista.agregar(1)
+lista.agregar(2)
+lista.agregar(3)
+lista.agregar(4)
+lista.agregar(5)
+print(lista)
+lista2 = lista.partir(3)
+print(lista)
+print(lista2)
 
+"""
+5
+El algoritmo de compresión RLE (Run Length Encoding) funciona reemplazando secuencias del mismo simbolo consecutivo por
+el simbolo y la cantidad de ocurrencias . Por ejemplo, al comprimir la cadena "aaaabcccaaa" se obtiene "4a1b3c3a".
+a) Implementar la funcion comprimir(cadena) que recibe una cadena y la comprima mediante el algoritmo RLE.
+b) Implementar la funcion comprimir_archivo(entrada, salida) que recibe el nombre de un archivo de texto de entrada y
+el nombre de un archivo de texto de salida, y comprime el archivo de entrada en el archivo de salida. 
+"""
+def comprimir(cadena):
+    if len(cadena) == 0:
+        return ""
+    cantidad = 0
+    caracter = cadena[0]
+    for i in range(len(cadena)):
+        if cadena[i] == caracter:
+            cantidad += 1
+        else:
+            break
+    return str(cantidad) + caracter + comprimir(cadena[cantidad:])
 
+print(comprimir("aaaabcccaaa"))
+
+def comprimir_archivo(entrada, salida):
+    try:
+        with open(entrada, "r") as archivo, open(salida, "w") as archivo_salida:
+            for linea in archivo:
+                if len(linea) == 0:
+                    raise ValueError("El archivo esta vacio")
+
+                archivo_salida.write(comprimir(linea))
+    except FileNotFoundError:
+        print("El archivo no existe")
 
