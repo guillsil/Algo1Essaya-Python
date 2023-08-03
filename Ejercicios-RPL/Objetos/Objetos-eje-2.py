@@ -22,7 +22,7 @@ Un ejemplo del comportamiento:
 import math
 class Fraccion:
     '''
-    Clase para representar una fraccion entre dos numeros
+    Apuntes -Clase para representar una fraccion entre dos numeros
     '''
 
     def __init__(self, num, den):

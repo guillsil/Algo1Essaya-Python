@@ -56,9 +56,9 @@ def juego_mostrar(juegos):
     for i in range(MAX_ANCHO):
         for j in range(MAX_ALTO):
             if juego[i, j] == JUGADOR_1:
-                gamelib.draw_text(JUGADOR_1, i * 30 + 15, j * 30 + 15, fill='#080F28',size=15)
+                gamelib.draw_text(JUGADOR_1, i * 30 + 15, j * 30 + 15, fill='#080F28', size=15)
             elif juego[i, j] == JUGADOR_2:
-                gamelib.draw_text(JUGADOR_2, i * 30 + 15, j * 30 + 15, fill='#080F28',size=15)
+                gamelib.draw_text(JUGADOR_2, i * 30 + 15, j * 30 + 15, fill='#080F28', size=15)
 
     #Mostrar de quién es el turno
     gamelib.draw_text("Turno de: " + turno, 150, 330, fill='#dda90e', size=20)

@@ -10,7 +10,7 @@ NORTE = (0, -1)
 SUR = (0, 1)
 
 class JuegoMover:
-    """Clase para controlar las acciones del juego"""
+    """Apuntes -Clase para controlar las acciones del juego"""
     def __init__(self, grilla, tecla, nivel):
         self.grilla = grilla
         self.tecla = tecla
