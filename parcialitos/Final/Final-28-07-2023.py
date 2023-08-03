@@ -1,7 +1,4 @@
-"""
-1
-a)
-Implementar la clase TrianguloRectangulo, con los siguientes métodos:
+""""
 • init que crea un triángulo rectángulo a partir de la longitud de sus catetos
 Debe lanzar una excepción si alguno de los catetos es negativo.
 • perimetro que calcula el perímetro del triángulo.

@@ -9,25 +9,24 @@ def seleccion_sort(lista):
 
         
 # Ejemplo de uso
-lista = [64, 25, 12, 22, 11]
+lista = [64, 25, 12, 22, 11, 10, 33, 5, 6, 8, 12 , 4, 1, 7, 21]
 seleccion_sort(lista)
-print(lista)
+print("Ordenamiento por seleccion: ", lista)
 
 #oredenamiento por insercion
 
 def ordenamiento_por_insercion(lista):
     for i in range(1, len(lista)):
         valor_actual = lista[i]
-        posicion = i
-        while posicion > 0 and lista[posicion - 1] > valor_actual:
-            lista[posicion] = lista[posicion - 1]
-            posicion -= 1
-        lista[posicion] = valor_actual
-
+        j = i - 1
+        while j >= 0 and lista[j] > valor_actual:
+            lista[j + 1] = lista[j]
+            j -= 1
+        lista[j + 1] = valor_actual
 # Ejemplo de uso
 lista = [5, 2, 4, 6, 1, 3, 10]
 ordenamiento_por_insercion(lista)
-print(lista)
+print("Ordenamiento por Insercion: ", lista)
 
 #ordenamiento merge sort
 def merge_sort(lista):
@@ -62,20 +61,25 @@ def merge(lista1, lista2):
 # Ejemplo de uso
 lista = [5, 2, 4, 6, 1, 3, 10]
 lista_ordenada = merge_sort(lista)
-print(lista_ordenada)
+print("Ordenamiento por Merge-SOrt: ",lista_ordenada)
 
 #ordenamiento quick sort
 def quicksort(lista):
     if len(lista) < 2:
         return lista
     pivote = lista[0]
-    menores = [x for x in lista[1:] if x <= pivote]
-    mayores = [x for x in lista[1:] if x > pivote]
-
+    menores = []
+    mayores = []
+    for x in lista[1:]:
+        if x <= pivote:
+            menores.append(x)
+        else:
+            mayores.append(x)
     menores_ordenados = quicksort(menores)
     mayores_ordenados = quicksort(mayores)
 
     return menores_ordenados + [pivote] + mayores_ordenados
 
-print([2, 3, 4, 7, 1, 2, 5 , 6, 8, 9, 10, 11, 12, 13, 14, 15, 16])
-print(quicksort([2, 3, 4, 7, 1, 2, 5 , 6, 8, 9, 10, 11, 12, 13, 14, 15, 16]))
+lista = [5, 2, 4, 6, 1, 3, 10]
+lista_ordenada = quicksort(lista)
+print("Ordenamiento por Quick-SOrt: ",lista_ordenada)

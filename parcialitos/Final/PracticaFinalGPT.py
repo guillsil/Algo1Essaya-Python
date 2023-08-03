@@ -79,10 +79,134 @@ conteo_vocales = contar_vocales_frase(frase)
 
 
 
-"""La ciberseguridad es un tema de suma importancia en la actualidad. Implementar la función validar_contrasena
-(contrasena) que reciba una contraseña y utilice técnicas de inteligencia artificial para verificar su 
-fortaleza. La función debe evaluar la contraseña en función de su longitud, uso de caracteres especiales, 
-combinación de letras mayúsculas y minúsculas, y otros criterios. Devolver un valor de verdad que indique si 
-la contraseña es considerada segura o no."""
+"""a) Implementar la clase Rectangulo, con los siguientes métodos:
+
+    __init__(self, base, altura): Crea un rectángulo a partir de la longitud de su base y altura.
+Debe lanzar una excepción si alguno de los valores es negativo.
+    perimetro(self): Calcula el perímetro del rectángulo.
+    area(self): Calcula el área del rectángulo.
+
+b) Implementar el o los métodos necesarios para que al ordenar una lista de rectángulos, se 
+ordene automáticamente por sus respectivas áreas. Es decir, para que el siguiente ejemplo funcione:
+rectangulos = [
+    Rectangulo(3, 4),
+    Rectangulo(1, 2),
+    Rectangulo(5, 6),
+]
+rectangulos.sort()  # Ordena por área
+print(rectangulos)  # Muestra el resultado
+# Salida: [Rectangulo(1, 2), Rectangulo(3, 4), Rectangulo(5, 6)]
+"""
+class Rectangulo:
+    def __init__(self, base , altura):
+        if base < 0 or altura < 0:
+            raise ValueError("Valores ingresados son incorrectos")
+        self.base = base
+        self.altura = altura
+
+    def perimetro(self):
+        return 2*(self.altura + self.base)
+
+    def area(self):
+        return self.base * self.altura
+
+    def __str__(self):
+        return f"Rectangulo({self.base}, {self.altura})"
+class Rectangulos:
+    def __init__(self):
+        self.rectangulos = []
+
+    def agregar_rectangulo(self, rectangulo):
+        self.rectangulos.append(rectangulo)
+
+    def __str__(self):
+        return str(self.rectangulos)
+
+    def sort(self):
+        ordenada = sorted(self.rectangulos, key=lambda x: x.area())
+        return ordenada
+
+
+
+rectangulo1 = Rectangulo(3, 4)
+rectangulo2 = Rectangulo(1, 2)
+rectangulo3 = Rectangulo(5, 6)
+rectangulos = Rectangulos()
+rectangulos.agregar_rectangulo(rectangulo1)
+rectangulos.agregar_rectangulo(rectangulo2)
+rectangulos.agregar_rectangulo(rectangulo3)
+rectangulos = rectangulos.sort()
+for i in rectangulos:
+    print(i)
+
+"""Escribir una función crear_matriz_triangular(n) que reciba un número entero n y devuelva una matriz triangular inferior de dimensión n x n,
+en forma de lista de listas, cuyos elementos no nulos son los números naturales en orden. Por ejemplo, para n = 4,
+debe devolver la siguiente matriz:
+[[1, 0, 0, 0],
+ [2, 3, 0, 0],
+ [4, 5, 6, 0],
+ [7, 8, 9, 10]]
+"""
+def crear_matriz_triangular(n):
+    matriz = []
+    fila = []
+    contador = 1
+    k = 0
+    for i in range(n):
+        for j in range(n):
+            if j <= k:
+                fila.append(contador)
+                contador += 1
+            else:
+                fila.append(0)
+        k += 1
+        matriz.append(fila)
+        fila = []
+    return  matriz
+
+print(crear_matriz_triangular(4))
+
+"""Escribir en forma recursiva la función filtrar(cola, funcion) que recibe una cola y una función, y devuelve una nueva cola que contiene
+los elementos para los cuales los elementos de la función devuelven True. La cola recibida debe quedar vacía al finalizar la ejecución.
+Ejemplo:
+cola = Cola([1, 2, 3, 4, 5])
+filtrar(cola, es_par)  # Resultado: Cola([2, 4])
+"""
+#iteratuv0
+from cola import Cola
+def filtrar(cola, funcion):
+    if cola.esta_vacia():
+        raise ValueError("Cola Vacia")
+    nueva_cola = Cola()
+    while not cola.esta_vacia:
+        dato = cola.desencolar()
+        if funcion(dato):
+            nueva_cola.encolar(dato)
+
+    return nueva_cola
+
+#recursivo
+def filtrar2(cola, f):
+    if cola.esta_vacia():
+        return cola
+    dato = cola.desencolar()
+    cola_filtrada = filtrar2(cola, f)
+    if f(dato):
+        cola_filtrada.encolar(dato)
+    return cola_filtrada
+
+cola = Cola()
+cola.encolar(1)
+cola.encolar(2)
+cola.encolar(3)
+cola.encolar(4)
+cola.encolar(5)
+print(cola)
+filtrar2(cola, lambda x: x % 2 == 0)
+print(cola)
+
+"""
+
+"""
 
 

@@ -1,55 +1,53 @@
-class _Nodo:
-    def __init__(self, dato, prox=None):
+class Nodo:
+    def __init__(self, dato):
         self.dato = dato
-        self.prox = prox
-class Cola:
-    '''Representa a una cola, con operaciones de encolar y 
-       desencolar. El primero en ser encolado es también el primero
-       en ser desencolado.'''
+        self.siguiente = None
 
+class Cola:
     def __init__(self):
-        '''Crea una cola vacía'''
-        self.frente = None
+        self.primero = None
         self.ultimo = None
 
+    def esta_vacia(self):
+        return self.primero is None
+
     def encolar(self, dato):
-        '''Agrega el elemento x como último de la cola.'''
-        nodo = _Nodo(dato)
-        if self.esta_vacia():
-            self.frente = nodo
+        nuevo_nodo = Nodo(dato)
+        if self.ultimo is None:
+            self.primero = nuevo_nodo
+            self.ultimo = nuevo_nodo
         else:
-            self.ultimo.prox = nodo
-        self.ultimo = nodo
+            self.ultimo.siguiente = nuevo_nodo
+            self.ultimo = nuevo_nodo
 
     def desencolar(self):
-        '''Desencola el primer elemento y devuelve su valor
-           Pre: la cola NO está vacía.
-           Pos: el nuevo frente es el que estaba siguiente al frente anterior'''
         if self.esta_vacia():
-            raise ValueError("Cola vacía")
-        dato = self.frente.dato
-        self.frente = self.frente.prox
-        if self.frente is None:
+            raise ValueError("La cola está vacía")
+        dato = self.primero.dato
+        self.primero = self.primero.siguiente
+        if self.primero is None:
             self.ultimo = None
         return dato
 
-    def ver_frente(self):
-        '''Devuelve el elemento que está en el frente de la cola.
-           Pre: la cola NO está vacía.'''
-        if self.esta_vacia():
-            raise ValueError("Cola vacía")
-        return self.frente.dato
-
-    def esta_vacia(self):
-        '''Devuelve True o False según si la cola está vacía o no'''
-        return self.frente is None
     def __str__(self):
-        '''Devuelve el contenido de la cola como una cadena'''
         s = ""
-        nodo = self.frente
+        nodo = self.primero
         while nodo is not None:
             s += str(nodo.dato) + " "
-            nodo = nodo.prox
+            nodo = nodo.siguiente
         return s
 
+# Ejemplo de uso
+cola = Cola()
+cola.encolar(1)
+cola.encolar(2)
+cola.encolar(3)
+print(cola)
+
+print(cola.desencolar())  # Salida: 1
+print(cola.desencolar())  # Salida: 2
+print(cola.esta_vacia())  # Salida: False
+print(cola.desencolar())  # Salida: 3
+print(cola.esta_vacia())  # Salida: True
+print(cola)
 
