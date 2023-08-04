@@ -6,6 +6,14 @@ valor 4 0 el 11. Implementar la función puede _ sumar (numeros:      list(intl,
 puede_sumar((l, 5, 7, 21, 7) True
 puede_sumar((l, 5, 7, 2), 11) False
 Ayuda: pensar la función en forma recursiva."""
+def puede_sumar(numeros, objetivo):
+    if objetivo == 0:
+        return True
+    if len(numeros) == 0:
+        return False
+
+    # Toma el primer número y verifica si se puede alcanzar el objetivo incluyendo o excluyendo ese número
+    return puede_sumar(numeros[1:], objetivo) or puede_sumar(numeros[1:], objetivo - numeros[0])
 
 #iterativo
 def puede_sumar(numeros, objetivo):
