@@ -96,3 +96,7 @@ comprimir y guarda el resultado
 en el archivo de salida.
  Asegúrate de manejar adecuadamente las excepciones y casos de error, como
 la falta de los archivos especificados."""
+def comprimir(cadena):
+    cadena_comprimida = ""
+    contador = 1
+    for i in range(len(cadena)):

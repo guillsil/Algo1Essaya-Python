@@ -7,7 +7,13 @@ b)
 Implementar el o los metodos necesarios para que al ordenar una lista de triangulos , se ordene
 automaticamente por sus respectivas areas. Es decir , para que el siguienete ejemplo funcione:
 >> tris = [
-TrianguloRectangulo(3, 4),
+TrianguloRectangulo(3, 4),    def __str__(self):
+        actual = self.prim
+        lista = []
+        while actual:
+            lista.append(str(actual.dato))
+            actual = actual.prox
+        return " ".join(lista)
 TrianguloRectangulo(1, 2),
 TrianguloRectangulo(5, 6),]
 >> tris.sort() # Ordena por area

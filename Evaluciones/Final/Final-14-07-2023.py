@@ -21,9 +21,9 @@ print(puede_sumar([1, 5, 7, 2], 11))
 def puede_sumar(numeros, objetivo):
     if len(numeros) == 0:
         return False
-    if numeros[0] == objetivo:
+    if objetivo == 0:
         return True
-    return puede_sumar(numeros[1:], objetivo) or puede_sumar(numeros[1:], objetivo - numeros[0])
+    return puede_sumar(numeros[1:], objetivo - numeros[0]) or puede_sumar(numeros[1:], objetivo)
 print(puede_sumar([1, 5, 7, 2], 7))
 print(puede_sumar([1, 5, 7, 2], 11))
 
@@ -66,11 +66,11 @@ def pascal(n):
         lista.append([])
         lista[i].append(1)
         for j in range(1, i):
-            lista[i].append(lista[i-1][j-1] + lista[i-1][j])
-        if(n != 0):
+            lista[i].append(lista[i - 1][j - 1] + lista[i - 1][j])
+        if n != 0:
             lista[i].append(1)
     return lista
-print(pascal(4))
+print(pascal(5))
 
 """4. Sea un archivo CSV que contiene el historial de tráfico de un sitio web, medido en cantidad de
 usuarios conectados, con el formato año, mes , día, cant_min, cant_media,cant_max (por ejemplo

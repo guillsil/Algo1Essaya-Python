@@ -11,60 +11,68 @@ class Nodo:
     # Recibe un dato y el nodo siguiente.
     def __init__(self, dato):
         self.dato = dato
-        self.siguiente = None
+        self.prox = None
  
 class ListaOrdenada:
     def __init__(self):
-        self.primero = None
-        self.ultimo = None
+        self.prim = None
+        self.len = 0
+
+    def __str__(self):
+        actual = self.prim
+        lista = []
+        while actual:
+            lista.append(str(actual.dato))
+            actual = actual.prox
+        return " ".join(lista)
     def agregar(self, dato):
-        if self.primero is None:
-            self.primero = Nodo(dato)
-            self.ultimo = self.primero
+        nodo = Nodo(dato)
+        if not self.prim:
+            self.prim = nodo
         else:
-            # Si el dato es menor al primero, lo insertamos antes del primero
-            if dato < self.primero.dato:
-                self.primero = Nodo(dato, self.primero)
-            # Si el dato es mayor al último, lo insertamos después del último
-            elif dato > self.ultimo.dato:
-                self.ultimo.siguiente = Nodo(dato)
-                self.ultimo = self.ultimo.siguiente
-            # Si no, lo insertamos en el medio
-            else:
-                actual = self.primero
-                while actual.siguiente is not None and actual.siguiente.dato < dato:
-                    actual = actual.siguiente
-                actual.siguiente = Nodo(dato, actual.siguiente)
+            actual = self.prim
+            while actual.prox:
+                actual = actual.prox
+            actual.prox = nodo
+        self.len += 1
 
     def combinar(self, otra_lista):
+        """Ordena los elementos de ambas listas y los combina en una nueva lista ordenada."""
         nueva_lista = ListaOrdenada()
-        nodo_actual = self.primero
-        nodo_otra_lista = otra_lista.primero
-        # Si alguna de las listas está vacía, devolvemos la otra lista
-        if nodo_actual is None:
-            return otra_lista
-        elif nodo_otra_lista is None:
-            return self
-        # Si ninguna de las listas está vacía, recorremos ambas al mismo tiempo
-        while nodo_actual is not None and nodo_otra_lista is not None:
-            if nodo_actual.dato < nodo_otra_lista.dato:
-                nueva_lista.agregar(nodo_actual.dato)
-                nodo_actual = nodo_actual.siguiente
+        actual = self.prim
+        actual_otra = otra_lista.prim
+        while actual is not None and actual_otra is not None:
+            if actual.dato < actual_otra.dato:
+                nueva_lista.agregar(actual.dato)
+                actual = actual.prox
             else:
-                nueva_lista.agregar(nodo_otra_lista.dato)
-                nodo_otra_lista = nodo_otra_lista.siguiente
-        # Si quedaron elementos en la primera lista, los agregamos
-        while nodo_actual is not None:
-            nueva_lista.agregar(nodo_actual.dato)
-            nodo_actual = nodo_actual.siguiente
-        # Si quedaron elementos en la segunda lista, los agregamos
-        while nodo_otra_lista is not None:
-            nueva_lista.agregar(nodo_otra_lista.dato)
-            nodo_otra_lista = nodo_otra_lista.siguiente
+                nueva_lista.agregar(actual_otra.dato)
+                actual_otra = actual_otra.prox
+        while actual is not None:
+            nueva_lista.agregar(actual.dato)
+            actual = actual.prox
+        while actual_otra is not None:
+            nueva_lista.agregar(actual_otra.dato)
+            actual_otra = actual_otra.prox
+
         return nueva_lista
 
+lista1 = ListaOrdenada()
+lista1.agregar(1)
+lista1.agregar(3)
+lista1.agregar(5)
+print(lista1)
+lista2 = ListaOrdenada()
+lista2.agregar(2)
+lista2.agregar(4)
+lista2.agregar(6)
+print(lista2)
+print(lista1.combinar(lista2))
+
+
 """
-2) Escribir una funcion que recibe una lista de denominadores de billetes D y un precio p, y devuelve un diccionario denominacion :n indicando cuantos billetes se necesitan de cada denominacion para cubrir el precio
+2) Escribir una funcion que recibe una lista de denominadores de billetes D y un precio p, y devuelve un diccionario
+denominacion :n indicando cuantos billetes se necesitan de cada denominacion para cubrir el precio
 p(de forma tal de utilizar la menor cantidad de billetes posible).
 Asumir que la lista D esta ordenada de menor a mayor y no tiene elemetos duplicados. El algoritmo a 
 implementar debe tomar la mayor cantidad posible de la primera denominacion luego la mayor cantidad posible de

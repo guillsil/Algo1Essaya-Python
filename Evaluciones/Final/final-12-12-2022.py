@@ -4,8 +4,10 @@ Escribir una función que reciba una lista de intervalos ordenados por el valor 
 una lista en la que los intervalos superpuestos hayan sido combinados. Por ejemplo, los inter-
 valos (1, 4) y (3, 5) se combinan obteniendo (1, 5). Si el fin y el inicio de dos intervalos son
 exactamente iguales, se considera que son superpuestos.
-Ejemplo: combinar_intervalos([(1,5), (2,3), (4,6), (7h,8), (8,10), (12,15)]) ➡ [(1,6),
-(7,10), (12,15)]"""
+Ejemplo: combinar_intervalos([(1,5), (2,3), (4,6), (7,8), (8,10), (12,15)]) ➡ [(1,6),(7,10), (12,15)]
+
+Recomendación: pensar la función en forma recursiva.
+"""
 def combinar_intervalos(intervalos):
     """Recibe una lista de intervalos ordenados por el valor de a y devuelve una lista en la que los intervalos superpuestos hayan sido combinados."""
     if len(intervalos) == 1:
@@ -37,8 +39,11 @@ def es_palabras(contrasenia, palabras):
             contrasenia = contrasenia.replace(palabra, '')
     return contrasenia == ''
 
+diccionario = {"a": 1, "b": 2, "c": 3}
+print(diccionario.get("a", 0))
 
 print(es_palabras('agua', palabras))
+print(diccionario.keys())
 
 #recursiva
 def es_palabras(contrasenia, palabras):
@@ -121,9 +126,9 @@ class Pila():
         self.len = 0
 
     def apilar(self, dato):
-        nodo = Nodo(dato, self.tope)
-        self.tope = nodo
-        self.len += 1    
+        self.tope = Nodo(dato, self.tope)
+        self.len += 1
+
 
     def esta_vacia(self):
         return self.tope is None
@@ -142,12 +147,13 @@ class Pila():
         return self.tope.dato
     
     def __str__(self):
-        nodo = self.tope
-        resultado = []
-        while nodo:
-            resultado.append(nodo.dato)
-            nodo = nodo.prox
-        return str(resultado)
+        actual = self.tope
+        lista = []
+        while actual is not None:
+            lista.append(actual.dato)
+            actual = actual.prox
+        return str(lista)
+
     
 pila = Pila()
 pila.apilar(1)
@@ -184,7 +190,7 @@ class Cola():
             self.ultimo = None
         return dato
     
-    
+    def __str__(self)
 
 
 

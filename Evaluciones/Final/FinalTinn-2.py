@@ -105,7 +105,7 @@ def merge_sort(lista):
 def merge(lista1, lista2):
     i, j = 0, 0
     resultado = []
-    while i < len(lista1) and j < len(lista2):
+    while i < len(lista1) and j < len(lista2):e
         if lista1[i] < lista2[j]:
             resultado.append(lista1[i])
             i += 1
