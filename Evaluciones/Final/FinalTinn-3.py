@@ -36,14 +36,63 @@ def obtener_pomedio(matriz):
 
 #b
 def matriz_transpuesta(matriz):
-    matriz_n = []
-    fila_n = []
+    matriz_nueva = []
+    fila = []
     for i in range(len(matriz)):
         for j in range(len(matriz)):
-            fila_n.append(matriz[j][i])
-        matriz_n.append(fila_n)
-        fila_n = []
-    return matriz_n
+            fila.append(matriz[j][i])
+        matriz_nueva.append(fila)
+        fila = []
+    return matriz_nueva
 
-matriz = [[1,2,3],[4,5,6],[7,8,9]]
-print(obtener_pomedio(matriz))
+"""2. Escribe una función llamada
+filtrar(cola, f) que reciba una cola y una función como
+parámetros, y devuelva una nueva cola que contenga los elementos para los cuales la
+función
+f devuelve
+True. La cola original recibida debe quedar vacía al finalizar la
+ejecución."""
+from cola import Cola
+#iterativo
+def filtrar(cola, f):
+    cola_aux = Cola()
+    while not cola.esta_vacia():
+        dato = cola.desencolar()
+        if f(dato):
+            cola_aux.encolar(dato)
+        else:
+            cola.desencolar
+    return cola_aux
+#recursivo
+def filtrar2(cola, f):
+    if cola.esta_vacia():
+        return cola
+    dato = cola.desencolar()
+    if f(dato):
+        cola_filtrada = filtrar2(cola, f)
+        cola_filtrada.encolar(dato)
+    else:
+        cola_filtrada = filtrar2(cola, f)
+    return cola_filtrada
+
+
+"""4. Resuelve el siguiente ejercicio de compresión y cadena: (1.5p)
+a. Implementar la función
+comprimir(cadena) que reciba una cadena y la comprima
+mediante el algoritmo RLE.
+b. Implementar la función
+comprimir_archivo(entrada, salida) que reciba el nombre de
+un archivo de texto de entrada y el nombre de un archivo de texto de salida, y comprima
+el contenido del archivo de entrada utilizando el algoritmo RLE, guardando el resultado
+en el archivo de salida.
+Consideraciones:
+ En el apartado (a), la función
+comprimir recorre la cadena y va contando las
+ocurrencias consecutivas de cada carácter para crear la cadena comprimida.
+ En el apartado (b), la función
+comprimir_archivo lee el contenido del archivo
+de entrada, lo comprime utilizando la función
+comprimir y guarda el resultado
+en el archivo de salida.
+ Asegúrate de manejar adecuadamente las excepciones y casos de error, como
+la falta de los archivos especificados."""
