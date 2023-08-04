@@ -152,21 +152,21 @@ def juego_mostrar(grilla):
     for i in range(tamanio[COL]):
         for j in range(tamanio[FIL]):
             if hay_pared(grilla, i, j):
-                gamelib.draw_image("img/ground.gif", GROSOR_CELDA * i, GROSOR_CELDA* j)
-                gamelib.draw_image("img/wall.gif",GROSOR_CELDA*i,GROSOR_CELDA*j)
+                gamelib.draw_image("img/ground.gif", GROSOR_CELDA * i, GROSOR_CELDA * j)
+                gamelib.draw_image("img/wall.gif", GROSOR_CELDA * i, GROSOR_CELDA * j)
             elif hay_caja(grilla, i, j):
-                gamelib.draw_image("img/ground.gif",GROSOR_CELDA*i,GROSOR_CELDA*j)
-                gamelib.draw_image("img/box.gif",GROSOR_CELDA*i,GROSOR_CELDA*j)
+                gamelib.draw_image("img/ground.gif", GROSOR_CELDA * i, GROSOR_CELDA * j)
+                gamelib.draw_image("img/box.gif", GROSOR_CELDA * i, GROSOR_CELDA * j)
             elif hay_objetivo(grilla, i, j):
-                gamelib.draw_image("img/ground.gif",GROSOR_CELDA*i,GROSOR_CELDA*j)
-                gamelib.draw_image("img/goal.gif",GROSOR_CELDA*i,GROSOR_CELDA*j)
+                gamelib.draw_image("img/ground.gif", GROSOR_CELDA * i, GROSOR_CELDA * j)
+                gamelib.draw_image("img/goal.gif", GROSOR_CELDA * i, GROSOR_CELDA * j)
                 if hay_jugador(grilla, i, j):
-                    gamelib.draw_image("img/player.gif",GROSOR_CELDA*i,GROSOR_CELDA*j)
+                    gamelib.draw_image("img/player.gif", GROSOR_CELDA * i, GROSOR_CELDA * j)
             elif hay_jugador(grilla, i, j):
-                gamelib.draw_image("img/ground.gif",GROSOR_CELDA*i,GROSOR_CELDA*j)
-                gamelib.draw_image("img/player.gif",GROSOR_CELDA*i,GROSOR_CELDA*j)
+                gamelib.draw_image("img/ground.gif", GROSOR_CELDA * i, GROSOR_CELDA * j)
+                gamelib.draw_image("img/player.gif", GROSOR_CELDA * i, GROSOR_CELDA * j)
             else:
-                gamelib.draw_image("img/ground.gif",GROSOR_CELDA*i,GROSOR_CELDA*j)
+                gamelib.draw_image("img/ground.gif", GROSOR_CELDA * i, GROSOR_CELDA * j)
 
 
 

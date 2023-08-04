@@ -710,8 +710,8 @@ class ListaEnlazada():
         while actual is not None and actual.prox is not None:
             if actual.dato == actual.prox.dato:
                 actual.prox = actual.prox.prox
-            actual = actual.prox
 
+            actual = actual.prox
         return self
 
 lista = ListaEnlazada()

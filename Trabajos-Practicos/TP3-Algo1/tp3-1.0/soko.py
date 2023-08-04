@@ -184,21 +184,21 @@ def juego_mostrar(grilla):
             #j es la fila
             if hay_pared(grilla, i, j):
                 gamelib.draw_image("img/ground.gif", ANCHO_CELDA * i, ALTO_CELDA * j)
-                gamelib.draw_image("img/wall.gif",ANCHO_CELDA*i,ALTO_CELDA*j)
+                gamelib.draw_image("img/wall.gif", ANCHO_CELDA * i, ALTO_CELDA * j)
 
             elif hay_caja(grilla, i, j):
-                gamelib.draw_image("img/ground.gif",ANCHO_CELDA*i,ALTO_CELDA*j)
-                gamelib.draw_image("img/box.gif",ANCHO_CELDA*i,ALTO_CELDA*j)
+                gamelib.draw_image("img/ground.gif", ANCHO_CELDA * i, ALTO_CELDA * j)
+                gamelib.draw_image("img/box.gif", ANCHO_CELDA * i, ALTO_CELDA * j)
             elif hay_objetivo(grilla, i, j):
-                gamelib.draw_image("img/ground.gif",ANCHO_CELDA*i,ALTO_CELDA*j)
-                gamelib.draw_image("img/goal.gif",ANCHO_CELDA*i,ALTO_CELDA*j)
+                gamelib.draw_image("img/ground.gif", ANCHO_CELDA * i, ALTO_CELDA * j)
+                gamelib.draw_image("img/goal.gif", ANCHO_CELDA * i, ALTO_CELDA * j)
                 if hay_jugador(grilla, i, j):
-                    gamelib.draw_image("img/player.gif",ANCHO_CELDA*i,ALTO_CELDA*j)
+                    gamelib.draw_image("img/player.gif", ANCHO_CELDA * i, ALTO_CELDA * j)
             elif hay_jugador(grilla, i, j):
-                gamelib.draw_image("img/ground.gif",ANCHO_CELDA*i,ALTO_CELDA*j)
-                gamelib.draw_image("img/player.gif",ANCHO_CELDA*i,ALTO_CELDA*j)
+                gamelib.draw_image("img/ground.gif", ANCHO_CELDA * i, ALTO_CELDA * j)
+                gamelib.draw_image("img/player.gif", ANCHO_CELDA * i, ALTO_CELDA * j)
             else:
-                gamelib.draw_image("img/ground.gif",ANCHO_CELDA*i,ALTO_CELDA*j)
+                gamelib.draw_image("img/ground.gif", ANCHO_CELDA * i, ALTO_CELDA * j)
 
 def juego_ganado(grilla):
     '''Devuelve True si el juego está ganado.'''

@@ -1,4 +1,3 @@
-import gamelib
 from soko import *
 def juego_mostrar(grilla):
     """En la función juego_mostrar tenemos que utilizar las funciones de Gamelib para dibujar el tablero
@@ -8,21 +7,21 @@ def juego_mostrar(grilla):
     for i in range(tamanio[COL]):
         for j in range(tamanio[FIL]):
             if hay_pared(grilla, i, j):
-                gamelib.draw_image("img/ground.gif", TAMANIO_CELDA * i, TAMANIO_CELDA* j)
-                gamelib.draw_image("img/wall.gif",TAMANIO_CELDA*i,TAMANIO_CELDA*j)
+                gamelib.draw_image("img/ground.gif", TAMANIO_CELDA * i, TAMANIO_CELDA * j)
+                gamelib.draw_image("img/wall.gif", TAMANIO_CELDA * i, TAMANIO_CELDA * j)
             elif hay_caja(grilla, i, j):
-                gamelib.draw_image("img/ground.gif",TAMANIO_CELDA*i,TAMANIO_CELDA*j)
-                gamelib.draw_image("img/box.gif",TAMANIO_CELDA*i,TAMANIO_CELDA*j)
+                gamelib.draw_image("img/ground.gif", TAMANIO_CELDA * i, TAMANIO_CELDA * j)
+                gamelib.draw_image("img/box.gif", TAMANIO_CELDA * i, TAMANIO_CELDA * j)
             elif hay_objetivo(grilla, i, j):
-                gamelib.draw_image("img/ground.gif",TAMANIO_CELDA*i,TAMANIO_CELDA*j)
-                gamelib.draw_image("img/goal.gif",TAMANIO_CELDA*i,TAMANIO_CELDA*j)
+                gamelib.draw_image("img/ground.gif", TAMANIO_CELDA * i, TAMANIO_CELDA * j)
+                gamelib.draw_image("img/goal.gif", TAMANIO_CELDA * i, TAMANIO_CELDA * j)
                 if hay_jugador(grilla, i, j):
-                    gamelib.draw_image("img/player.gif",TAMANIO_CELDA*i,TAMANIO_CELDA*j)
+                    gamelib.draw_image("img/player.gif", TAMANIO_CELDA * i, TAMANIO_CELDA * j)
             elif hay_jugador(grilla, i, j):
-                gamelib.draw_image("img/ground.gif",TAMANIO_CELDA*i,TAMANIO_CELDA*j)
-                gamelib.draw_image("img/player.gif",TAMANIO_CELDA*i,TAMANIO_CELDA*j)
+                gamelib.draw_image("img/ground.gif", TAMANIO_CELDA * i, TAMANIO_CELDA * j)
+                gamelib.draw_image("img/player.gif", TAMANIO_CELDA * i, TAMANIO_CELDA * j)
             else:
-                gamelib.draw_image("img/ground.gif",TAMANIO_CELDA*i,TAMANIO_CELDA*j)
+                gamelib.draw_image("img/ground.gif", TAMANIO_CELDA * i, TAMANIO_CELDA * j)
 
 def hallar_max_columnas(desc):
     """Devuelve el largo del string más largo, si el string no tiene una Pared, Caja, Jugador
@@ -110,7 +109,7 @@ def cargar_teclas(archivo):
 def main():
     # Inicializar el estado del juego
 
-    nivel = 153
+    nivel = 0
     niveles = obtener_nivel("niveles.txt")
     grilla = crear_grilla(niveles[nivel])
     tamanio = dimencion_grilla(grilla)

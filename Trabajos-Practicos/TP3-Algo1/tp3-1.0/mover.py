@@ -1,4 +1,3 @@
-import gamelib
 from pila import Pila
 import soko
 

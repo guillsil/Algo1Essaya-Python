@@ -27,3 +27,5 @@ class ListaEnlazada:
             actual.prox = nodo
         self.len += 1
 
+    def esta_vacia(self):
+        return self.prim is None
