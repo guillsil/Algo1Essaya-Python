@@ -45,11 +45,7 @@ abc acb
 bac bca
 cab cba
 """
-def voltear_cadena(cadena):
-    cadena = ""
-    k = len(cadena) -1
-    for i in range(len(cadena)):
-        cadena += cadena[k]
-        k -= 1
-    return cadena
-print(voltear_cadena("abc"))
+#iterativa
+def permutaciones(s):
+    for c in range(s):
+        
