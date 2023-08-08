@@ -106,7 +106,7 @@ Ejemplo:
 >>> lista.insertar(5)
 >>> lista.reducir(lambda x, y: x + y)
 >>> lista
-[15]
+[15]d
 """
 class Nodo:
     def __init__(self, dato, prox=None):
