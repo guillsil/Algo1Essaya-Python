@@ -39,7 +39,7 @@ print(cola.esta_llena())
 """
 2)
 Implementar la funcion permutaciones(s) que dada una cadena de caracteres imprime todas las permutaciones posibles de la misma.
-Ejemplo:s
+Ejemplo:
 >>> permutaciones("abc")
 abc acb
 bac bca
