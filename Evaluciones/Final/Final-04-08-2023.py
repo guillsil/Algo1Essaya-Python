@@ -46,6 +46,5 @@ bac bca
 cab cba
 """
 #iterativa
-def permutaciones(s):
-    for c in range(s):
+
         
